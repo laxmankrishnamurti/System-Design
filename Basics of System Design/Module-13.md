@@ -6,7 +6,7 @@ Actually what happens is let say user want to see their account details so they 
 
 Obviously not!
 
-To solve the problem we use caching system in our application. In this process we store the information in the memory for short term like for 1min, 30sec, 2min, ..etc. So, when user hit the same reqeust again-and-again the request will not go directly to the server it first check whether the information is stored in the cache or not that the user wants? If yes, it send back the data from the memory and display it on the page.
+To solve the problem we use caching system in our application. In this process we store the information in the memory for short term like for 1min, 30sec, 2min,2h, 4h ..etc. So, when user hit the same reqeust again-and-again the request will not go directly to the server it first check whether the information is stored in the cache or not that the user wants? If yes, it send back the data from the memory and display it on the page.
 
 CACHING HAPPENS IN THE RAM MEMORY(PRIMARY MEMORY) ===> FAST
 
