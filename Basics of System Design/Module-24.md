@@ -16,3 +16,5 @@ Tools or program that helps to keep the web application always up and running.
    - This is an HTTP server.
    - An HTTP server is software that understands URLs(web addresses) and HTTP(The protocol browsers uses to view webpages)
    - An HTTP server can be accessed through the domain names of the website it stores, and it delivers the content of these hosted website to the end user's device.
+
+Ex :- Apache, Nginx
