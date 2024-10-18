@@ -69,4 +69,6 @@ DATABASE ===> MYSQL (For Consistency)
 Synchronize to other clients by information about the changes and update the file totally without updating it into chunks.
 
 - Changes made by one client is queued into _messaging queue_ asynchronously.
-- Synchronizer listen all the changes and replicate those changes among all devices.
+- Synchronizer listen all the changes and put all the changes into another message queue that is listened by other synchronizer and they catch the message and replicate those changes among all devices.
+
+Messeging Queue ===> kafka
