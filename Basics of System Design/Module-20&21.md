@@ -18,6 +18,14 @@ It dosen't depends on any network calls.
 
 # Asynchronous Communication
 
-The communication that will take time to happen call "Asynchronous communication". In asynchronous communication things always depends on some network calls which is responsible for fetching data from servers, database, ....etc and it will take time to get those data and take over to the other parties to complete that task.
+The communication that will take time to happen call "Asynchronous communication"(non-blocking communication). In asynchronous communication things always depends on some network calls which is responsible for fetching data from servers, database, ....etc and it will take time to get those data and take over to the other parties to complete that task.
+
+While network call is happening all synchronous task will also happening simulteniously.
 
 It depends on network calls.
+
+## Use-case
+
+- Computation takes a lot of time
+- Scalability of application
+- Avoid cascading failure(overwhelming communication)
