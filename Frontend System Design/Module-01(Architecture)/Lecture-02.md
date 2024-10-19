@@ -77,3 +77,9 @@
 - Folder structure
 - Dependencies
 - Build tools (webpack)
+
+## 4. Component Architecture
+
+- Routing
+- Component Hierarchy
+- Data sharing (How differnet components & routes are going to share data to others)
