@@ -83,3 +83,39 @@
 - Routing
 - Component Hierarchy
 - Data sharing (How differnet components & routes are going to share data to others)
+
+## 5. Data API | Protocols | Implementation
+
+- Protocols
+
+  - REST/GraphQL/rPF
+  - JSON, Protocol Buffer
+
+- Implementation Details
+
+  - Pagination/Infinite scrolling
+  - Debouncing/Throttling
+
+- APIs
+
+  - getProductsList()
+  - getProductDetails()
+  - removeProduct()
+
+- Data Modeling
+  - URL
+  - METHOD
+  - Request (query name, body)
+  - Response (Data, Error)
+  - Status Code
+- Component
+  - State/Props
+  - Event handling
+  - Customization support
+  - Theming
+  - Reusable
+  - Data source
+
+# HLD ===> Requirements + Priortization + Tech Choices
+
+# LLD ===> Component Architecture + (Data API + Protocols + Implementation)
