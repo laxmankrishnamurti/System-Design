@@ -119,3 +119,14 @@
 # HLD ===> Requirements + Priortization + Tech Choices
 
 # LLD ===> Component Architecture + (Data API + Protocols + Implementation)
+
+# Tools
+
+- draw.io
+- gliffy.com
+- lucidchart.com
+- miro.com
+- one note (microsoft)
+- jamboard (Google)
+
+<code>My observation ===> _System Design is an eventual process that we learn by facing real world challenges. It's not like a static concepts that i'm learning right now but it is more than that._</code>
