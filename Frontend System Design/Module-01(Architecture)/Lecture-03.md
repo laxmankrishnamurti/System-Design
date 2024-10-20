@@ -147,3 +147,11 @@ In this section we make sure, we delivered the content that takes less time to r
 - Unit testing
 - Integration testing
 - End-to-end testing
+
+- _Tools_
+  - Jest
+  - Mocha
+  - Selenium
+  - Mocha
+  - Chai
+  - Playwright
