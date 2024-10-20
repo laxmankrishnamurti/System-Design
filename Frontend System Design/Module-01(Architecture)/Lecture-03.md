@@ -103,3 +103,47 @@ In this section we monitor the application to check whether all are working fine
 ## Database/Caching
 
 In this section we try to remove unwanted load from the server by caching the re-sent data in the memory and whenever user reqeust for same data server dosen't need to do all complex calculation that it has done previously. It simply check whether the data is available in the memory or not if yes, then it sent the data from the memory.
+
+- HTTP caching
+
+  - Static files
+    - Images
+    - Icons
+  - CSS
+  - JS
+
+- In Memory caching
+- Apollo Caching
+- State management (Redux, Context API)
+- Local Storage
+- Session Storage
+- Cookie
+- IndexedDB
+
+## Security
+
+Making an application secure is a very crutial task because any one loop hole in the application cause system crashed. It means all of the actions which we have taken earlier dosen't make any sense if our application is not secure. So, its' must to secure our website from thse different types of attacks. These are :-
+
+- DDOS Attack (Lots of reqeusts comes at the same time and our system get slow down or may be crashed)
+- Authentication/Authorization
+- Content Security Policy (anyone cannot clone our website on their own website. Like :- Iframe)
+- Cross origin resource sharing (Other domain cannot request our server)
+- Man in the middle (Before reaching the response to the client a middle man access those data)
+
+## Performance & Optimization
+
+In this section we make sure, we delivered the content that takes less time to reach to the client as much as possible. Deliver content as their priority order.
+
+- Asset Optimization
+- Blocking-NonBlocking actions
+- Delivery option (What is the best way to deliver)
+- Build assets
+- Server-sent event
+- Service worker
+- Pre-received Performance
+
+## Testing
+
+- Unit testing
+- Integration testing
+- End-to-end testing
