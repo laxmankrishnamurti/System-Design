@@ -2,9 +2,9 @@
 
 When i tried to start a project initially it looks good like initially is looks like simple, organized and easy to read but when i continue to start building the project without having the knowledge about the frontend system design, the component that was looking good previously it starts becoming complex and code get meshed and the readability of that code became very poor.
 
-Actually i was trying to put everything in a single place this is what called _monolithic architecture_ that i was not know. The fact is that if we want to make a project which can scale it not possible in _monolithic architecture_. It can only scale if the system designed based on _distributed system architecture_ where every component of the frontend system is isolated.
+Actually i was trying to put everything in a single place this is what called _monolithic architecture_ that i was not know. The fact is that if we want to make a project which can scale it not possible in _monolithic architecture_. It can only scale if the system is designed based on _distributed system architecture_ where every component on the frontend is isolated.
 
-But after watching the video about 4-5 minutes they introduce _micro frontend architecture_ and shared some knowledge about this then i realise that ooooo... this is the thing which is missing in my project and so that's why my code get bulky.
+But after watching the video about 4-5 minutes they introduce _micro frontend architecture_ and shared some knowledge about this then i realise that ooooo... this was the thing that is missing in my project and so that's why my code get bulky.
 
 I think it's must to know for building projects in a scalable manner and this is what i should know to become a good frontend developer.
 
@@ -30,11 +30,15 @@ To be more precise in _long polling_ client continuously pushing a new request t
 
 After client pushed a request, server will send the data automatically when it get ready and client dosen't need to push any extra request to the server.
 
-<code>Uses :: Fetching data from the server</code>
+<code>Uses :: Fetching data from the server (Default HTTP request)</code>
 
 2. Web Socket ===> In web-socket connection client simply push a request to the server and server will keep sending the data untill it will not send all the data that client has reqeusted. Clint has to simply push a reqeust and server will take care of it.
 
 Basically in web-socket connection client and server establish a persistent connection and once the connection is established both client and server can send data to each other any time. Server can send data to the client without waiting for client request and the connection will keep connected until the client will not disconnect the connection explicity.
+
+- Client make first reqeust for handshake
+- Handshake is completed (Protocol upgradation)
+- Full-duplex communication
 
 <code>Uses :: Real time communication</code>
 
