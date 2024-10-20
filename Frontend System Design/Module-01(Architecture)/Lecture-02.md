@@ -37,7 +37,7 @@
 
    - Features/module
 
-2. Non-Functional Requirements (No action)===> This is more like treoratical part of the application that we are going to build. Non-functional requirements cover how we are going to manage our application efficiently. It includes
+2. Non-Functional Requirements (Keep in mind)===> This is more like treoratical part of the application that we are going to build. Non-functional requirements cover how we are going to manage our application efficiently. It includes
    - Mobile/Desktop first
    - Responsive/Adaptive
    - Asset optimization
