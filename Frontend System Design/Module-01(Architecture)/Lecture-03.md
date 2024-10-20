@@ -65,7 +65,6 @@ Client may using different-different browsers which has different configuration 
 <code>- Popular design system</code>
 
 - Material UI
-- Google
 - Atlantean design system
 - Fluent (By Microsoft)
 - Semantic (By Amazon)
@@ -159,3 +158,12 @@ In this section we make sure, we delivered the content that takes less time to r
   - Mocha
   - Chai
   - Playwright
+
+# KEY TAKEAWAYS
+
+1. Component should be customizable and independent or isolated.
+2. Take care of different protocol and use tose protocols where it should be used.
+3. Performance
+4. Caching
+5. Security
+6. SEO
