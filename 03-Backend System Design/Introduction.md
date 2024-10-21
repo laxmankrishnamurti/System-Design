@@ -20,7 +20,6 @@ To effectively start building scalable backend systems with TypeScript, you shou
 #### Resources:
 
 - [RESTful API Design](https://restfulapi.net/)
-- Udemy/Coursera Courses on **Databases and SQL**
 
 ### Step 2: **Deep Dive into TypeScript Backend Development**
 
