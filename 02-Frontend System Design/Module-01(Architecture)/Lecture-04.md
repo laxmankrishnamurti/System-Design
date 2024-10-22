@@ -241,3 +241,81 @@ This service worker is being replaced by another one.
 ## 5. Compression
 
 Compressing the file size that is generated on the server side is very important in terms of performance.
+
+There are two mostly used compression methods, are :-
+
+1. Gzip
+2. Brotli
+
+<code>Brotli compressed file more efficiently than Gzip.</code>
+
+There are still some legacy browsers out there that dosen't understand Brotli.
+
+## 6. Layout Shifts & Repaints
+
+- Request page
+- Get HTML
+- Response
+
+  - Render Blocking
+    - Get CSS, JS (Downloaded)
+
+- Build DOM (Both HTML & CSS get combined)
+
+  - Parse CSS & Build CSSOM
+  - Execute JS
+
+- Merger DOM and CSSOM into the render tree
+- Build layout tree
+- Build paint tree
+- Turn layers information inito pixels on the screen
+
+**Stages**
+
+- Loading
+
+  - Parsing
+    - Request page
+    - Get HTML
+    - Response
+      - Response Blocking
+        - Get CSS, JS
+  - Style Calculation (recalculate styles)
+    - Build DOM
+    - Parse CSS & Build CSSOM
+
+- Scripting
+
+  - Execute JavaScript
+
+- Rendering
+
+  - Layout (Web page structure)
+    - Merge DOM and CSSOM into the render tree
+    - Build layout tree (Final layout for the web page)
+
+- Painting
+  - Paint (Synching CSS with HTML to apply those styles and positions of the element)
+    - Build layout tree (Using HTML)
+    - Build paint tree (Using CSS)
+  - Compositing (Putting things in a different layer ===> Final touch)
+    - Build paint tree (Using CSS)
+    - Turn layers information into pixels on the screen
+
+**If we try to make any change in our styles using JavaScript or CSS which is goin to change our dimension and reqeuired more computational power for the browser. Let see how it will work in different scenarios.....**
+
+1. This will affect on the dimentsion (if there is a commond for the browser to add or remove some element from the web page)
+
+JavaScript ===> Style ===> Layout ===> Paint ===> Composite
+
+2. This will affect on the paint area instead of layout
+
+JavaScript ===> Style ===> xxxxx ===> Paint ===> Composite
+
+Ex :- Backgroun-color, color, shadows, visibility, .....etc
+
+3. This will affect on final layout of the web page instead of Layout, or painting area.
+
+JavaScript ===> Style ===> xxxxx ===> xxxxx ===> Composite
+
+Ex :- Transform, Opacity, animation, .....etc
