@@ -182,3 +182,62 @@ With this we can load modules before borwser starts rendering.
 ```
 
 ## 4. Service Worker
+
+Service worker are a powerful in order to provide Caching stategies and making offline applications. Service worker intercept the request which is made on client side to the server but before the reqeust step out from the client enviroment it basically intercepted by Service worker and then it will go to the server via network.
+
+Any network request first reach to the service worker and it has capabilities to decide whether to fetch the data from the cache or the network layer. If user requested the data which is already available in the cache memroy it doesn't have to make any network request it simple fetch the data from the cache memory and send it to the client.
+
+In advance if user has no internet connectivity we can write logic for cache memroy that detect user is offline and try to make things possible for the user and can use the application while being offline to make availability high.
+
+At the end the main goal of service worker is to help to build PWA(Progressive web app).
+
+### **Worker Lifecycle**
+
+**1. Installation (Stage ==> Installing)**
+
+This stage marks the beginning of registration. It's intended to allow to setup worker-specific resources such ad offline caches.
+
+<code>Install</code>
+
+- Use _event.waitUntil()_ passing a promise to extend the installing stage untill the promise is resolved.
+- Use _self.skipWaiting()_ anytime before activation to skip installed stage and directly jump to activating stage without waiting for currently controlled clients to close.
+
+**2. Installed (Stage ==> Installed)**
+
+The service worker has finished its setup and it's waiting for clients using other service workers to be closed.
+
+**3. Activating (Stage ==> Active)**
+
+There are no clients controlled by other workers. This stage is intended to allow the worker to finish the setup or clean other worker's related resources like removing old caches.
+
+<code>activate</code>
+
+- Use _event.waitUntil()_ passing a promise to extend the activating stage until the promise is resolved.
+- Use _self.clients.clain()_ in the active handler to start controlling all open clients without reloading them.
+
+**4. Activated (Stage ==> Active)**
+
+The service worker can now handle functional events.
+
+**5. Redundant**
+
+This service worker is being replaced by another one.
+
+**Where the service workers resides in our browser**
+
+- Inspect
+- Application
+- Service worker
+
+**Tool to manage the service worker ===> Workbox**
+
+- Precaching
+- Runtime caching
+- Strategies
+- Request routing
+- Background Sync
+- Helpful debugging
+
+## 5. Compression
+
+Compressing the file size that is generated on the server side is very important in terms of performance.
