@@ -56,10 +56,10 @@ It is commonly used in the image, iframe, and video section which is on the view
 <img src="./profile.png" loading="lazy" />
 
 <!-- We want to render it as soon as possible -->
-<iframe loading="eager" path="xxxxxx">
+<iframe loading="eager" path="xxxxxx"></iframe>
 
 <!-- This is quire similar to eager loading but has less priority than eager loading but higher priority than lazy loading -->
-<img src="./profile.png" fetchPriority="low"
+<img src="./profile.png" fetchPriority="low" />
 ```
 
 2. _Intersection Observer_
@@ -105,7 +105,7 @@ CSS file can also impact on rendering process like JavaScipt file. These are the
 <!-- Load critical css (navbar, sidebar) Synchronously -->
 <link rel="stylesheet" href="critical.css" />
 
-Load css asynchronously with low priority
+<!-- Load css asynchronously with low priority -->
 <link
   rel="stylesheet"
   href="full.css"
@@ -132,7 +132,7 @@ With this hint we are telling the browser before rendering anything just go to t
 
 2. _prefetch_
 
-It is same as _preload_ but this attribute prevent the browser to execute the resources that it fetched.
+It is same as _preload_ but this attribute prevent the browser to execute the resources that he fetched.
 
 ```html
 <link rel="prefetch" href="/chunk.elak232kjh3sdkdhrwr.js" as="script" />
