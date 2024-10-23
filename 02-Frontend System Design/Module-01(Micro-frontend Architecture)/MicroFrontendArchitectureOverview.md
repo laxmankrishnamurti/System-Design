@@ -17,3 +17,13 @@ The answer is simple monolithic architecture is not very effective in terms of s
 3. **Communication** ===> Micro frontends should be loosely coupled, and communication between them should happen using APIs, shared events, or messaging systems.
 
 4. **Routing and Composition** ===> The root application or shell handles routing and composing various micro frontends into one UI.
+
+## **Frontend Mircoservices Architecture Step-By-Step**
+
+1. _Identify domains and split the frontend_
+2. _Create indivisual Micro Frontend Projects_
+3. _Defiine Communication Strategies_
+4. _Micro Frontend Container(Root Application)_
+5. _Deployment Strategy_
+
+[Read](./Architecture.md)
