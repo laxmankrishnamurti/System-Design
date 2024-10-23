@@ -6,13 +6,13 @@ Each "micro frontend" can own a part of the user interface, which allows teams t
 
 ## Why should we learn about micro-frontends?
 
-The answer is simple monolithic architecture is not very effective in terms of scalability, technology independency, performance, and not flexible. On the other hand in micro-frontends each of them is independent, isolated, loosly coupled, scalable, flexible, technology independent and gives high performance.
+The answer is simple monolithic architecture is not very effective in terms of scalability, technology independency, performance, and not flexible and have single point of failure. On the other hand in micro-frontends each of them is independent, isolated, loosly coupled, scalable, flexible, technology independent and gives high performance.
 
 **Key Principles of Micro Frontend Architecture**
 
 1. **Independence** ===> Each frontend microservice is a self-contained unit. They may use different technologies, state management solutions, or even run as separate applications on subdomains.
 
-2. **Integration** ===> Each frontend microservice is a self-contained unit. They may use different technologies, state management solutions, or even run as separate applications on subdomains.
+2. **Integration** ===> A shell or root application integrates the micro frontends into a cohesive UI.
 
 3. **Communication** ===> Micro frontends should be loosely coupled, and communication between them should happen using APIs, shared events, or messaging systems.
 
