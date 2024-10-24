@@ -2,11 +2,11 @@
 
 1. Vipul Tyagi
 
-   - [Visit the playlist](https://www.youtube.com/playlist?list=PLA3GkZPtsafZdyC5iucNM_uhqGJ5yFNUM)
+   - [Visit the playlist]([https://www.youtube.com/playlist?list=PLA3GkZPtsafZdyC5iucNM_uhqGJ5yFNUM](https://www.youtube.com/@EngineeringDigest))
 
 2. Engineer Chirag
 
-   - [Visit the playlist](https://www.youtube.com/playlist?list=PL4CFloQ4GGWICE0Tz6iXKfN3XWkXRlboU)
+   - [Visit the playlist]([https://www.youtube.com/playlist?list=PL4CFloQ4GGWICE0Tz6iXKfN3XWkXRlboU](https://www.youtube.com/@engineerchirag))
 
 ## How do all folders are structured ?
 
