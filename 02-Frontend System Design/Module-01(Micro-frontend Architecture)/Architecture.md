@@ -72,7 +72,7 @@ Ex :- If we take an example of an e-commerce site then we can split the entire a
 
 4. **Push it to the GitHub and linked with vercel, netlify, ....etc**
 
-5. **Set-up the root application which loads and manage all micro-frontend application**
+5. **Set-up the root application which loads and manage all micro-frontend applications dynamically**
 
 6. **Take care of tokens and network related stuffs.**
 
