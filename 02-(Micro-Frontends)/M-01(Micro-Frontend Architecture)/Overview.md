@@ -26,4 +26,4 @@ The answer is simple monolithic architecture is not very effective in terms of s
 4. _Micro Frontend Container(Root Application)_
 5. _Deployment Strategy_
 
-[Read](./Architecture.md)
+[Read](../Architecture.md)
