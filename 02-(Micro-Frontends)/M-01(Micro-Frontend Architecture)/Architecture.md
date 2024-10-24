@@ -23,53 +23,53 @@
 
      **Typical folder structure of a micro-frontend application**
 
-   -
+     -
 
-   ````jsx
-       / src
-           // UI components
-           - components
-               - account
-                   - AccountForm.tsx
-                   - AccountDetails.tsx
-               - ...etc
+     ````jsx
+         / src
+             // UI components
+             - components
+                 - account
+                     - AccountForm.tsx
+                     - AccountDetails.tsx
+                 - ...etc
 
-           // state with reducers
-           - features
-               - account
-                   - accountSlice.ts
-               - ...etc
+             // state with reducers
+             - features
+                 - account
+                     - accountSlice.ts
+                 - ...etc
 
-           // Final UI
-           - pages
-               - AccountPage.tsx
-               - ... etc
+             // Final UI
+             - pages
+                 - AccountPage.tsx
+                 - ... etc
 
-           // all backend requests
-           - services/api calls
-               - api.ts
-               - account.ts
+             // all backend requests
+             - services/api calls
+                 - api.ts
+                 - account.ts
 
-           // parent directory for managing all states
-           - store
-               - store.ts
+             // parent directory for managing all states
+             - store
+                 - store.ts
 
-           - App.tsx
-           - index.tsx or main.tsx
-           - types
-               - index.types.ts
+             - App.tsx
+             - index.tsx or main.tsx
+             - types
+                 - index.types.ts
 
-           // If error occurs within the component
-           - ErrorBoundry.tsx
+             // If error occurs within the component
+             - ErrorBoundry.tsx
 
-           // Utility components
-           - utils/
-            - Button.tsx
-            - Spinner.tsx
-            - ToastMessage.tsx
-       ```
+             // Utility components
+             - utils/
+                 - Button.tsx
+                 - Spinner.tsx
+                 - ToastMessage.tsx
+         ```
 
-   ````
+     ````
 
 4. **Push the micro-frontend to the GitHub and linked with vercel, netlify, ....etc for hosting**
 
