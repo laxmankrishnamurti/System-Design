@@ -1,7 +1,7 @@
 # Where to start?
 
 1. **Understand the micro-frontend architecture**
-2. **Why do we need bundler and why we use Single-SPA & Webpack in micro-frontend architecture.**
+2. **Why do we need a bundler and why we use Single-SPA & Webpack in micro-frontend architecture.**
 3. **Responsiveness**
 4. **(React + Optimization) + TypeScript**
 5. **State management + Query Optimization + Error handling**
