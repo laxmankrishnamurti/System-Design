@@ -101,3 +101,44 @@ module.exports = {
     }
 }
 ```
+
+## We can also hand-over the HTML file to webpack
+
+Put the index.html file into the _src_ directory and unlink the _script_ link.
+
+```bash
+npm install --save-dev html-webpack-plugin
+```
+
+```json
+const path = require("path")
+const HtmlWebpackPlugin = require("html-webpack-plugin")
+
+module.exports = {
+    mode: "production",
+    entry: "./src/app.js",
+    output: {
+        path: path.resolve(__dirname, "dist"),
+        filename: "output.js"
+    },
+    devServer: {
+        static: path.join(__dirname, "dist"),
+        compress: true,
+        port: 3000
+    },
+    module: {
+        rules: [
+            {
+                test: /\.css/i,
+                use: ["style-loader", "css-loader"]
+            }
+        ]
+    },
+    plugins: [
+        new HtmlWebpackPlugin({
+            filename: "index.html",
+            template: "./src/index.html"
+        })
+    ]
+}
+```
