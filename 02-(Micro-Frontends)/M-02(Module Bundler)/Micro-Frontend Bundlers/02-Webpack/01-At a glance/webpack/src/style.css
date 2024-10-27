@@ -1,0 +1,11 @@
+* {
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    font-family: sans-serif;
+}
+
+.hello {
+    background-color: salmon;
+    color: black;
+}
