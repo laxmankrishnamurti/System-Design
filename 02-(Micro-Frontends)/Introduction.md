@@ -10,6 +10,6 @@
 8. **How does a micro-frontend will communicate with others?**
 9. **How all comes together and makes a full-fledged web application?**
 
-_learn all that are required to reach from step-1 to step-6_
+_learn all that are required to reach from step-1 to step-9_
 
 [Read](<./Module-01(Micro-frontend%20Architecture)/Architecture.md>)
