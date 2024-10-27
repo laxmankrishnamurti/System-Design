@@ -5,7 +5,7 @@
 - src
 - dist
 
-Both should be in the root directory.
+Both _src & dist_ should be in the root directory.
 
 **At the end webpack is just a bundler so it requires some entry point to compile all files and compose it into a single module**
 
