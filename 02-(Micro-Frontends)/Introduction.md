@@ -1,7 +1,7 @@
 # Where to start?
 
 1. **Understand the micro-frontend architecture**
-2. **Webpack**
+2. **What do we need bundler and why do we use Webpack in micro-frontend architecture.**
 3. **Responsiveness**
 4. **(React + Optimization) + TypeScript**
 5. **State management + Query Optimization + Error handling**
