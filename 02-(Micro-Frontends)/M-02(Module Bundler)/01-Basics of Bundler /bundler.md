@@ -27,3 +27,20 @@ There are three main-important task that a bundler does :-
 - Optimizes
 
   Bundlers can shrink our code and remove anything unnecessary, making it load faster for users.
+
+#### **In short, bundlers involved to handle the growing complexity of javaScript applications. They support frameworks by taking care of dependency management, compiling code, and optimizing it for the broser.**
+
+## Single-SPA vs Webpack
+
+- Both are bundlers and does almost same task. But both are slightly different from each other.
+- Both Single-SPA and Webpack is used for building micro-frontend application.
+
+**Difference**
+
+- Webpack's module federation feature enables to combine all micro-frontend application into a single application that serve as a main-website.
+
+  - But the condition is every micro-frontend should based on a single framework.
+
+- On the other hand Single-SPA is mainly focused to build micro-frontend application and it allows to combine all micro-frontend into a single application and serve as a main-website.
+  - It dosen't matter which framework is used for building the micro-frontend application.
+  - One of the best part of the Single-SPA is the feature which enables to combine all micro-frontend without knowing it's technology on which it builds.
