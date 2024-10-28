@@ -8,8 +8,9 @@ const server = createServer((req, res) => {
     res.end('Hello world!')
 })
 
-console.log(server)
+// console.log(server)
 // console.log(server._events.connection())
+console.log(createServer().listening)
 
 server.listen(port, () => {
     console.log(`Server is listening on http://localhost:${port}`)
