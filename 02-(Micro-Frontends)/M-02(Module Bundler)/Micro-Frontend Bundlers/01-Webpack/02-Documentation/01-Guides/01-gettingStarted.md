@@ -13,4 +13,4 @@ In a module there can be :-
   - Can be static
   - Can be dynamic
 
-So, we know that webpack is a bundler and it's job is to combine these files while are in different-different modules, into a single module.
+So, we know that webpack is a bundler and it's job is to combine these files while are in different-different modules, into a single module/bundle so that our application can load fast and give a better user experience.
