@@ -13,6 +13,8 @@ In a module there can be :-
   - Can be static
   - Can be dynamic
 
-So, we know that webpack is a bundler and it's job is to combine these files while are in different-different modules, into a single module/bundle so that our application can load fast and give a better user experience.
+So, we know that webpack is a bundler and it's job is to combine all these files which are in different-different modules, into a single module/bundle so that our application can load fast and give a better user experience.
+
+Bundler means _It receives lots of things, it dosen't matter what is it and combine them all together by their own specific group. This is what a bundler does._
 
 #### **[_Installation guide_](../02-Installation/installation.md)**

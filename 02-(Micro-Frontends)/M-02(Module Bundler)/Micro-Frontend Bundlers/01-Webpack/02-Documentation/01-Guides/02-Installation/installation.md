@@ -8,21 +8,23 @@
 
 - **Local installation**
 
-```bash
-$ npm install --save-dev webpack
+  ```bash
+  $ npm install --save-dev webpack
 
-# download specific version of webpack
-$ npm install --save-dev webpack@<version>
+  # download specific version of webpack
+  $ npm install --save-dev webpack@<version>
 
-# to call webpack from the command line, we'll also need to install the CLI
-$ npm install --save-dev webpack-cli
-```
+  # to call webpack from the command line, we'll also need to install the CLI
+  $ npm install --save-dev webpack-cli
+  ```
 
 _use '--save-dev' only when we are going to use webpack only for bundling and will not be used in production._
 
 **Typically webpack is run via one or more _npm script_ which will look for a webpack installation in the _node_module_ directory.**
 
 ```json
+// package.json
+
 "script": {
     "build": "webpack",
 
@@ -37,16 +39,11 @@ We can interact with webpack either from its _CLI_ or _API_.
 
 Webpack has its own configuration file called _webpack.config.ts_ for proper usage and easier distribution.
 
-- webpack cli version5.0.0 requires ::
+- webpack CLI version5.0.0 requires ::
   - node >= v14.15.0
   - webpack >= 5.0.0
   - webpack dev server >= 4.0.0
 
-**If we want to run webpack using _npx_ we must have _webpack-cli_ installed**
+**If we want to run webpack using _npx/npm_ we must have _webpack-cli_ installed**
 
-### **Important commands that we must know**
-
-```bash
-# validate a webpack configuration
-
-```
+[Webpack Command Line Interface](../03-Webpack-CLI/webpackCLI.md)
