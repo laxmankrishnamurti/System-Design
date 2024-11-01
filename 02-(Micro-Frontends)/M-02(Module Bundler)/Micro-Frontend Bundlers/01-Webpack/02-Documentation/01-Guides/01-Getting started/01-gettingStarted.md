@@ -31,7 +31,7 @@ Bundler means _It receives lots of things, it dosen't matter what is it and comb
 
 **2. Deployment**
 
-- On deployment stage, we take the _dist_ folder and upload it to the server which we rented from the hosting provider. Once, it's uploaded, the application can be served to users without Webpack being involved.
+- On deployment stage, we take the _dist_ folder and upload it to the server which we have rented from the hosting provider. Once, it's uploaded, the application can be served to users without Webpack being involved.
 
 - At this point, webpack job is done. It does not _keep working_ on the server. The webpack configuration and tool itself are not part of the deployment.
 
