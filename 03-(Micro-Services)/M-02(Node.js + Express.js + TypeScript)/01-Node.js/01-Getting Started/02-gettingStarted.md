@@ -33,7 +33,7 @@ server.listen(PORT, () => {
 });
 ```
 
-```json
+```js
 Server {
   maxHeaderSize: undefined,
   insecureHTTPParser: undefined,
