@@ -1,4 +1,4 @@
-# For any technology or environment to provide server-like functionalities, it must have some level of access of hardware resources? Now, the question is who gives the facilities to Node.js to perform server-like functionalities?
+# For any technology or environment to provide server-like functionalities, it must have some level of access of hardware resources? Now, the question is who gives the power/facilities to Node.js to perform server-like functionalities?
 
 - In the case of Node.js, it dosen't directly manage hardware but operate on top of **_libuv_**.
 
