@@ -42,3 +42,21 @@ Bundler means _It receives lots of things, it dosen't matter what is it and comb
 - If we want to make our changes in the code we must re-run the webpack command to re-generate the _dist_ folder again and then re-deploy the folder. But if we built a CI/CD pipeline we can directly push the code on the platform, all changes will be replicated after a while.
 
 **_So, to summarize ===> No, webpack does not working once the application is deployed. It work ends after the dist folder is built, as it's meant to prepare our code for production, not handle it on the server._**
+
+## Getting Started
+
+Webpack is used to compile JavaScript modules. Once installed, we can interact with webpack either from it _CLI_ or _API_
+
+[About Webpack CLI](../03-Webpack-CLI/webpackCLI.md)
+
+## Basic Setup
+
+**1. Create a directory**
+**2. Initialize NPM**
+**3. Install webpack locally**
+
+```bash
+$ npm install webpack webpack-cli --save-dev
+```
+
+**4. Install webpack CLI(the tool used to run webpack on the command line)**
