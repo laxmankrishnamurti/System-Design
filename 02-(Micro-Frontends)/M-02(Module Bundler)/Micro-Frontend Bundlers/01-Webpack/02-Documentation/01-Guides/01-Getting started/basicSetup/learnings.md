@@ -69,7 +69,7 @@ This setup, _index.js_ explicitly requires _lodash_ to be present and bind it as
 
 **Now, it's time to build the project using webpack.**
 
-1. First webpack search for _package.json_ file to get the information about all modules dependencies. And it uses this information for building a _dependency graph_
+1. First of all, webpack search for _package.json_ file to get the information about all modules dependencies. And it uses this information for building a _dependency graph_
 
 2. It then uses a graph to generate an optimized bundle where script will be executed in the correct order.
 

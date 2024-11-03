@@ -60,3 +60,20 @@ $ npm install webpack webpack-cli --save-dev
 ```
 
 **4. Install webpack CLI(the tool used to run webpack on the command line)**
+
+[Read about basic setup](./basicSetup/learnings.md)
+
+## Modules
+
+- The import and export statements have been standardized in ES2015.
+- Behind the scenes, webpack actually "transpiles" the code so that older browsers can also run it.
+- Note that webpack will not alter any code other than import and export statements.
+- If we are using other _ES2015 features_, we must use a transpiler such as Babel via webpack's loader system.
+
+## Using a configuration
+
+As of version 4, webpack doesn't require any configuration, but most projects will need a more complex setup, which is why webpack supports a configuration file.
+
+This is much more efficient than having to manually type in a lot of commands in the terminal, so lets create a demo project with webpack configuration file
+
+[Demo project with webpack's configuration file]
