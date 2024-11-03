@@ -99,3 +99,40 @@ These methods and properties are part of what allows the `server` instance to be
 - **requireHostHeader** adds an extra security check to ensure only well-formed HTTP requests are processed.
 
 By understanding each of these properties, you can fine-tune your server configuration to be efficient and secure based on your specific needs.
+
+###
+
+## **[Symbol(IncomingMessage)]** and **[Symbol(ServerResponse)]**
+
+In Node.js, the **[Symbol(IncomingMessage)]** and **[Symbol(ServerResponse)]** properties refer to the constructors for the **`IncomingMessage`** and **`ServerResponse`** classes, respectively. These classes are essential for handling HTTP requests and responses, and these symbols essentially represent the functions that create these objects internally in Node.js.
+
+Here’s what each of these classes does and why they’re important:
+
+### 1. **IncomingMessage**
+
+- **What It Is**: `IncomingMessage` is the class used by Node.js to represent the incoming HTTP request. Whenever a client (like a web browser) sends a request to your Node.js server, an instance of this `IncomingMessage` class is created. This instance holds all the details about the request.
+- **What It Contains**:
+  - **HTTP Headers**: `req.headers` contains an object representing the headers sent by the client.
+  - **URL**: `req.url` is the URL path requested by the client.
+  - **HTTP Method**: `req.method` tells you if it’s a GET, POST, PUT, DELETE, etc., request.
+  - **Request Body**: `req.on('data')` and `req.on('end')` can be used to read the request body (for POST or PUT requests).
+- **Purpose**: This `IncomingMessage` object allows your server to read and handle the incoming data from the client.
+
+### 2. **ServerResponse**
+
+- **What It Is**: `ServerResponse` is the class used by Node.js to create the outgoing response sent back to the client. When your server processes a request and is ready to send data back, it uses an instance of `ServerResponse`.
+- **What It Contains**:
+  - **Status Code**: `res.statusCode` lets you set the HTTP status code (e.g., 200 for success, 404 for not found).
+  - **Response Headers**: `res.setHeader()` allows you to specify headers to send back to the client.
+  - **Response Body**: `res.write()` and `res.end()` are used to write data and complete the response.
+- **Purpose**: This `ServerResponse` object enables your server to respond to the client with data, headers, and status codes.
+
+### Symbols in Node.js
+
+The **symbols** you see in `[Symbol(IncomingMessage)]` and `[Symbol(ServerResponse)]` are a unique way to reference properties. Symbols are special identifiers that allow Node.js to reference these constructors without exposing them as regular properties. This avoids conflicts and ensures these properties are only accessed internally by the HTTP server.
+
+In summary:
+
+- **[Symbol(IncomingMessage)]** and **[Symbol(ServerResponse)]** are internal references to the constructors for handling HTTP requests and responses.
+- They are crucial for the server’s functionality but are hidden from direct access to maintain encapsulation and prevent interference with these internal mechanisms.
+- It means we cannot call or access both of them like regular methods or properties. They are only used by node.js internals to manage HTTP requests and responses.
