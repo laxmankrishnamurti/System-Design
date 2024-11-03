@@ -17,8 +17,6 @@
 3. **Micro-Services (Backend)**
 4. **Databases + DBMS**
 5. **TypeScript**
-   Upcoming....
-
 6. **DevOps**
 7. **Networking**
 
