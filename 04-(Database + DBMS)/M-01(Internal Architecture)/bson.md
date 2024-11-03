@@ -61,3 +61,41 @@ s.n         Data Type           Size(bytes)
 ## Disadvantage of using BSON
 
 **_BSON supports fast traversal of the BSON document. In order to support it, BSON adds extra information (like the length of subobjects, etc.) to the document. In some cases, this leads to increase in the size of the document and decreases the efficiency when compared to JSON._**
+
+Sure, here’s a simplified example:
+
+### JSON Document
+
+Imagine we have a JSON document:
+
+```json
+{
+  "name": "Alice",
+  "age": 30,
+  "address": {
+    "city": "New York",
+    "zipcode": "10001"
+  }
+}
+```
+
+In JSON, there’s no extra information stored, just the data itself.
+
+### BSON Document
+
+In BSON, to make it faster to read through each part of the document, it adds extra information like the length of the `address` object. So the BSON document might look something like this (simplified):
+
+```json
+Document Length: 38 bytes
+{
+  "name": "Alice",
+  "age": 30,
+  "address": {
+    Object Length: 20 bytes
+    "city": "New York",
+    "zipcode": "10001"
+  }
+}
+```
+
+Here, BSON has added the `Document Length` and `Object Length` fields. This extra information makes it faster to jump directly to parts of the document, but it also makes the document a bit bigger than JSON.
