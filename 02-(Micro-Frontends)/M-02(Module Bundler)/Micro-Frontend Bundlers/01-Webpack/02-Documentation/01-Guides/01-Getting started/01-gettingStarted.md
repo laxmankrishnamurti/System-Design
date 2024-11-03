@@ -76,4 +76,4 @@ As of version 4, webpack doesn't require any configuration, but most projects wi
 
 This is much more efficient than having to manually type in a lot of commands in the terminal, so lets create a demo project with webpack configuration file
 
-[Demo project with webpack's configuration file]
+[Demo project with webpack's configuration file](./basicSetupWithConfiguration/learnings.md)
