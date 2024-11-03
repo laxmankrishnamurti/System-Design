@@ -73,3 +73,63 @@ When you have a large user base and lots of data, you can design your database i
 - Regularly monitor shard performance and adjust if needed (e.g., changing shard keys or rebalancing data across shards).
 
 This way, even with a million users, your database remains fast and efficient as it grows!
+
+## Mongodb architecture
+
+The internal architecture of MongoDB is designed to efficiently handle large amounts of data and provide flexibility and high availability. Here’s a simplified breakdown:
+
+### 1. **Database Structure: Documents and Collections**
+
+- **Document**: The basic unit of data in MongoDB, stored in **BSON** (Binary JSON) format. Each document contains fields and values, similar to a JSON object.
+- **Collection**: A group of documents. Collections in MongoDB are analogous to tables in relational databases, but they don’t enforce a fixed schema.
+
+### 2. **Components of MongoDB Architecture**
+
+MongoDB's architecture includes several key components:
+
+#### a. **Sharding**
+
+- **Sharding** is MongoDB’s method for horizontal scaling. It allows large data sets to be divided across multiple machines, each holding a subset of the data.
+- MongoDB uses a **shard key** to decide how to split the data. The data is divided into **chunks** based on this key, and chunks are then distributed across different **shards**.
+- Each **shard** is a MongoDB instance (or replica set), holding part of the overall data.
+
+#### b. **Replication**
+
+- MongoDB uses **replication** to ensure high availability. It does this with **replica sets**, which are groups of MongoDB servers that contain the same data.
+- A **primary node** handles all write operations, while **secondary nodes** replicate the primary’s data.
+- If the primary node fails, MongoDB automatically promotes a secondary to primary, providing redundancy and preventing downtime.
+
+#### c. **Config Servers**
+
+- Config servers store metadata and routing information about the sharded clusters.
+- They manage the sharding configuration, helping the **mongos** process (see below) locate data across the shards.
+- Typically, there are multiple config servers (usually three) for fault tolerance.
+
+#### d. **Mongos (Query Router)**
+
+- **Mongos** is a routing layer that connects applications to the correct shards.
+- When a client requests data, the **mongos** server looks at the shard key and the config server metadata to route the request to the appropriate shard.
+- This allows the application to interact with the sharded data as if it were a single, unified database.
+
+### 3. **Storage Engine**
+
+- MongoDB’s **storage engine** handles how data is stored on disk. MongoDB supports multiple storage engines, like **WiredTiger** (default) and **MMAPv1**.
+- The **WiredTiger** engine provides efficient storage, data compression, and concurrent read-write operations.
+
+### 4. **Indexes**
+
+- MongoDB supports indexes for faster query performance. Indexes are structures that MongoDB maintains to help quickly locate documents in a collection.
+- You can create different types of indexes (e.g., single-field, compound, geospatial, etc.) based on your application’s needs.
+
+### 5. **Journaling**
+
+- Journaling provides data durability by recording write operations in a log before applying them to the actual data. This ensures that in case of a crash, the database can recover to a consistent state.
+
+### Summary of Data Flow in MongoDB
+
+1. **Client Request**: A client sends a request (e.g., read, write).
+2. **Mongos Routing**: For sharded clusters, the **mongos** routes the request to the correct shard(s) based on the shard key and config server metadata.
+3. **Data Handling**: Each **shard** handles the request using its replica set for high availability.
+4. **Response**: Data is fetched, combined if needed, and sent back to the client.
+
+This architecture enables MongoDB to handle large-scale, distributed data while ensuring availability, fault tolerance, and high performance.
