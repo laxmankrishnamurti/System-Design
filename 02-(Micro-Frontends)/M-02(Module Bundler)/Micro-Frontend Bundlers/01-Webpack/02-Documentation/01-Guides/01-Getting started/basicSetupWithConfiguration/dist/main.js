@@ -1,1 +1,1 @@
-console.log("main file is loaded");
+window.alert("Hello from webpack");
