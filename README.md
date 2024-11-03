@@ -29,5 +29,5 @@
 
 2. **What's inside the every sub-root directory?**
 
-   - What are things that is required to complete the goal of sub-root directory.
+   - What are required to in order to complete the sub-root directory goals.
    - Inside the sub-root directory there can be nested modules in order to achieve the goal of sub-root directory and so on....
