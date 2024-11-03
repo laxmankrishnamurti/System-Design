@@ -45,4 +45,57 @@ Server {
 
 The server object is indeed a complex object. The listen method, along with many others, is available to this object because it inherits from Node.js’s _EventEmitter_ and _net.Server classes_, which provide these additional functionalities. This is an example of prototypal inheritance in JavaScript.
 
-When we call createServer, we’re essentially creating an instance of _http.Server_, which has _listen_, _close_, and other methods due to this inheritance.
+When we call createServer, we’re essentially creating an instance of _http.Server_, which has _listen_, _close_, and other methods because of inheritance.
+
+### Key Properties of `http.Server`
+
+1. **maxHeaderSize**: Specifies the maximum size of HTTP headers in bytes. If headers exceed this size, the server will reject the request. Undefined by default, it’s configurable in the server options.
+
+2. **insecureHTTPParser**: Controls whether the HTTP parser should allow non-standard HTTP headers and relaxed header formatting. It’s set to `undefined` by default, and when enabled, it could introduce vulnerabilities if misused.
+
+3. **requestTimeout**: The timeout in milliseconds for receiving an entire request. By default, it’s set to 5 minutes (300,000 ms). If the request isn’t completed within this time, the server will automatically close the connection.
+
+4. **headersTimeout**: The maximum time allowed for reading request headers (default: 60,000 ms). If headers aren’t received within this limit, the server will terminate the connection.
+
+5. **keepAliveTimeout**: The timeout for the server to keep a connection open after sending a response, to potentially reuse it for subsequent requests from the same client (default: 5,000 ms).
+
+6. **connectionsCheckingInterval**: The interval in milliseconds at which the server checks open connections for activity, particularly useful for terminating inactive connections.
+
+7. **requireHostHeader**: Determines if the `Host` header must be present in requests. If set to `true`, the server will reject requests without this header, adding a layer of security by requiring the header.
+
+8. **joinDuplicateHeaders**: A property to handle duplicate headers; when enabled, it joins repeated headers into a single field, separated by commas.
+
+9. **\_events**: Lists all event listeners currently registered on the server, like `request`, `connection`, and `listening`. These manage server behaviors when different events happen, such as handling incoming requests.
+
+10. **\_connections**: Represents the current number of concurrent connections. This is useful for monitoring load on the server.
+
+11. **allowHalfOpen**: Determines whether to keep the connection open if the client closes one end of the socket, useful for duplex streams.
+
+12. **highWaterMark**: This is a buffer threshold that the server uses to determine when to apply backpressure to the client, essentially controlling the flow of data between the client and server.
+
+13. **httpAllowHalfOpen**: Similar to `allowHalfOpen`, this specifically applies to HTTP connections, controlling whether the connection should remain open.
+
+14. **timeout**: Sets the amount of time (in milliseconds) that the server will wait for inactivity before automatically ending a connection.
+
+15. **[Symbol(IncomingMessage)]** and **[Symbol(ServerResponse)]**: These represent the constructors for the `IncomingMessage` and `ServerResponse` objects that Node.js uses internally to handle request and response data.
+
+16. **[Symbol(async_id_symbol)]**: Tracks asynchronous operations for internal diagnostics and debugging.
+
+### Inherited Properties and Methods
+
+The `listen` method, along with others like `close`, comes from the `net.Server` and `EventEmitter` classes:
+
+- **listen**: Binds the server to a specific port and starts listening for incoming connections.
+- **close**: Stops the server from accepting new connections.
+- **emit**: Triggers an event on the server.
+- **on**: Registers an event handler.
+
+These methods and properties are part of what allows the `server` instance to behave as a full HTTP server.
+
+### Practical Use-Cases for Some Properties
+
+- **headersTimeout** and **requestTimeout** are useful in protecting the server from slowloris attacks, where an attacker holds the connection open to exhaust resources.
+- **keepAliveTimeout** helps maintain fast response times for clients by reusing existing connections when possible.
+- **requireHostHeader** adds an extra security check to ensure only well-formed HTTP requests are processed.
+
+By understanding each of these properties, you can fine-tune your server configuration to be efficient and secure based on your specific needs.
