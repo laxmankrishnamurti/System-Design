@@ -1,6 +1,6 @@
 # KEY TAKEAWAYS
 
-**1. Loading CSS**
+## **1. Loading CSS**
 
 - Module loaders can be chained.
 - Each loader in the chain applies transformations and processed resources and at the end it passes the result to the next loader, and so forth.
@@ -38,7 +38,7 @@ function component() {
 document.body.appendChild(component());
 ```
 
-**2. Loading Images**
+## **2. Loading Images**
 
 - **Add module rules in the _webpack.config.js_ file.**
 

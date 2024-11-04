@@ -14,8 +14,8 @@ One of the coolest webpack features is that we can also include any other type o
 $ npm install --save-dev style-loader css-loader
 ```
 
-[Visit the repo](./practice/learnings.md)
+[Checkout](./practice/learnings.md#1-loading-css)
 
 ## Loading Images
 
-[Checkout](./practice/learnings.md)
+[Checkout](./practice/learnings.md#2-loading-images)
