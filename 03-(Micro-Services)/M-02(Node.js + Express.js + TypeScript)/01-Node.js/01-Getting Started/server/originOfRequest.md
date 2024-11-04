@@ -36,3 +36,17 @@ You're on the right track! Let's break it down step-by-step to understand the or
 - **Access in Node.js**: Through libuv, Node.js interacts with the OS and makes requests accessible in the form of `req` and `res` objects, allowing you to read and respond to them in JavaScript.
 
 In short, Node.js operates at a higher layer, abstracting away the complexities of networking and hardware, while layers below Node.js (OS, network stack, libuv) manage the actual interception and handling of requests.
+
+### Flow-chart
+
+- **1. Client send**
+- **2. Data packets**
+- **3. To the destination IP address**
+- **4. OS receives and reassembles these packets**
+- **5. Network stack**
+- **6. Network socket get triggered**
+- **7. libev notify about that to**
+- **8. Node.js**
+- **9. _request event_ has been triggered on the HTTP server and create a request object and**
+- **10. Process that request**
+- **11. Trigger _response event_ and creates a response object to send response back to the client.**
