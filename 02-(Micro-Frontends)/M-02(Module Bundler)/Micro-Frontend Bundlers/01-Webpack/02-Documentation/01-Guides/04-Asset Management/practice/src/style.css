@@ -1,0 +1,10 @@
+.hello {
+    color: red;
+    background-image: url('./hero-image.png');
+}
+
+h1 {
+    background-color: salmon;
+    color: brown;
+    text-align: center;
+}
