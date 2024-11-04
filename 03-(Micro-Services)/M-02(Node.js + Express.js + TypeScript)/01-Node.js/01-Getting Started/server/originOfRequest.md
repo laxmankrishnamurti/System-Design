@@ -50,3 +50,5 @@ In short, Node.js operates at a higher layer, abstracting away the complexities 
 - **9. _request event_ has been triggered on the HTTP server and create a request object and**
 - **10. Process that request**
 - **11. Trigger _response event_ and creates a response object to send response back to the client.**
+
+**_The server created by createServer() is a universal server that listens for all incoming requests on the specified port. It uses the same server instance to handle each request by creating new IncomingMessage and ServerResponse objects each time._**

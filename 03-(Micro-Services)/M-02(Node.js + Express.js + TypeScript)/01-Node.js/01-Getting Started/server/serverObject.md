@@ -136,3 +136,15 @@ In summary:
 - **[Symbol(IncomingMessage)]** and **[Symbol(ServerResponse)]** are internal references to the constructors for handling HTTP requests and responses.
 - They are crucial for the server’s functionality but are hidden from direct access to maintain encapsulation and prevent interference with these internal mechanisms.
 - It means we cannot call or access both of them like regular methods or properties. They are only used by node.js internals to manage HTTP requests and responses.
+
+---
+
+Whenever a new request is received, the request event is called, providing two objects: a request (an http.IncomingMessage object) and a response (an http.ServerResponse object).
+
+Those 2 objects are essential to handle the HTTP call.
+
+```js
+req.statusCode = 400;
+res.setHeader("Content-Type", "text/html");
+res.end("Hello world!\n");
+```
