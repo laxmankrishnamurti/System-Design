@@ -12,6 +12,8 @@ $ db.<collection_name>.findOne({})
 ### 2. Import external file data via cmd
 
 ```bash
+# Path can be relative or obsolute
+
 # file type ===> Contains only object data
 $ mongoimport <path> -d <db_name> -c <collection_name>
 
