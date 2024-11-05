@@ -224,3 +224,26 @@ console.log("json5 title", json5.title);
 ```bash
 $ npm run build
 ```
+
+## **6. Global Assets**
+
+One of the best coolest feature of webpack, is that loading assets in this way allows us to to group modules and assets in a more intuitive way.
+
+Instead of relying on global _/assets_ directory that contains everything, we can group assets with the code that uses them. The folder structure would be like this :-
+
+```js
+- components
+  - /component-01
+    - index.jsx
+    - style.css
+    - icon.svg
+    - img.png
+  -/component-n
+```
+
+- Simple
+- Readable
+- Portable
+- Closely coupled
+- Re-usable
+- Customizable

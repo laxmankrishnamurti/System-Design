@@ -29,3 +29,11 @@ The asset modules will take any file we load though and output it to the build d
 ## Loading Data
 
 [Checkout](./practice/learnings.md#4-loading-data)
+
+## Customize parser of JSON module
+
+[Checkout](./practice/learnings.md#5-customize-parser-of-josn-module)
+
+## Global Assets
+
+[Checkout](./practice/learnings.md#6-global-assets)

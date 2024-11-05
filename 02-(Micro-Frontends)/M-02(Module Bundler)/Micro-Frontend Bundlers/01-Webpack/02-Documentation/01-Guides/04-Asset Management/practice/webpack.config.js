@@ -45,13 +45,13 @@ module.exports = {
                     parse: yaml.parse
                 }
             },
-            {
-                test: /\.json5$/i,
-                type: 'json',
-                parser: {
-                    parse: json5.parse
-                }
-            }
+            // {
+            //     test: /\.json5$/i,
+            //     type: 'json',
+            //     parser: {
+            //         parse: json5.parse
+            //     }
+            // }
         ]
-    }
+    }   
 }
