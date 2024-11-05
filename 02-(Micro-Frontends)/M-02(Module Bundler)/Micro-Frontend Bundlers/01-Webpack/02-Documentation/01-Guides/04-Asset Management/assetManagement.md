@@ -19,3 +19,13 @@ $ npm install --save-dev style-loader css-loader
 ## Loading Images
 
 [Checkout](./practice/learnings.md#2-loading-images)
+
+## Loading Fonts
+
+The asset modules will take any file we load though and output it to the build directory. This means we can use them for any kind of file, including fonts.
+
+[Checkout](./practice/learnings.md#3-loading-fonts)
+
+## Loading Data
+
+[Checkout](./practice/learnings.md#4-loading-data)

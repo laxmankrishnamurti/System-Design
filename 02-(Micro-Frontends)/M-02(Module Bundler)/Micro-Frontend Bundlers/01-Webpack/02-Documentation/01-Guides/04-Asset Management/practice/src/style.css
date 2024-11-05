@@ -1,6 +1,15 @@
+@font-face {
+    font-family: 'my-font';
+    src: url(./my-font.woff2) format('.woff2'),
+    url(./my-font.woff) format('.woff');
+    font-weight: 600;
+    font-style: normal;
+}
+
 .hello {
     color: red;
     background-image: url('./hero-image.png');
+    font-family: 'my-font';
 }
 
 h1 {
