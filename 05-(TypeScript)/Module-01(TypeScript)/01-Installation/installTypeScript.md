@@ -6,7 +6,7 @@ TypeScript can be installed through three installation routes, these are followi
 **2. NuGet package**
 **3. Visual studio extension**
 
-Let's go with simple one.
+Let's go with NPM module.
 
 ## **NPM Module**
 
