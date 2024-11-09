@@ -48,3 +48,23 @@ Before running the _npm run build_ command one thing which we should keep in min
 **_This means that it will replace the existing HTML file with the new one._**
 
 [Learn more about HtmlWebpackPlugin](https://github.com/jantimon/html-webpack-plugin)
+
+## Cleaning up the _/dist_ folder
+
+It's a good practice to clean the _/dist_ directory before each build, so that we used files will be generated.
+
+```js
+output: {
+  filename: '[name].bundle.js',
+  path: path.resolve(__dirname, 'dist'),
+  clean: true
+}
+```
+
+It will delete all older folders which are not a part of the build process. Basically, it will delete all the previous built file and generate all new files from scratch.
+
+And then run the build command
+
+```bash
+$ npm run build
+```
