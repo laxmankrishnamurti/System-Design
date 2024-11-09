@@ -106,3 +106,21 @@ const getRefreshToken = (accessToken: string): string => {
 
 console.log(getRefreshToken("abcd"));
 ```
+
+JavaScript has these primitive data types:
+
+- number
+- string
+- boolean
+- biging
+- undefined
+- null
+- symbol
+
+But TypeScript extends this list by adding some more types, are :-
+
+- All JavaScript Primitives
+- any (allow anything, means any type)
+- unknown
+- never (it's not possible that this type could happen)
+- void (a function which returns undefined or has no return value)
