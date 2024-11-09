@@ -7,9 +7,12 @@ module.exports = {
         printFun: './src/printFun.js'
     },
     plugins: [
+        new HtmlWebpackPlugin(),
         new HtmlWebpackPlugin({
-            title: 'Output Management'
-        })
+            title: 'Test file',
+            filename: 'test.html',
+            template: 'src/test/test.html'
+        }) 
     ]
     ,
     output: {

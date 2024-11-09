@@ -38,7 +38,7 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 plugins: [
   new HtmlWebpackPlugin({
-    title: "Output Management",
+    title: "Output Management", // This will be the title for the HTML document
   }),
 ];
 ```
@@ -46,3 +46,5 @@ plugins: [
 Before running the _npm run build_ command one thing which we should keep in mind is the _HtmlWebpackPlugin_ will also generate it's own HTML file. Although, we have already a HTML file in the _dist_ directory.
 
 **_This means that it will replace the existing HTML file with the new one._**
+
+[Learn more about HtmlWebpackPlugin](https://github.com/jantimon/html-webpack-plugin)
