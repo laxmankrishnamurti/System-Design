@@ -68,3 +68,15 @@ And then run the build command
 ```bash
 $ npm run build
 ```
+
+## The Manifest
+
+One of the most important question is "**_How do these webpack plugins know what files are being generated._**"
+
+The answer is **_Manifest_**
+
+Webpack manifest keeps to track how all the modules map to the output bundles.
+
+## Conclusion
+
+In this guide we have learnt about how to create a HTML file dynamically in which all bundles are included.
