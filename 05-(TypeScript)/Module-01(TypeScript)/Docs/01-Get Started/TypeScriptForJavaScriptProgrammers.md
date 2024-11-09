@@ -80,3 +80,29 @@ class Seller {
 const newSeller = new Seller("Laxman Krishnamurti", "xxxxx916E", 918252764932);
 console.log("newSeller", newSeller);
 ```
+
+Also, we can use interfaces to annotate function's parameters and it's return value so that we can get an clear overview about at the end what kind of value the function is going to give us.
+
+```ts
+// Interfaces with functions
+
+function sayHello(name: string): void {
+  console.log("Hello", name + "!");
+}
+
+sayHello("Laxman");
+
+const getRefreshToken = (accessToken: string): string => {
+  let isValid: boolean = false;
+
+  if (accessToken === "abcd") {
+    isValid = true;
+  } else {
+    return "Invalid access token";
+  }
+
+  return "newRefreshToken is generated successfully";
+};
+
+console.log(getRefreshToken("abcd"));
+```
