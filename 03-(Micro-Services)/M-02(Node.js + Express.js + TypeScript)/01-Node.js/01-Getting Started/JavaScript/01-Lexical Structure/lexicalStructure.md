@@ -215,3 +215,138 @@ The following are reserved as future keyword by the ECMAScript specification. Th
 - private
 - protected
 - public
+
+## Literals
+
+A literal in programming represents a fixed value directly in the code, which means it's not computed or driven from other values.
+
+For example number(22), string("laxman"), boolean(true), and more complex structures like objects({}) and arrays([]) are all literals because they represent fixed, specific values.
+
+**_MDN FORMAL DEFINITION :: Literals that are atomic tokens._**
+
+What does this mean? Let's understand......
+
+The MDN line clearifies that literals can consist of multiple _atomic tokens._ An _Atomic token_ is the smallest unit of code that can't broken down further—for instance, numbers, strings, and variable names. Object literals ({ key: value }) and array literals ([value1, value2]) are slightly more complex literals. They’re expressions built from multiple atomic tokens (such as **key**, **:**, **value**, and { } for objects) but still represent a single value as a whole.
+
+```js
+// literal examples
+
+//null
+null
+
+//string
+"laxman krishnamurti"
+
+//boolean
+true
+false
+
+//numeric (decimal)
+22
+9034
+
+// numeric (Exponential)
+4e10 (4 res to the power 10 to the base of 10)
+
+// numeric (Binary)
+
+0b10 // 2
+0b11 // 3
+0b111 // 7
+
+//Regular Expressions
+/\d/g
+/[a-zA-Z0-9]/g
+```
+
+```bash
+# Escape Sequence
+
+\0  ===> null character (U + 0000)
+\'  ===> Single quote (U + 0027)
+\"  ===> Double quote   (U + 0022)
+\\  ===> backslash  (U + 005C)
+\n  ===> newline    (U + 000A)
+\r  ===> carriage return    (U + 00D)
+\v  ===> vertical tab   (U + 000B)
+\t  ===> tab    (U + 0009)
+\b  ===> backspace  (U + 0008)
+\f  ===> form feed  (U + 000C)
+```
+
+## Automatic semicolon insertion
+
+Some JavaScript statements' syntax definitions require semicolon (;) at the end. They include:-
+
+- **var, let, const**
+
+  ```js
+  var name = "laxman krishnamurti";
+  let email = "laxmankrishnamurti@gmail.com";
+  const age = 22;
+  ```
+
+- **Expression statement**
+
+  - Expression ===> It can be anything that produce a value.
+
+    - Ex :- 5 + 3; 2 \* 2; "Laxman Krishnamurti"
+
+  - Statement ===> A statement is a complete line of code that performs some action.
+
+    - Ex :- let name = "laxman krishnamurti"
+
+  - It means an _expression statement_ is simply a statement in code that evaluate an expression, and it's written in a way that cause the expression to have some effects or produce some results.
+
+  ```js
+  // This is an expression statement because it perform an action.
+  console.log("Hello world!");
+  ```
+
+- **do.....while**
+
+  ```js
+  let i = 0;
+  do {
+    i = i + 1;
+    result = result + i;
+  }
+  ```
+
+- **continue, break, return, throw**
+
+  ```js
+  if(i === 5){
+      continue;
+  }else if (i === 8){
+      break;
+  }else if (i === -1){
+      throw Error("Invalid input");
+  }else {
+      return i;
+  }
+  ```
+
+- **debugger**
+
+  ```js
+  function findPotentialBugs() {
+    debugger;
+  }
+  ```
+
+- **Class field declarations (public or private)**
+
+  ```js
+  class Customer {
+    customerName;
+    static accountNumber;
+  }
+  ```
+
+- **import, export**
+
+  ```js
+  import express from "express";
+  export default generateTokens;
+  ```
