@@ -1,9 +1,9 @@
-const path = require('path')
+const path = require("path")
 
 module.exports = {
     entry: {
         index: './src/index.js',
-        print: './src/print.js',
+        printFun: './src/printFun.js'
     },
     output: {
         filename: '[name].bundle.js',
