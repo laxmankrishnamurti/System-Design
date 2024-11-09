@@ -1,5 +1,6 @@
 let usernmae = "Laxman Krishnamurti";
 
+// Describing the object shape
 interface USER {
     name: string;
     age: number
