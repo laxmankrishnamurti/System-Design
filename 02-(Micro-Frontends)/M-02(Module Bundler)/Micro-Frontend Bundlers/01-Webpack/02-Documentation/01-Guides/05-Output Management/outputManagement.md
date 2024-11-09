@@ -18,3 +18,31 @@ module.exports = {
   },
 };
 ```
+
+But what if we change the entry file name without changing in HTML it means it still refrencing the old file name that can give errors.
+
+Let's fix that with the _HtmlWebpackPlugin_
+
+## Setting up HtmlWebpackPlugin
+
+- Install the plugin and adjust the _webpack.config.js_ file.
+
+```bash
+$ npm install --save-dev html-webpack-plugin
+```
+
+- Adjust the configuration file with this one.
+
+```js
+const HtmlWebpackPlugin = require("html-webpack-plugin");
+
+plugins: [
+  new HtmlWebpackPlugin({
+    title: "Output Management",
+  }),
+];
+```
+
+Before running the _npm run build_ command one thing which we should keep in mind is the _HtmlWebpackPlugin_ will also generate it's own HTML file. Although, we have already a HTML file in the _dist_ directory.
+
+**_This means that it will replace the existing HTML file with the new one._**
