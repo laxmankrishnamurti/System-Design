@@ -25,3 +25,58 @@ It can only changable if we changed the variable type explicitly. _Type inferenc
 ## Defining Types
 
 However TypeScript tries their best to infer type implicitly but at some point it can't. Because we can use a wide variety of design principles in JavaScript. So, we need to define types explicitly.
+
+```ts
+let usernmae = "Laxman Krishnamurti";
+
+// Explicitly describing the object shape
+interface USER {
+  name: string;
+  age: number;
+}
+
+const newUser: USER = {
+  name: "Harshad Mehta",
+  age: 22,
+};
+
+console.log("newUser is", newUser);
+console.log("username is", usernmae);
+```
+
+If we provide an object that dosen't match the interface we have provided, TypeScript will warn us:
+
+```ts
+const newUser: USER = {
+  name: "Harshad Mehta",
+  age: 22,
+  email: "harsahadmehta@gmail.com",
+};
+
+//Warning ===> Object literal may only specify known properties, and 'email' does not exist in type 'USER'.
+```
+
+**Because, JavaScript supports OOPs style, we can use an interface declaration with classes :**
+
+```ts
+interface CUSTOMER {
+  customerName: string;
+  panDetails: string;
+  accountNumber: number;
+}
+
+class Seller {
+  customerName: string;
+  panDetails: string;
+  accountNumber: number;
+
+  constructor(customerName: string, panDetails: string, accountNumber: number) {
+    this.customerName = customerName;
+    this.panDetails = panDetails;
+    this.accountNumber = accountNumber;
+  }
+}
+
+const newSeller = new Seller("Laxman Krishnamurti", "xxxxx916E", 918252764932);
+console.log("newSeller", newSeller);
+```
