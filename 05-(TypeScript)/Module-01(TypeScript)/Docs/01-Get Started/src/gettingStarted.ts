@@ -1,1 +1,14 @@
-let username = "Laxman Krishnamurti";
+let usernmae = "Laxman Krishnamurti";
+
+interface USER {
+    name: string;
+    age: number
+}
+
+const newUser: USER = {
+    name: "Harshad Mehta",
+    age: 22
+}
+
+console.log("newUser is", newUser)
+console.log("username is", usernmae)

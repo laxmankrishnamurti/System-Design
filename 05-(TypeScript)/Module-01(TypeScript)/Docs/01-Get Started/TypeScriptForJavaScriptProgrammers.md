@@ -23,3 +23,5 @@ Because TypeScript knows JavaScript very well and based on the variable value it
 It can only changable if we changed the variable type explicitly. _Type inference_ done by TypeScript implicitly (automatically).
 
 ## Defining Types
+
+However TypeScript tries their best to infer type implicitly but at some point it can't. Because we can use a wide variety of design principles in JavaScript. So, we need to define types explicitly.
