@@ -57,3 +57,5 @@ const getRefreshToken = (accessToken: string): string => {
 }
 
 console.log(getRefreshToken("abcd"))
+
+type isLoggedIn = true | false;

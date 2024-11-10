@@ -124,3 +124,44 @@ But TypeScript extends this list by adding some more types, are :-
 - unknown
 - never (it's not possible that this type could happen)
 - void (a function which returns undefined or has no return value)
+
+**There are two syntax for building types: _interface and types_. TypeScript recommend to use interface than typea. It states that use _types_ when we need specific features.**
+
+## Composing Types
+
+There are two ways to create more complex types:-
+
+### **Unions**
+
+With unions we can declare a type could be one of many types. This is like a if-else condition where declare type should be either this one or this. like this :-
+
+```ts
+type isLoggedIn = true | false;
+```
+
+Bydefault, it is classed as _boolean_. This is the property of Structural Type System.
+
+```ts
+type isLoggedIn = boolean;
+```
+
+Unions also provide a way to handle different types too.
+
+```ts
+const generateRefreshToken = (input: string | number): string => {
+  return "accessToken";
+};
+```
+
+```ts
+// Learn the type of a variable
+
+console.log(typeof age); // number
+console.log(Array.isArray([]))  // true
+console.log(typeof () => {})  // function
+```
+
+## **Generics**
+
+- Generics means **_characteristic of or relating to a class or group of things; not specific_**
+- Generic types are dynamic types means it can adopt any type based on the input type.
