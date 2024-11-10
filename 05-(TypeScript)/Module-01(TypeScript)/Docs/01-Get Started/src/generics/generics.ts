@@ -77,3 +77,22 @@ const authenticationFeature: Authentication<string> = {
 
 console.log("generatedAccessToken", authenticationFeature.generateAccessToken("laxmankrishnamurti"));
 console.log("generatedRefreshToken", authenticationFeature.getRefreshToken())
+
+// Defining a generic type for array
+
+type DynamicArray<T> = T[]
+
+const freedomFighters: DynamicArray<string> = ["Bhagat Singh", "Shukhdev", "Batukeshwar dutt", "Azzad", "Pritilatta wadedar", "Kalpana dutt", "Vinoy basu", "Khudiram bosh"]
+
+console.log("freedomFighters", freedomFighters)
+console.log("typeof freedomFighters", typeof freedomFighters)
+
+const myMatriculationMarks: DynamicArray<number> = [75,85,89,91,93,95]
+
+console.log("myMatriculationMarks", myMatriculationMarks)
+console.log("type of myMatriculationMakrs", typeof myMatriculationMarks)
+
+const isLoggedInStatus: DynamicArray<boolean> = [true, false, false, false, false, true, true, false, false, false, false, false, true, true]
+
+console.log("isLoggedInStatus", isLoggedInStatus)
+console.log("type of isLoggedInStatus", typeof isLoggedInStatus)
