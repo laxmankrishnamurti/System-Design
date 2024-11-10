@@ -167,3 +167,70 @@ console.log(typeof () => {})  // function
 
 - Generics means **_characteristic of or relating to a class or group of things; not specific_**
 - Generic types are dynamic types, it means it can adopt any type based on the input type.
+
+## Structural Type System
+
+One of TypeScript’s core principles is that type checking focuses on the **_shape_** that values have. This is sometimes called “duck typing” or “structural typing”.
+
+In a structural type system, if two objects have the same shape, they are considered to be of the same type.
+
+```ts
+interface User {
+  name: string;
+  age: number;
+}
+
+function printUserInfo(user: User): void {
+  console.log("user", user);
+}
+
+const user = {
+  name: "Laxman Krishnamurti",
+  age: 22,
+};
+
+printUserInfo(user);
+```
+
+You might be wondering about if the _user_ object never declared it's type of be _User_ so why TypeScript passes the code?
+
+This is because of the shape of the object that we have passed to function. The object is mathing the shpae of the _User_ type so that's why TypeScript think that oooo..... This is what the function is expecting and it actually have all the properties which is described in the _User interface_
+
+```ts
+//TypeScript can also accept the object because it has all properties which is defined in the interface. But it will only accept the _name & age_ and the extra properties will be excluded.
+const secondArg = {
+  name: "Laxman Krishnamruti",
+  age: 22,
+  email: "laxmankrishnamurti@gmail.com",
+};
+
+// TypeScript will not allow to pass the object because it dosen't have the properties described in the interface
+
+const thirdArg = {
+  name: "Laxman Krishnamurti",
+  hobbies: "VIDHYA",
+};
+```
+
+**_There is no difference between how classes and objects conform to shapes_**
+
+```ts
+class User {
+  name: string;
+  age: number;
+
+  constructor(name: string, age: number) {
+    this.name = name;
+    this.age = age;
+  }
+}
+
+const newUser = new User("Laxman Krishnamurti", 22);
+console.log("newUser", newUser);
+
+// {name: 'Laxman Krishnamurti', age: 22}
+```
+
+If the object or class has all the required properties, TypeScript will say they match, regardless of the implementation details.
+
+**_In short, TypeScript focus on the shape of the value rather than how it is implimented_**

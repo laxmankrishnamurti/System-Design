@@ -51,3 +51,13 @@ console.log("type of myMatriculationMakrs", typeof myMatriculationMarks);
 var isLoggedInStatus = [true, false, false, false, false, true, true, false, false, false, false, false, true, true];
 console.log("isLoggedInStatus", isLoggedInStatus);
 console.log("type of isLoggedInStatus", typeof isLoggedInStatus);
+// Structural Type System 
+console.log("STRUCTURAL TYPE SYSTEM");
+function printUserInfo(user) {
+    console.log("user", user);
+}
+var user = {
+    name: "Laxman Krishnamurti",
+    age: 22,
+};
+printUserInfo(user);

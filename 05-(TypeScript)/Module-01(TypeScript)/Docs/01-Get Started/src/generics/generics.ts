@@ -96,3 +96,23 @@ const isLoggedInStatus: DynamicArray<boolean> = [true, false, false, false, fals
 
 console.log("isLoggedInStatus", isLoggedInStatus)
 console.log("type of isLoggedInStatus", typeof isLoggedInStatus)
+
+// Structural Type System 
+
+console.log("STRUCTURAL TYPE SYSTEM")
+
+interface User {
+    name: string;
+    age: number;
+  }
+  
+  function printUserInfo(user: User): void {
+    console.log("user", user);
+  }
+  
+  const user = {
+    name: "Laxman Krishnamurti",
+    age: 22,
+  };
+  
+  printUserInfo(user);
