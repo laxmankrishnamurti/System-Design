@@ -163,5 +163,7 @@ console.log(typeof () => {})  // function
 
 ## **Generics**
 
+[Practice file](./src/generics/generics.ts)
+
 - Generics means **_characteristic of or relating to a class or group of things; not specific_**
-- Generic types are dynamic types means it can adopt any type based on the input type.
+- Generic types are dynamic types, it means it can adopt any type based on the input type.
