@@ -41,4 +41,39 @@ const clients: ArrayOfObjects = [
 console.log("clients", clients)
 console.log("clients type", typeof clients)
 
-// type GenericArray = Array<T>;
+// generics with interface 
+
+interface Authentication<Type>{
+    generateAccessToken: (credentials: Type) => void;
+    getRefreshToken: () => Type;
+}
+
+//This is a shortcut to tell TypeScript there is a constant called _assignAuthenticationType_, and you don't have to worry about where it came from. 
+
+// If we don't use the declare keyword it would ask for values to be initialized. Like this :- 'const' declarations must be initialized.
+
+// declare const assignAuthenticationType: Authentication<string>;
+
+// // Now, after assigning the type of the interface we can use both methods. 
+
+// assignAuthenticationType.generateAccessToken("laxmankrishnamurti");
+
+// // Warn :- Argument of type 'number' is not assignable to parameter of type 'string'.ts(2345)
+// // assignAuthenticationType.generateAccessToken(22);
+
+// const accessToken = assignAuthenticationType.getAccessToken()
+// console.log("type of accessToekn is", typeof accessToken)
+
+// let's implement the Authentication interface
+
+const authenticationFeature: Authentication<string> = {
+    generateAccessToken: (credential: string) => {
+        console.log(`Access token is generated for ${credential}`, String(Math.ceil(Math.random()*1e10)))
+    },
+    getRefreshToken: () => {
+        return String(Math.ceil(Math.random()*1e10))
+    }
+}
+
+console.log("generatedAccessToken", authenticationFeature.generateAccessToken("laxmankrishnamurti"));
+console.log("generatedRefreshToken", authenticationFeature.getRefreshToken())
