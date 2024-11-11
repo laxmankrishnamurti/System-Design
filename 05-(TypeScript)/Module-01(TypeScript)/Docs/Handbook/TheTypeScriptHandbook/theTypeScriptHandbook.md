@@ -9,3 +9,17 @@ But the ability of the JavaScript language to express the relationships between 
 The most common kinds of errors that we face as a developer write can be described as type errors: a certain kind of value was used where a different kind of value was expected. This could be due to simple typos, a failure to understand the API surface of a library, incorrect assumptions about runtime behavior, or other errors.
 
 **_The goal of TypeScript is to be a typechecker for JavaScript programs - in other words, TypeScript is the tool that runs before our code runs (static) and ensures that the types of the program are correct(Type should be checked before code runs)_**
+
+## How is the Handbook Structured
+
+The handbook is split into two sections, are :-
+
+- **1. Section-01 (The Handbook)**
+
+  - The TypeScript Handbook is intended to be a comprehensive document.
+  - This will not explore edge case or minutiae of the features being covedred.
+
+- **2. Section-02 (Reference Files)**
+  - This is intended to provide a richer understanding of how a particular part of TypeScript works.
+  - The Reference file are not intended for readers unfamiliar with TypeScript because they may use advanced terminology or reference topics.
+  - _Disclaimer_ :: Because each section in the reference file is covering a single bit of information of TypeScript concept it means it will not gurantee you for any kind of continuity.
