@@ -158,3 +158,32 @@ tsc --noEmitOnError <fileName>
 ```
 
 This command tells _tsc compiler_ do not generate the JavaScript file if you got any kind of typo error in the TypeScript code.
+
+## Explicit Types
+
+```ts
+function greet(person: string, date: Date) {
+  console.log(`Hello ${person}, today is ${date.toDateString()}`);
+}
+
+greet("Laxman Krishnamurti", Date());
+```
+
+```bash
+# After running the command
+tsc --noEmitOnError <fileName>
+
+warn :- Argument of type 'string' is not assignable to parameter of type 'Date'
+```
+
+Because when we call **Date()** it returns a string. Lets quickly fix this error
+
+```ts
+greet("Laxman Krishnamurti", new Date());
+```
+
+```bash
+# Output
+
+Hello Laxman Krishnamurti, today is Tue Nov 12 2024
+```
