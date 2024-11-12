@@ -80,3 +80,81 @@ undefined
 ```
 
 This looks _strange_ in the first example we have seen JavaScript successfully throw an error but not in this case. This will become a big problem for our application or might be a bugs that can lead our application vulnerable.
+
+On the other hand type system has to make a call over what code should be flagged as an error in its system, even if it's a valid JavaScript that won't immediately throw an error.
+
+```ts
+const user = {
+  name: "Laxman Krishnamurti",
+  age: 22,
+};
+
+console.log(user.email);
+```
+
+```bash
+Warn : Property 'email' does not exit on type {name: string; age: number}
+```
+
+It also throw errors when we done any logical mistakes.
+
+```ts
+const value = Math.random() < 0.5 ? "a" : "b";
+if (value !== a) {
+  console.log("value is", value);
+} else if (value === b) {
+  console.log("value is", value);
+}
+```
+
+```bash
+# Output
+
+Warn: The comparison operator appears to be unintensional because the types "a" and "b" have no overlap.
+```
+
+**Why?**
+
+The error is pointing out that the `else if (value === "b")` condition is unreachable because it’s logically impossible. Here’s why:
+
+1. In the `if` condition, you check if `value` is **not** `"a"`.
+2. If `value` is `"a"`, this `if` condition will be **false** and the code won’t enter this block.
+3. If `value` is **not** `"a"` (meaning it’s `"b"`), the `if` condition will be **true**, so the code enters this block and won’t reach the `else if`.
+
+Since `value` can only be `"a"` or `"b"`, there’s no situation where the `else if (value === "b")` condition could execute. This is what TypeScript is alerting us about—it’s a redundant and unreachable check.
+
+## Types for Tooling
+
+- Catch bugs
+
+- Provide suggestions
+
+  - The type-checker has information to check things like whether we’re accessing the right properties on variables and other properties.
+
+- Quick fixes
+
+- Provide navigation feature to jump on the variable definition and find all given references.
+
+- All of this is built on top of the **type-checker**
+
+### **tsc**, the TypeScript compiler
+
+```bash
+# Intall TypeScript Globally
+
+npm install -g typescript
+
+# Type-check by running the command
+tsc <fileName>
+```
+
+- Compiler tries to emit clean readable code.
+- Consistent indentation
+
+## Emitting with Errors
+
+```bash
+tsc --noEmitOnError <fileName>
+```
+
+This command tells _tsc compiler_ do not generate the JavaScript file if you got any kind of typo error in the TypeScript code.
