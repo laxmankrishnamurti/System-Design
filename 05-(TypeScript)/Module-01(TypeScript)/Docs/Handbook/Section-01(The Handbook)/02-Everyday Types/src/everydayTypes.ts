@@ -14,3 +14,33 @@ function getIpAddress(): string {
 }
 
 const userIpAddress: string = getIpAddress()
+
+// Anonymous function
+
+const mixArr = ["laxman", 22, true]
+mixArr.forEach((value) => {
+    console.log("value is", value)
+    // console.log(typeof value.toFixed(2))
+})
+
+const newMix = [22,32]
+newMix.forEach(function (value){
+    console.log("value is", value)
+    console.log("typeof value is", typeof value)
+    console.log("fixed value", value.toFixed(2))
+})  
+
+
+function logUser(obj: {name: string; email?: string}){
+    console.log("LOGUSER CALLED")
+    console.log("you registered email id is", obj.email?.toUpperCase());
+    // console.log("you registered email id is", obj.email.toUpperCase());
+}
+
+logUser({name: "Laxman Krishnamurti"})
+
+function showDetails(obj: {name: string; email?: string}){
+    if(obj.email !== undefined){
+        console.log("your registered email id is", obj.email)
+    }
+}

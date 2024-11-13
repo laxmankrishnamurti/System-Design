@@ -156,3 +156,181 @@ function getIpAddress(): string {
 
 const userIpAddress: string = getIpAddress();
 ```
+
+**If a function is returning a Promise we can annotate like this**
+
+```ts
+async function getTotalSubscribers(): Promise<number> {
+  return 10000000000;
+}
+```
+
+### Anonymous Functions
+
+If TypeScript encounter an anonymous function it uses the context to determine the type of the value. This same thing happens with _type inference_. When a function appears in a place where TypeScript can determine how it's going to be called, it used the current context for values to associate types.
+
+```ts
+const mixArr = ["laxman", 22, true];
+mixArr.forEach((value) => {
+  console.log("value is", value);
+  console.log(typeof value.toFixed(2));
+});
+```
+
+```bash
+warning
+
+Property 'toFixed' does not exist on type 'string | number | boolean'.
+  Property 'toFixed' does not exist on type 'string'
+```
+
+TypeScript might be thinking that all values is of type _string_. I don't know lets take another example to analyze.
+
+```ts
+const newMix = [22, 32, "laxman krishnamurti"];
+newMix.forEach(function (value) {
+  console.log("value is", value);
+  console.log("typeof value is", typeof value);
+  console.log("fixed value", value.toFixed(2));
+});
+```
+
+```bash
+warning
+
+Property 'toFixed' does not exist on type 'string | number'.
+  Property 'toFixed' does not exist on type 'string'.
+```
+
+- **Contextual typing will only work if we passed a specific type of array.**
+
+```ts
+const newMix = [22, 32];
+newMix.forEach(function (value) {
+  console.log("value is", value);
+  console.log("typeof value is", typeof value);
+  console.log("fixed value", value.toFixed(2));
+});
+```
+
+Now, TypeScript can infer type for every single value.
+
+- TypeScript used the types of the _forEach_ function, along with the inferred type of the array, to determine the type _s_ will have.
+
+- This process is called _contextual typing_ because the context that the function occurred within informs what type it should have.
+
+## Object Types
+
+Apart from primitives, the most common sort of type we'll encounter is an _object type._ To define an object type, we simply list the properties and their types.
+
+```ts
+function printUserDetails(user: { name: string; email: string }) {
+  console.log("Hello", user.name);
+  console.log("Your registered email id is", user.email);
+}
+
+const newUser = {
+  name: "Laxman Krishnamurti",
+  email: "laxmankrishnamurti@gmail.com",
+};
+
+printUserDetails(newUser);
+```
+
+- We can either use _,_ or _;_ to separate properties, and the last separator is optional.
+
+- If we don't specify a type, it will be assumed to be _any_
+
+```ts
+function printUserDetails(user: { name: any; email: any }) {
+  console.log("Hello", user.name);
+  console.log("Your registered email id is", user.email);
+}
+```
+
+**Optional Properties**
+
+We can also mark properties to be optional
+
+```ts
+function printUserDetails(user: { name: string; email?: string }) {
+  console.log("Hello", user.name);
+  console.log("Your registered email id is", user.email);
+}
+
+const newUser = {
+  name: "Laxman Krishnamurti",
+  email: "laxmankrishnamurti@gmail.com",
+};
+
+const user = {
+  name: "Harshad Mehta",
+};
+
+printUserDetails(newUser);
+printUserDetails(user);
+```
+
+```bash
+Both are OK!
+```
+
+- The **?** is also used for optional chaining.
+
+- In JavaScript, if we try to access a property that dosen't exist, we'll get the _undefined_ rather than a _runtime error_.
+
+- So, when we read from an optional property, we'll have to check for _undefined_ before using it.
+
+```ts
+function logUser(obj: { name: string; email?: string }) {
+  console.log("you registered email id is", obj.email);
+}
+```
+
+```bash
+(property) email?: string | undefined
+
+If value will be undefined it can crash the application. Always check for undefined we are accessing an optional property
+```
+
+Let's fix this .....
+
+```ts
+function showDetails(obj: { name: string; email?: string }) {
+  if (obj.email !== undefined) {
+    console.log("your registered email id is", obj.email);
+  }
+}
+```
+
+```bash
+(property) email?: string
+
+Now, we are good to go!
+```
+
+```ts
+function logUser(obj: { name: string; email?: string }) {
+  console.log("LOGUSER CALLED");
+  console.log("you registered email id is", obj.email.toUpperCase());
+}
+```
+
+```bash
+warning
+
+'obj.email' is possibly 'undefined'.ts(18048)
+(property) email?: string | undefined
+```
+
+```ts
+// A safe alternative using modern JavaScript syntax
+function logUser(obj: { name: string; email?: string }) {
+  console.log("LOGUSER CALLED");
+  console.log("you registered email id is", obj.email?.toUpperCase());
+}
+```
+
+```bash
+no warnings but value can be undefined
+```
