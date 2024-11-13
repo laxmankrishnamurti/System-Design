@@ -959,4 +959,4 @@ function log(message: string, level: LogLevel) {
 log("This is an info message.", LOG_LEVEL.INFO);  // Works fine
 ```
 
-## Summary ===> **In short, we try to do any kind of actions which exceeds the TypeScript Boundry it will always warn us. TypeScript is only concerned with the structure of the value. Being concerned only with the structure and capabilities of types is why we call TypeScript a structurally typed type system.**
+## Summary ===> **In short, if we try to do any kind of actions which exceeds the TypeScript Boundry it will always warn us. TypeScript is only concerned with the structure of the value. Being concerned only with the structure and capabilities of types is why we call TypeScript a structurally typed type system.**
