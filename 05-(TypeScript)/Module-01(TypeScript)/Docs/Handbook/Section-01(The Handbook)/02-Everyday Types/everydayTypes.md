@@ -334,3 +334,229 @@ function logUser(obj: { name: string; email?: string }) {
 ```bash
 no warnings but value can be undefined
 ```
+
+## Union Types
+
+TypeScript’s type system allows you to build new types out of existing ones using a large variety of operators. It’s time to start combining them in interesting ways.
+
+### Defining union types
+
+- A union type is a type formed from two or more other types, representing values that may be any one of those types.
+
+- We refer to each of these types as the union’s members.
+
+```ts
+function printUserId(id: number | string) {
+  console.log("id", id);
+}
+
+printUserId("lsdjk");
+printUserId(11);
+printUserId({ name: "Laxman" }); //warning :- Argument of type '{ name: string; }' is not assignable to parameter of type 'number | string '.
+```
+
+**The separator of the union members is allowed before the first element, so you could also write this:**
+
+```ts
+function printId(id: "|" number | string) {
+  console.log("userid is ", id);
+}
+printId("lakdsj");
+printId(22);    // ignore the "" on the first one separator
+```
+
+- TypeScript will only allow an operation if it is valid for every member of the union. For example, if we have the union string | number, we can’t use methods that are only available on string:
+
+```ts
+function welcomeKit(x: number[] | string) {
+  console.log(x.slice(0, 3));
+}
+```
+
+Here, we don't need any kind of parameter validation because either the input is an array or a string both have the same method that we have used in the code.
+
+```ts
+function printId(id: "|" number | string) {
+  console.log("userid is ", id.toFixed(2));
+}
+```
+
+```bash
+warning
+
+Property 'toFixed' does not exist on type 'string | number'.
+  Property 'toFixed' does not exist on type 'string'.
+```
+
+- **Solution :: Narrow down your code**
+- **Narrowing occurs when TypeScript can deduce a more specific type for a value based on the structure of the code**
+
+```ts
+function printId(id: "|" number | string) {
+    if(typeof id === number){
+        console.log("userid is ", id.toFixed(2));
+    }
+}
+```
+
+Because TypeScript knows that only a _number_ value will have a _typeof_ value _number_
+
+```ts
+function welcomeKit(x: string[] | string) {
+  if (Array.isArray(x)) {
+    console.log(x.join(" "));
+  } else {
+    console.log(x.toLocaleLowerCase());
+  }
+}
+```
+
+- TypeScript will automatically detect if this was not an array it must be a string so that's why it is not giving any kind or warning messages.
+
+**_Only the intersection of those facts(string[] | string) applies to the union of the sets themselves. In short, the common part between the facts that is described as type will be union. Don't get confused about union is something called combining all facts, not this is not like that. In TypeScript UNION simply means the common part among all the facts. That's it._**
+
+```ts
+const marks1 = [15, 45, 8, 45, 8, 45, 8];
+const marks2 = [4, 5, 8, 1, 2, 4, 5, 1, 8];
+
+// The union will be [8,8] not this [15,45,8,4,5,1,2]
+```
+
+## Type Aliases
+
+This is acts like a function means we can create once and use multiple times as a reference. This exactly done by _Type aliases_. We can create a type alias and use it anywhere which need the same kind of type.
+
+```ts
+type User = {
+  name: string;
+  age: number;
+  isLoggedIn: boolean;
+};
+
+const user1: User = {
+  name: "Laxman krishnamurti",
+  age: 22,
+  isLoggedIn: true,
+};
+
+const user2: User = {
+  name: "Harshad Mehta",
+  age: 42,
+  isLoggedIn: false,
+};
+
+function printUser(data: User) {
+  for (let key in data) {
+    console.log(`${key} : ${data.key}`);
+  }
+}
+
+printUser({
+  name: "Sonu Kumar",
+  age: 17,
+});
+
+//Argument of type '{ name: string; age: number; }' is not assignable to parameter of type 'User'.
+//Property 'isLoggedIn' is missing in type '{ name: string; age: number; }' but required in type 'User'
+```
+
+**Combining union with type aliases**
+
+```ts
+type userId = number | string;
+```
+
+## Interfaces
+
+Interface is a way to pre-define an object shape which means anyone try to use the interface must have the shape that is defined in the interface.
+
+This is same as _Type Aliases_ but not exactly. _Interfaces_ are especially designed for defining an object shape.
+
+```ts
+interface User {
+  name: string;
+  age: number;
+  isLoggedIn: boolean;
+}
+
+function showUserDetails(data: User) {
+  for (let key in data) {
+    console.log(`${key} : ${data[key]}`);
+  }
+}
+
+showUserDetails({
+  name: "Laxman Krishnamurti",
+  age: 22,
+  isLoggedIn: true,
+});
+```
+
+### Difference Between Type Aliases and Interfaces
+
+- Very similar
+- We can choose any one of them
+- Almost all features of an _interface_ are available in _type_
+
+- **But the key distinct is that a _type_ cannot be re-opened to add add new properties**
+- **On the other hand, _interface_ is always extendable**
+
+```ts
+//1. Extends with interfaces
+interface User {
+  name: string;
+}
+
+interface Book extends User {
+  author: string;
+}
+
+function getBook(data: Book): Book {
+  return data;
+}
+
+getBook({
+  name: "KARMA: why everything you know about it is wrong",
+  author: "Acharya Prashant",
+});
+
+const myBook = getBook();
+console.log("Book name", myBook.name);
+console.log("Book name", myBook.author);
+```
+
+```bash
+# Output
+
+Book name KARMA: why everything you know about it is wrong
+Book name Acharya Prashant
+```
+
+```ts
+//1. extends with type
+
+type Animal = {
+  name: string;
+};
+
+type Dog = Animal & {
+  legs: number;
+};
+
+function getAnimalInfo(data: Dog) {
+  return data;
+}
+
+const myPet = getAnimalInfo({
+  name: "Manohar",
+  legs: 4,
+});
+console.log(`${myPet.name} has ${myPet.legs} legs`);
+```
+
+```bash
+# Output
+Manohar has 4 legs
+```
+
+## Summary ===> **In short, we try to do any kind of actions which exceeds the TypeScript Boundry it will always warn us. TypeScript is only concerned with the structure of the value. Being concerned only with the structure and capabilities of types is why we call TypeScript a structurally typed type system.**

@@ -26,6 +26,7 @@ function logUser(obj) {
     var _a;
     console.log("LOGUSER CALLED");
     console.log("you registered email id is", (_a = obj.email) === null || _a === void 0 ? void 0 : _a.toUpperCase());
+    // console.log("you registered email id is", obj.email.toUpperCase());
 }
 logUser({ name: "Laxman Krishnamurti" });
 function showDetails(obj) {
@@ -33,3 +34,46 @@ function showDetails(obj) {
         console.log("your registered email id is", obj.email);
     }
 }
+console.log("UNION");
+function printId(id) {
+    console.log("userid is ", id);
+}
+printId("lakdsj");
+printId(22);
+function welcomeKit(x) {
+    if (Array.isArray(x)) {
+        console.log(x.join(" "));
+    }
+    else {
+        console.log(x.toLocaleLowerCase());
+    }
+}
+console.log("TYPE ALIASES");
+function printUser(data) {
+    for (var key in data) {
+        console.log("".concat(key, " : ").concat(data[key]));
+    }
+}
+printUser({
+    name: "Laxman Krishnamurti",
+    age: 22,
+    isLoggedIn: true
+});
+console.log("INTERFACE AND TYPES");
+function getBook(data) {
+    return data;
+}
+var myBook = getBook({
+    name: "KARMA: why everything you know about it is wrong",
+    author: "Acharya Prashant",
+});
+console.log("Book name", myBook.name);
+console.log("Book name", myBook.author);
+function getAnimalInfo(data) {
+    return data;
+}
+var myPet = getAnimalInfo({
+    name: "Manohar",
+    legs: 4
+});
+console.log("".concat(myPet.name, " has ").concat(myPet.legs, " legs"));

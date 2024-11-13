@@ -44,3 +44,78 @@ function showDetails(obj: {name: string; email?: string}){
         console.log("your registered email id is", obj.email)
     }
 }
+
+console.log("UNION")
+
+function printId(id: |number | string){
+    console.log("userid is ", id)
+}
+printId("lakdsj")
+printId(22)
+
+function welcomeKit(x: string[] | string){
+    if(Array.isArray(x)){
+        console.log(x.join(" "))
+    }else {
+        console.log(x.toLocaleLowerCase())
+    }
+}
+
+console.log("TYPE ALIASES")
+
+type User = {
+    name: string;
+    age: number;
+    isLoggedIn: boolean;
+}
+
+function printUser(data: User){
+    for(let key in data){
+        console.log(`${key} : ${data[key]}`)
+    }
+}
+
+printUser({
+    name: "Laxman Krishnamurti",
+    age: 22,
+    isLoggedIn: true
+})
+
+console.log("INTERFACE AND TYPES")
+
+interface Users {
+    name: string;
+}
+  
+  interface Book extends Users {
+    author: string;
+  }
+  
+  function getBook(data: Book): Book {
+    return data;
+  }
+  
+  const myBook = getBook({
+    name: "KARMA: why everything you know about it is wrong",
+    author: "Acharya Prashant",
+  });
+  console.log("Book name", myBook.name);
+  console.log("Book name", myBook.author);
+
+type Animal = {
+    name: string
+}
+
+type Dog = Animal &  {
+    legs: number
+}
+
+function getAnimalInfo(data: Dog){
+    return data;
+}
+
+const myPet = getAnimalInfo({
+    name: "Manohar",
+    legs: 4
+})
+console.log(`${myPet.name} has ${myPet.legs} legs`)
