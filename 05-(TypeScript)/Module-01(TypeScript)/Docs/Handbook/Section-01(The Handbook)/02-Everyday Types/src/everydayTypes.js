@@ -77,3 +77,58 @@ var myPet = getAnimalInfo({
     legs: 4
 });
 console.log("".concat(myPet.name, " has ").concat(myPet.legs, " legs"));
+console.log("DIFFERENCE");
+var newRequestObj = {
+    origin: "India",
+    ipAddress: "192.168.12.254"
+};
+console.log("newRequestObj", newRequestObj);
+// type Req = {
+//     origin: string
+// }
+// type Req = {
+//     ipAddress: string
+// }
+console.log("TYPE ASSERTION");
+// const age = "22" as number
+var username = "Harshad";
+username = "Harshad";
+// username = "Laxman"
+function literalTypes(name) {
+    console.log("name", name);
+}
+//   literalTypes("Rohit")
+console.log("LITERAL INFERENCE");
+var count = {
+    counter: 0
+};
+count.counter++;
+// declare function handleRequest(url: string, method: "GET" | "POST"): void;
+// const req = { url: "https://example.com", method: "GET" };
+// handleRequest(req.url, req.method as "GET");
+var req = { url: "https://example.com", method: "GET" };
+// handleRequest(req.url, req.method)
+console.log("NON-NULL");
+function functionOne(id) {
+    console.log(id.toFixed(3));
+}
+// functionOne(null)
+console.log("ENUMERATION");
+var UserRole;
+(function (UserRole) {
+    UserRole[UserRole["Admin"] = 0] = "Admin";
+    UserRole[UserRole["Normal"] = 1] = "Normal";
+})(UserRole || (UserRole = {}));
+function checkRole(role) {
+    if (role === UserRole.Admin) {
+        console.log("Full access granted!");
+    }
+    else if (role === UserRole.Normal) {
+        console.log("You don't have permission to override the content of the file because you are a normal user");
+    }
+    else {
+        console.log("Unknown user role! Please enter a valid role");
+    }
+}
+var user = UserRole.Admin;
+checkRole(user);

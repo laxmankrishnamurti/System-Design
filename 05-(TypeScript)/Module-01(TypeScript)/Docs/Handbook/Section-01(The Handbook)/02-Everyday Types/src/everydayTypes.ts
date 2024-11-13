@@ -119,3 +119,84 @@ const myPet = getAnimalInfo({
     legs: 4
 })
 console.log(`${myPet.name} has ${myPet.legs} legs`)
+
+console.log("DIFFERENCE")
+
+interface RequestObj {
+    origin: string;
+}
+
+interface RequestObj {
+    ipAddress: string;
+    // origin: number
+}
+
+const newRequestObj: RequestObj = {
+    origin: "India",
+    ipAddress: "192.168.12.254"
+}
+console.log("newRequestObj", newRequestObj)
+
+// type Req = {
+//     origin: string
+// }
+
+// type Req = {
+//     ipAddress: string
+// }
+
+console.log("TYPE ASSERTION")
+
+// const age = "22" as number
+
+let username: "Harshad" = "Harshad"
+username = "Harshad"
+// username = "Laxman"
+
+function literalTypes(name: "Laxman" | "Harshad" | "Sonu") {
+    console.log("name", name);
+  }
+
+//   literalTypes("Rohit")
+
+console.log("LITERAL INFERENCE")
+
+const count = {
+    counter: 0
+}
+count.counter++
+
+// declare function handleRequest(url: string, method: "GET" | "POST"): void;
+// const req = { url: "https://example.com", method: "GET" };
+// handleRequest(req.url, req.method as "GET");
+
+const req = { url: "https://example.com", method: "GET" } as const;
+// handleRequest(req.url, req.method)
+
+console.log("NON-NULL")
+
+function functionOne(id: Number | null){
+    console.log(id!.toFixed(3))
+}
+
+// functionOne(null)
+
+console.log("ENUMERATION")
+
+enum UserRole {
+    Admin,
+    Normal
+}
+
+function checkRole(role: UserRole){
+    if(role === UserRole.Admin){
+        console.log("Full access granted!")
+    }else if(role === UserRole.Normal){
+        console.log("You don't have permission to override the content of the file because you are a normal user")
+    }else {
+        console.log("Unknown user role! Please enter a valid role")
+    }
+}
+
+const user: UserRole = UserRole.Admin
+checkRole(user)
