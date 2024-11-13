@@ -200,3 +200,28 @@ function checkRole(role: UserRole){
 
 const user: UserRole = UserRole.Admin
 checkRole(user)
+
+console.log("SYMBOL")
+
+// // Define the structure of LOG_LEVEL with specific symbol types
+// (() => {
+//     const LOG_LEVEL = {
+//         INFO: Symbol("info"),
+//         WARN: Symbol("warn"),
+//         ERROR: Symbol("error")
+//     } as const;
+
+//     type LogLevel = (typeof LOG_LEVEL)[keyof typeof LOG_LEVEL];
+
+//     function log(message: string, level: LogLevel) {
+//         if (level === LOG_LEVEL.INFO) {
+//             console.log("Info:", message);
+//         } else if (level === LOG_LEVEL.WARN) {
+//             console.warn("Warning:", message);
+//         } else if (level === LOG_LEVEL.ERROR) {
+//             console.error("Error:", message);
+//         }
+//     }
+
+//     log("This is an info message.", LOG_LEVEL.INFO);
+// })();

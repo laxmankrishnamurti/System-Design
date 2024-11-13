@@ -878,4 +878,85 @@ checkRole(user);
 Full access granted!
 ```
 
+## Less Common Primitives
+
+1. **bigint**
+
+   - Introduce in ES2020
+   - Used for very large integers
+
+   ```ts
+   //via BigInt function
+   const million: bigint = BigInt(10000000);
+
+   //via literal syntax
+   const million: bigint = 10000000n;
+   ```
+
+2. **symbol**
+
+   - This is a primitive type in JavaScript
+   - Used to create globally unique reference via the function: _Symbol()_
+
+   1. **Unique**
+
+   2. **Immutable data type ===> used for creating unique property keys.**
+
+   3. **This is useful when we want to add properties to objects without the risk of key conflicts, even if others add properties with similar names**
+
+   4. **each Symbol is unique, even if you create two symbols with the same description:**
+
+   ```ts
+   const sym1 = Symbol("identifier");
+   const sym2 = Symbol("identifier");
+
+   console.log(sym1 === sym2); // false
+   ```
+
+**Example : 01 ==> Suppose we’re working with an object but don’t want to accidentally overwrite any existing properties. Symbol allows us to create a property with a guaranteed unique key:**
+
+```ts
+const user = {
+  name: "Alice",
+  age: 25,
+};
+
+// Adding a unique ID symbol property
+const uniqueId = Symbol("id");
+user[uniqueId] = 12345;
+
+console.log(user); // { name: "Alice", age: 25, Symbol(id): 12345 }
+```
+
+**Example : 02 ==> Using Symbols for Constants in Library**
+
+Libraries often use symbols as unique constants to avoid conflicts in codebases. For example, a logging library might use symbols to define log levels:
+
+```js
+// This code is in JavaScript, it may creates problem in TypeScript file.
+// Define the structure of LOG_LEVEL with specific symbol types
+const LOG_LEVEL = {
+    INFO: Symbol("info"),
+    WARN: Symbol("warn"),
+    ERROR: Symbol("error")
+} as const;
+
+// Define a type for the log level, which is one of the symbols in LOG_LEVEL
+type LogLevel = (typeof LOG_LEVEL)[keyof typeof LOG_LEVEL];
+
+// Type annotate the log function
+function log(message: string, level: LogLevel) {
+    if (level === LOG_LEVEL.INFO) {
+        console.log("Info:", message);
+    } else if (level === LOG_LEVEL.WARN) {
+        console.warn("Warning:", message);
+    } else if (level === LOG_LEVEL.ERROR) {
+        console.error("Error:", message);
+    }
+}
+
+// Usage
+log("This is an info message.", LOG_LEVEL.INFO);  // Works fine
+```
+
 ## Summary ===> **In short, we try to do any kind of actions which exceeds the TypeScript Boundry it will always warn us. TypeScript is only concerned with the structure of the value. Being concerned only with the structure and capabilities of types is why we call TypeScript a structurally typed type system.**

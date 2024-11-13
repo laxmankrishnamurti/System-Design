@@ -132,3 +132,4 @@ function checkRole(role) {
 }
 var user = UserRole.Admin;
 checkRole(user);
+console.log("SYMBOL");
