@@ -1,6 +1,6 @@
 # Narrowing
 
-Narrowing is used in the place where we want to do something based on the variable but the point is the varible may have different-different types. Just have a look on this example
+Narrowing is used in the place where we want to do something based on the variable but the point is the varible may have different-different types. Just have a look on this example:-
 
 ```ts
 function isEligibleForVoting(age: string | number) {
@@ -25,3 +25,5 @@ And this is why we are using TypeScript. Right!
 So, in TypeScript Narrowing variable type is very-very important for our project safety.
 
 This is just a basic example or we can say the foundation about why _narrowing_ is important. Lets learn a bit more about that.
+
+**This TypeScript code looks like JavaScript. The idea is that TypeScript's type system aims to make it as easy to write typical JavaScript code without bending over backwards to get type safety.**
