@@ -24,4 +24,4 @@ And this is why we are using TypeScript. Right!
 
 So, in TypeScript Narrowing variable type is very-very important for our project safety.
 
-This is just a basic example about why _narrowing_ is important. Lets learn more about that.
+This is just a basic example or we can say the foundation about why _narrowing_ is important. Lets learn a bit more about that.
