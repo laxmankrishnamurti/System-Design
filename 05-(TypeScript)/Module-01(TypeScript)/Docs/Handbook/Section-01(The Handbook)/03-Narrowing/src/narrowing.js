@@ -12,3 +12,17 @@ function isEligibleForVoting(age) {
     }
 }
 isEligibleForVoting("18");
+function printAllUses(users) {
+    if (typeof users === "object") {
+        users === null || users === void 0 ? void 0 : users.forEach(function (user) {
+            console.log("user", user);
+        });
+    }
+    else if (typeof users === "string") {
+        console.log("users", users);
+    }
+    else {
+        return false;
+    }
+}
+console.log(printAllUses(null));
