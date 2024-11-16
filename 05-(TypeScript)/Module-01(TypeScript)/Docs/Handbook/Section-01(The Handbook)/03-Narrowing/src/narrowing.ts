@@ -26,3 +26,8 @@ function printAllUses(users: | string | string[] | null){
 
 console.log(printAllUses(null))
 
+console.log("TRUTHINESS NARROWING")
+
+console.log(Boolean("laxman"))
+// console.log(!!"")
+// console.log(!!"laxman")

@@ -84,3 +84,16 @@ Because we already know that _null_ is also a type of "object" in JavaScript. Ri
 This is why TypeScript is warning us by say saying that; Hey! you are trying to run a high-order loop on the varible that may a _null_ vlaue because _null_ is also a type of an _object_.
 
 ## Truthiness narrowing
+
+In JavaScript, constructs like _if_ first _coerce_ their conditions to _boolean_ to make sense of them, and then choose their brances depending on whether the result is _true_ or _false_.
+
+**Values that coerce to _false_**
+
+- 0
+- NaN
+- "" (an empty string)
+- 0n (Zero in bigint version)
+- null
+- undefined
+
+**_and other values get coerced to true._**

@@ -26,3 +26,7 @@ function printAllUses(users) {
     }
 }
 console.log(printAllUses(null));
+console.log("TRUTHINESS NARROWING");
+console.log(Boolean("laxman"));
+// console.log(!!"")
+// console.log(!!"laxman")
