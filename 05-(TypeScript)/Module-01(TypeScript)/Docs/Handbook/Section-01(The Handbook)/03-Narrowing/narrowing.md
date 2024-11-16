@@ -122,3 +122,17 @@ printAllUses(null);
 - Using _&&_ operator in the _if_ condition will make sure the value should not _null_. By this, we've gotten rid of the error above by checking if _users_ is truthy.
 
 - Narrowing by truthiness is that Boolean negations with _!_ filter out from negated brances.
+
+```ts
+function printAllUses(users: string | string[] | null) {
+  if (!users) {
+    return "Invalid input";
+  } else {
+    users.forEach((user) => {
+      console.log("user", user);
+    });
+  }
+}
+
+printAllUses(null);
+```

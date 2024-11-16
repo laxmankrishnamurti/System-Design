@@ -31,3 +31,15 @@ console.log("TRUTHINESS NARROWING")
 console.log(Boolean("laxman"))
 // console.log(!!"")
 // console.log(!!"laxman")
+
+function printAllUsess(users: string | string[] | null) {
+    if (!users) {
+      return "Invalid input";
+    } else if(typeof users === "object"){
+      users.forEach((user) => {
+        console.log("user", user);
+      });
+    }
+  }
+  
+  printAllUsess(null);
