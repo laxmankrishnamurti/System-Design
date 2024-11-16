@@ -97,3 +97,28 @@ In JavaScript, constructs like _if_ first _coerce_ their conditions to _boolean_
 - undefined
 
 **_and other values get coerced to true._**
+
+- We can also leverage the expression in conditions
+  - _&&_ (AND operator)
+  - _||_ (OR operator)
+  - _!_ (Boolean negation)
+
+```ts
+function printAllUses(users: string | string[] | null) {
+  if (users && typeof users === "object") {
+    users.forEach((user) => {
+      console.log("user", user);
+    });
+  } else if (typeof users === "string") {
+    console.log("users", users);
+  } else {
+    return false;
+  }
+}
+
+printAllUses(null);
+```
+
+- Using _&&_ operator in the _if_ condition will make sure the value should not _null_. By this, we've gotten rid of the error above by checking if _users_ is truthy.
+
+- Narrowing by truthiness is that Boolean negations with _!_ filter out from negated brances.
