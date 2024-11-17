@@ -136,3 +136,5 @@ function printAllUsess(users: string | string[] | null) {
 
 printAllUsess(null);
 ```
+
+## Equality narrowing
