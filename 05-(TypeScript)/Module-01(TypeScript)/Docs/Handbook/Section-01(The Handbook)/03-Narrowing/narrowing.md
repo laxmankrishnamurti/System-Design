@@ -313,3 +313,123 @@ if (isAnimal(myObj)) {
     ```ts
       obj is Animal
     ```
+
+**We can also use the type guard to filter an array of _Animal | Car_ and obtain an array of _Animal_**.
+
+```ts
+const collection: (Animal | Car)[] = [
+  getCollection(),
+  getCollection(),
+  getCollection(),
+  getCollection(),
+  getCollection(),
+];
+
+const collection1: Animal[] = collection.filter(isAnimal);
+
+//Or, Equivalently
+
+const collection2: Animal[] = collection.filter(isAnimal) as Animal[];
+
+// For more complex structure
+
+const collection3: Animal[] = collection.filter((ele): ele is Animal => {
+  if (ele.name === "scorpio") false;
+
+  return isAnimal(ele);
+});
+
+// lets filter car
+const collection4: Car[] = collection.filter((coll): coll is Car => {
+  return !isAnimal(coll);
+});
+```
+
+### **With practical examples**
+
+```ts
+// lets filter car
+
+type Animal = {
+  name: string;
+  sound: () => void;
+};
+
+type Car = {
+  name: string;
+  drive: () => void;
+};
+
+function isAnimal(obj: Animal | Car): obj is Animal {
+  return (obj as Animal).sound !== undefined;
+}
+
+function getCollection() {
+  const obj1: Animal = {
+    name: "Manohar",
+    sound: () => "foo",
+  };
+
+  const obj2: Car = {
+    name: "Scorpio",
+    drive: () => "high-speed",
+  };
+
+  if (Math.random() < 0.6) {
+    return obj1;
+  } else {
+    return obj2;
+  }
+}
+
+const collection: (Animal | Car)[] = [
+  getCollection(),
+  getCollection(),
+  getCollection(),
+  getCollection(),
+  getCollection(),
+  getCollection(),
+];
+
+console.log("collection", collection);
+
+const collectionOfAnimal: Animal[] = collection.filter(isAnimal);
+// const collection2: Car[] = collection.filter(!isAnimal)
+
+const collectionOfCar: Car[] = collection.filter((ele): ele is Car => {
+  return !isAnimal(ele);
+});
+
+console.log("collection of Animals", collectionOfAnimal);
+console.log("collection of Cars", collectionOfCar);
+```
+
+```bash
+# Output
+
+collection [
+  { name: 'Scorpio', drive: [Function: drive] },
+  { name: 'Scorpio', drive: [Function: drive] },
+  { name: 'Manohar', sound: [Function: sound] },
+  { name: 'Manohar', sound: [Function: sound] },
+  { name: 'Manohar', sound: [Function: sound] },
+  { name: 'Manohar', sound: [Function: sound] }
+]
+collection of Animals [
+  { name: 'Manohar', sound: [Function: sound] },
+  { name: 'Manohar', sound: [Function: sound] },
+  { name: 'Manohar', sound: [Function: sound] },
+  { name: 'Manohar', sound: [Function: sound] }
+]
+collection of Cars [
+  { name: 'Scorpio', drive: [Function: drive] },
+  { name: 'Scorpio', drive: [Function: drive] }
+]
+
+```
+
+🎯 🎯 🎯 🎯 🎯 🎯 🎯 🎯 🎯 🎯 🎯 🎯 🎯 🎯 🎯 🎯 🎯 🎯 🎯 🎯
+
+## Assertion Functions
+
+There is a specific set of functions that _throw_ an error if something unexpected happened. They are called **_Assertion function._**

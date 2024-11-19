@@ -100,3 +100,51 @@ function controlFlowAnalysis(){
 
     return foo
 }
+
+// lets filter car
+
+type Animal = {
+    name: string;
+    sound: () => void
+}
+
+type Car = {
+    name: string;
+    drive: () => void
+}
+
+function isAnimal(obj: Animal | Car): obj is Animal {
+    return (obj as Animal).sound !== undefined
+}
+
+function getCollection(){
+    const obj1: Animal = {
+        name: "Manohar",
+        sound: () => "foo"
+    }
+
+    const obj2: Car = {
+        name: "Scorpio",
+        drive: () => "high-speed"
+    }
+
+    if(Math.random() < 0.6){
+        return obj1
+    }else {
+        return obj2
+    }
+}
+
+const collection: (Animal | Car)[] = [getCollection(),getCollection(),getCollection(),getCollection(),getCollection(),getCollection()];
+
+console.log("collection", collection);
+
+const collectionOfAnimal: Animal[] = collection.filter(isAnimal)
+// const collection2: Car[] = collection.filter(!isAnimal)
+
+const collectionOfCar: Car[] = collection.filter((ele): ele is Car => {
+    return !isAnimal(ele)   
+})
+
+console.log("collection of Animals", collectionOfAnimal)
+console.log("collection of Cars", collectionOfCar)
