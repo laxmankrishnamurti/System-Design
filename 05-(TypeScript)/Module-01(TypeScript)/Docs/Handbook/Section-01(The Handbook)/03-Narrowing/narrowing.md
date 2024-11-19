@@ -54,8 +54,10 @@ In JavaScript we have the _typeof_ operator that gives the type of the value at 
 - **"symbol"**
 
 - _typeof_ operator returns a value.
+
 - TypeScript strictly check the value returned by _typeof_ because this lies under _type guards_.
-- Because TypeScript also familier with the peculiar behavioral habit of the operator that it does in JavaScript. Lets have a look on this example:
+
+- Because TypeScript also familier with the peculiar behavioral habit of the operator that it does in JavaScript. Have a look on this example:
 
 ```ts
 function printAllUses(users: string | string[] | null) {
@@ -138,3 +140,50 @@ printAllUsess(null);
 ```
 
 ## Equality narrowing
+
+In this section we do narrowing with the help of these operators :- _===, !==, ==, !=_
+
+```ts
+interface Container {
+  value: number | null | undefined;
+}
+
+function getMultiply(obj: Container, factor: number) {
+  if (obj.value != undefined) {
+    return obj.value * factor;
+  } else {
+    return "Invalid input";
+  }
+}
+```
+
+- _!=_, this checks whether a value is _undefined or null_ means with a single operator we have checked for both types such as _undefined or null_. Now, TypeScript perfectly understood that this value is going to be a _number_.
+
+## The _in_ operator narrowing
+
+We know that the _in_ operator is used to find a key-name whether it is literal or an optional value in an object. TypeScript also take this into account as a way to narrow down potential types.
+
+- _true_ branch narrow objects's types which have either an optional or required property **value**.
+
+- _false_ branch narrow to type which have an optional or missing property **value.**
+
+```ts
+interface A {
+  a: () => void;
+}
+interface B {
+  b: () => void;
+}
+interface C {
+  a?: () => void;
+  c: () => void;
+}
+
+function takeInput(obj: A | B | C) {
+  if ("a" in obj) {
+    console.log(obj); // (parameter) obj: A | C
+  } else {
+    console.log(obj); // (parameter) obj: B | C
+  }
+}
+```

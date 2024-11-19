@@ -42,4 +42,28 @@ function printAllUsess(users: string | string[] | null) {
     }
   }
   
-  printAllUsess(null);
+//   printAllUsess(null);
+
+interface Container{
+    value: number | null | undefined
+}
+
+function getMultiply(obj: Container, factor: number){
+    if(obj.value != undefined){
+        return obj.value * factor
+    }else {
+        return "Invalid input"
+    }
+}
+
+interface A { a : () => void}
+interface B { b : () => void}
+interface C { a? : () => void; c : () => void}
+
+function takeInput(obj: A | B | C){
+    if("a" in obj){
+        console.log(obj)
+    }else {
+        console.log(obj)
+    }
+}
