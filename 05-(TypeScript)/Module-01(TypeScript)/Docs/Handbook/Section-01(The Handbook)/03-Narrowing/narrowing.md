@@ -1,6 +1,6 @@
 # Narrowing
 
-Narrowing is used in the place where we want to do something based on the variable but the point is the varible may have different-different types. Just have a look on this example:-
+Narrowing is used in the place where we want to do something based on the variable but the point is the varible may have different-different types. Please, have a look on this example:-
 
 ```ts
 function isEligibleForVoting(age: string | number) {
