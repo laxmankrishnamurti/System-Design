@@ -187,3 +187,129 @@ function takeInput(obj: A | B | C) {
   }
 }
 ```
+
+## _instanceof_ narrowing
+
+As same the _instanceof_ operator is used to check whether or not a value is an _instance_ of another value. This is also a _type guard_, and TypeScript narrow in branches guarded by _instanceof_ s.
+
+```ts
+function checkLog(str: Error | string) {
+  if (str instanceof Error) {
+    console.log("error", str); // (parameter) str: Error
+    throw new Error("Err: New Error"); // var Error: ErrorConstructor ; new (message?: string, options?: ErrorOptions) => Error (+1 overload)
+  } else {
+    console.log("new Error", str);
+  }
+}
+```
+
+## Assignments
+
+```ts
+let foo = Math.random() < 0.5 ? 10 : "Foo"; // let foo: string | number
+foo = 1;
+console.log("foo", foo); // let foo: number
+foo = "FUBAR";
+console.log("foo", foo); // let foo: string
+```
+
+We know that if we assign a variable, TypeScript looks at the right side of the assignment and narrow the left side appropriately.
+
+**The type that _foo_ started with - _string | number_, and assignability is always checked against the declared type. That's why we are able to change the reassigned value to the variable.**
+
+If we try to reassign the variable with different type like with _boolean_ value then TypeScript prevent us to so because _boolean_ is not a part of the declared type.
+
+## Control flow analysis
+
+**Analysis of code based on reachability is called _control flow analysis_**. TypeScript uses _control flow analysis_ to determine or narrow down the variable type.
+
+Take a look on this function:-
+
+```ts
+function controlFlowAnalysis() {
+  let foo: boolean | string | number;
+
+  foo = true;
+  console.log("foo", foo); // let foo: true
+
+  if (Math.random() > 0.5) {
+    foo = 4;
+    console.log("foo", foo); // let foo: number
+
+    foo = "laxmankrishnamurti";
+    console.log("foo", foo); // let foo: string
+  }
+
+  return foo; // let foo: string | number
+}
+```
+
+In this function body the type of the variable is changing continuously based on assigned value. So, in _control flow analysis_ TypeScript try to determine what's the type of the value on a particular location in the function body or in the global enviroment.
+
+## Using type predicates
+
+Type predicates help avoid unnecessary type checks by letting the TypeScript compiler know exactly what type a variable is inside a block of code.
+
+**Without predicates**
+
+```ts
+type Animal = { name: string; sound: () => void };
+type Car = { brand: string; drive: () => void };
+
+const myObject: Animal | Car = {
+  name: "Dog",
+  sound: () => console.log("Woof!"),
+};
+
+if ((myObject as Animal).sound !== undefined) {
+  // Explicitly assert again to access 'sound'
+  (myObject as Animal).sound();
+} else {
+  // Explicitly assert again to access 'drive'
+  (myObject as Car).drive();
+}
+```
+
+**With predicates**
+
+```ts
+type Animal = { name: string; sound: () => void };
+type Car = { brand: string; drive: () => void };
+
+function isAnimal(obj: Animal | Car): obj is Animal {
+  return (obj as Animal).sound !== undefined;
+}
+
+let myObj = getMyObject();
+
+if (isAnimal(myObj)) {
+  //In this block TypeScript knows that myObj has Animal type
+  myObj.sound();
+} else {
+  // In this block TypeScript know myObj has Car type instead of Animal
+  myObj.drive();
+}
+```
+
+- **Type Predicates follow the structure**
+
+  - _parameterName is Type_
+
+    - parameterName must be the name of a parameter from the current function signature.
+
+  - _type assertion allows TypeScript to use the parameter as Animal type_
+  - _Then, it tries to access the method which we can specify. If there is more than one method we can express it like this_
+
+    ```ts
+    return (
+      (obj as Animal).sound !== undefined && (obj as Animal).eat !== undefined
+    );
+
+    // so on.
+    ```
+
+  - _Once the function returns **true** TypeScript knows that the Object has Animal like sturcture because of the predicate_
+
+    ```ts
+      obj is Animal
+    ```

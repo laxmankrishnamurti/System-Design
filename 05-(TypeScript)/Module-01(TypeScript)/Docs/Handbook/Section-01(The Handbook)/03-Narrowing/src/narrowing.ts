@@ -67,3 +67,36 @@ function takeInput(obj: A | B | C){
         console.log(obj)
     }
 }
+
+function checkLog(str: Error | string) {
+    if (str instanceof Error) {
+        console.log("error", str)
+        throw new Error("Err: New Error");
+    } else {
+        console.log("new Error", str);
+    }
+}
+
+let foo = Math.random() < 0.5 ? 10 : "Foo" 
+foo = 1;
+console.log("foo", foo)
+foo = "FUBAR"
+console.log("foo", foo)
+
+
+function controlFlowAnalysis(){
+    let foo: boolean | string | number;
+
+    foo = true;
+    console.log("foo", foo)
+
+    if(Math.random() > 0.5){
+        foo = 4;
+        console.log("foo", foo)
+
+        foo = "laxmankrishnamurti";
+        console.log("foo", foo)
+    }
+
+    return foo
+}
