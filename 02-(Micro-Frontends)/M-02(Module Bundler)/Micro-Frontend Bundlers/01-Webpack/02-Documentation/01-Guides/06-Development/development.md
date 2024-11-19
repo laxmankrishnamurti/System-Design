@@ -29,9 +29,9 @@ module.exports = {
 
 Source means the _origin_ and map means _targeting at a particular location or referencing to that particular location_.
 
-Actually, when webpack try to bundle our modules it becomes difficult for it to track down the error or warning to their original location. So, that why it uses source mapping tools to point the error or warning to the origin.
+Actually, when webpack try to bundle our modules it becomes difficult for it to track down the error or warning to their original location. So, that's why it uses source mapping tools to point the error or warning to the origin.
 
-In order to make it easier to track down errors and warnings, JavaScript offers _source maps_ which map our compiled code back to the source code and if there is any kind of errors or warnings occurs between bundiling process it can point the specific location. This becomes very useful for debuggin.
+In order to make it easier to track down errors and warnings, JavaScript offers _source maps_ which map our compiled code back to the source code and if there is any kind of errors or warnings occurs on the bundiling process it can point the specific location. This becomes very useful for debugging.
 
 Its time to modify the configuration file.
 
@@ -173,7 +173,12 @@ module.exports = {
 
 ## webpack-dev-middleware
 
-_webpack-dev-middleware_ is a wrapper that will emit files processed by webpack to a server. We might get surpurised but yes! this is true. And the _webpack-dev-server_ is using the same concept at its core.
+- _webpack-dev-middleware_ is a wrapper
+- that will emit files
+- processed by webpack
+- to a server.
+
+We might get surpurised but yes! this is true. And the _webpack-dev-server_ is using the same concept at its core.
 
 - It's available as a separate package to allow more custom setups if needed.
 
@@ -181,7 +186,7 @@ _webpack-dev-middleware_ is a wrapper that will emit files processed by webpack 
 
 **Why we are using express here?**
 
-Because _webpack-dev_ is a kind of middleware which require a server to use them. Because only server has the capabilities to use a middleware and serve files accoding to the configuration.
+Because _webpack-dev_ is a kind of middleware which require a server to use them. Because only server has the capabilities to use a middleware and serve files according to the configuration.
 
 ```bash
 npm install --save-dev express webpack-dev-middleware
@@ -212,7 +217,7 @@ module.exports = {
     filename: "[name].bundle.js",
     path: path.resolve(__dirname, "dist"),
     clean: true,
-    publicPath: "/",
+    publicPath: "/", // added
   },
   optimization: {
     runtimeChunk: "single",
@@ -259,3 +264,5 @@ Lets add a script to _package.json_ to run the server
     "server": "node server.js"
 },
 ```
+
+This will not build the project. It is only ment for live-loading.
