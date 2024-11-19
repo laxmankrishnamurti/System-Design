@@ -16,3 +16,9 @@ It used correctly, can have a major impact on load time.
 - **Dynamic Imports**
 
 ## **Entry Points**
+
+[Checkout](./01-EntryPoints/webpack.config.js)
+
+- **There are some pitfalls to this approach**
+  - **If there are any duplicated modules between entry chunks they will be included in both bundles.**
+  - **It isn't as flexible and can't be used to dynamically split code with the core application logic.**
