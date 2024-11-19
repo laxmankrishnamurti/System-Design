@@ -20,5 +20,17 @@ It used correctly, can have a major impact on load time.
 [Checkout](./01-EntryPoints/webpack.config.js)
 
 - **There are some pitfalls to this approach**
-  - **If there are any duplicated modules between entry chunks they will be included in both bundles.**
-  - **It isn't as flexible and can't be used to dynamically split code with the core application logic.**
+
+  1. **If there are any duplicated modules between entry chunks they will be included in both bundles.**
+
+  - Why is this a problem?
+
+    - In both entry files _index.js & anotherModule.js_ we've included _lodash_ it means both file contains _lodash module_ which makes it heavy in size, impact on load time. As a result :
+
+      - **Waste of space** :: Duplicated code makes our final build larger than necessary.
+
+      - **Longer load time** :: Users downloading duplicate code for every bundle slows down page loading.
+
+      - **Hard to maintain** :: If there are updates, all bundles containing duplicates must be updated.
+
+  2. **It isn't as flexible and can't be used to dynamically split code with the core application logic.**
