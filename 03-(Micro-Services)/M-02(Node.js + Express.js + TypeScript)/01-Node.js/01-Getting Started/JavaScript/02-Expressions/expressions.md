@@ -69,3 +69,9 @@ No LHS expressions means it is just used before. That's it.
    - This is used to initiaze an object from a class. In other words, we can say this is used to create an instance of a class.
 
 3. **new.target**
+
+   - It is used to check whether a constructor or a class is called with _new_ keyword or not.
+   - If it is, then _new.target_ referes to the constructor function or the class being called.
+   - If not, it will be _undefined_
+
+Means when we call a function with _new_ keyword it creates a new object and runs the constructor(sayHello function in this case) function in the context of that new object.

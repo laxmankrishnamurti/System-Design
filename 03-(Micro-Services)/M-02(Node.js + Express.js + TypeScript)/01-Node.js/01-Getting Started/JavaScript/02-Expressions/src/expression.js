@@ -9,6 +9,7 @@ const person = {
 }
 console.log(person.getUserAge())
 
+// new keyword
 console.log("CLASS")
 
 class User{
@@ -23,17 +24,35 @@ class User{
 const user1 = new User("Laxman Krishnamurti", 21)
 console.log("user1", user1)
 
-console.log("LEFT-HAND-SIDE-EXPRESSION")
+// new.target
+console.log("new.target")
 
-console.log(person?.email)
-
-class Animal{
-    constructor(){
-        if(new.target === Animal){
-            throw new Error("new.target value")
-        }
-    }
+function sayHello(){
+    return "Hello!"
 }
 
-const animal1 = new Animal()
-console.log("animal", animal1)
+const obj = new sayHello()
+obj.name = "Laxman Krishnamurti"
+console.log(obj)
+console.log(obj.name)
+
+console.log("USING NEW.TARGET WITH CONSTRUCTOR")
+
+function constructorFunc(){
+    if(!new.target){
+        throw new Error("You must call this function with the 'new' keyword")
+    }
+
+    console.log("Constructor is called with new")
+}
+
+const constructorObj = new constructorFunc()
+console.log("constructorObj", constructorObj)
+
+/**
+ * Constructor is called with new
+ * constructorObj constructorFunc {}
+ */
+
+const constructorObj1 = constructorFunc() // Error: You must call this function with the 'new' keyword
+console.log("constructorObj1", constructorObj1)
