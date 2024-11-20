@@ -148,3 +148,58 @@ const collectionOfCar: Car[] = collection.filter((ele): ele is Car => {
 
 console.log("collection of Animals", collectionOfAnimal)
 console.log("collection of Cars", collectionOfCar)
+
+console.log("DISCRIMINATED UNIONS")
+
+interface Shape {
+    kind: "circle" | "square";
+    radius?: number;
+    sideLength?: number
+}
+
+function getAreq(shape: Shape){
+    if(shape.kind === "circle"){
+        return Math.PI * shape.radius! ** 2
+    }
+}
+
+interface Circle {
+    kind: "circle";
+    radius:number;
+}
+
+interface Square {
+    kind: "square";
+    sideLength: number;
+}
+
+interface Rectangle {
+    kind: "rectangle";
+    height: number;
+    width: number;
+}
+
+type Shapee = Circle | Square | Rectangle;
+
+function getArea (shape: Shapee){
+    if(shape.kind === "circle"){
+        return Math.PI * shape.radius ** 2
+    }
+}
+
+function getAreaOfShapes(shape: Shapee){
+    switch(shape.kind){
+        case "circle":
+            return Math.PI * shape.radius ** 2;
+
+        case "square":
+            return shape.sideLength ** 2;
+
+        case "rectangle":
+            return shape.height * shape.width;
+
+        default:
+            const _exhaustiveCheck: never = shape;
+            throw new Error(`Unhandled shape kind ${_exhaustiveCheck}`);
+    }
+}

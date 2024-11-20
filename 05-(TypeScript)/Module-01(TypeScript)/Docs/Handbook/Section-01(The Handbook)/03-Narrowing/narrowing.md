@@ -434,4 +434,292 @@ collection of Cars [
 
 There is a specific set of functions that _throw_ an error if something unexpected happened. They are called **_Assertion function._**
 
-[Checkout](./src/assertionFunction.ts)
+[Checkout](./src/lassertionFunction.ts)
+
+## Discriminated Unions
+
+When every type is a union contains a common property with literal types, TypeScript considers that to be a **_discriminated union_**, and can narrow out the members of the union.
+
+Take a look on this interface:
+
+```ts
+interface Shape {
+  kind: "circle" | "square";
+  radius?: number;
+  sideLength?: number;
+}
+
+function getAreq(shape: Shape) {
+  if (shape.kind === "circle") {
+    return Math.PI * shape.radius ** 2;
+  }
+}
+```
+
+```bash
+warning
+  'shape.radius' is possibly 'undefined'.ts(18048)
+  (parameter) shape: Shape
+```
+
+Here, both type _circle & square_ is trying to contain the same property named _kind_ and both are literal types. **TypeScript consider this to be an discriminated union.**
+
+TypeScript is saying that: OK! say the shape is a kind of "circle" but the radius property is an optional value which value may be _null or undefined_ so that's why TypeScript is telling that you can not do this.
+
+Of course! This seems to be good. So, what we should do now?
+
+Idea! We have a _non-null assertion_ operator in TypeScript. let's use this
+
+```ts
+function getAreq(shape: Shape) {
+  if (shape.kind === "circle") {
+    return Math.PI * shape.radius! ** 2;
+  }
+}
+```
+
+That's it. we don't get any kind of warning from TypeScript. Absolutely right!
+
+But think for a while we also know that this operator dosen't change the runtime behaviour means if we passed an object without radius property this will return an _undefined or null_.
+
+Hence, we don't rely on the _non-null assertion_ operator this can make our code error prone. So, what should we do now?
+
+Lets have a look on below code.
+
+```ts
+interface Circle {
+  kind: "circle";
+  radius: number;
+}
+
+interface Square {
+  kind: "square";
+  sideLength: number;
+}
+
+type Shapee = Circle | Square;
+
+function getArea(shape: Shapee) {
+  if (shape.kind === "circle") {
+    return Math.PI * shape.radius ** 2; // (parameter) shape: Circle ; (property) Circle.radius: number
+  }
+}
+```
+
+In the _if branch_ TypeScript knows that the shape follow the _Circle_ interface so it must have the _radius_ property.
+
+Checking whether the _kind_ property was _circle_ got rid of every type in Shape that didn't have a _kind_ property with the type _circle_. That narrowed _shape_ down to the type _Circle_.
+
+The same checking works with **switch** statement as well. Now, we can try to write our complete _getArea_ without any pesky _!_ non-null assertion.
+
+```ts
+function getAreaOfShapes(shape: Shapee) {
+  switch (shape.kind) {
+    case "circle":
+      return Math.PI * shape.radius ** 2;
+
+    case "square":
+      return shape.sideLength ** 2;
+  }
+}
+```
+
+Let's try play around the switch statement.
+
+```ts
+function getAreaOfShapes(shape: Shapee) {
+  switch (shape.kind) {
+    case "circle":
+      Math.PI * shape.radius ** 2;
+
+    case "square":
+      return shape.sideLength ** 2;
+  }
+}
+```
+
+```bash
+warning
+  Property 'sideLength' does not exist on type 'Shapee'.
+  Property 'sideLength' does not exist on type 'Circle'.ts(2339)
+
+  any
+```
+
+**Why?**
+
+Because let say the first case was matched then it will move forward to the second case and hence, the _sideLength_ dosen't exist in the _Circle_ that's why TypeScript is giving the warning.
+
+But take a look on this code:
+
+```ts
+function getAreaOfShapes(shape: Shapee) {
+  switch (shape.kind) {
+    case "circle":
+      return Math.PI * shape.radius ** 2;
+
+    case "square":
+      shape.sideLength ** 2;
+  }
+}
+```
+
+```bash
+no warnings
+```
+
+Because there is no more cases after "sqare".
+
+**_Conclusion_**
+
+- Discriminated unions are useful for more than just talking about circles and squares. They are good for:
+  - Representing any sort of messanging schema in JavaScript
+  - Like when sending messages over the network (client/server communication)
+  - Encoding mutations in a state management framework.
+
+## The _never_ type
+
+The _never_ type in TypeScript represents values that never occur. It is used in scenarios where a _value cannot logically exist_, such as functions that never return or code paths that are unreachable. This type is particularly _useful for enforcing exhaustiveness checks_ in TypeScript's type system.
+
+- **Key points about _never_**
+
+  1. **Unreachable code:** The _never_ type is used to indicate that a piece of code should never execute.
+
+  ```ts
+  type Action = "start" | "stop";
+  function performAction(action: Action) {
+    if (action === "start") {
+      console.log("Starting...");
+    } else if (action === "stop") {
+      console.log("Stopping...");
+    } else {
+      const unreachable: never = action; // TypeScript ensures no other values are possible
+    }
+  }
+  ```
+
+  2. **No value:** A _never_ type cannot hold any value.
+
+  ```ts
+  <!-- like the else branch -->
+  const unreachable: never = action;
+  ```
+
+  3. **Function with no Return** : A function that always throws an error or enters an infinite loop is typed as _never_.
+
+  ```ts
+  function infiniteLoop(): never {
+    while (true) {
+      console.log("Running.........");
+    }
+  }
+  ```
+
+  4. **Exhaustive Checking:** _never_ ensures all possible cases are covered in a _switch_ statement or a conditional structure. This is useful in working with _discriminated unions._
+
+  Lets take the previous switch example:
+
+  ```ts
+  function getAreaOfShapes(shape: Shapee) {
+    switch (shape.kind) {
+      case "circle":
+        return Math.PI * shape.radius ** 2;
+
+      case "square":
+        return shape.sideLength ** 2;
+
+      default:
+        const _exhaustiveCheck: never = shape;
+        throw new Error(`Unhandled shape kind ${_exhaustiveCheck}`);
+    }
+  }
+  ```
+
+## Exhaustiveness checking
+
+We can say that this is a kind of extra effort that we are putting in out TypeScript code after checking all possible value's type.
+
+**What does it mean?**
+
+It means after checking all possible values and its type we are sure that there is nothing that we need to worry about. But, there is something unexpected happens then we can throw an error as a response.
+
+For example:
+
+```ts
+function getAreaOfShapes(shape: Shapee) {
+  switch (shape.kind) {
+    case "circle":
+      return Math.PI * shape.radius ** 2;
+
+    case "square":
+      return shape.sideLength ** 2;
+
+    default:
+      const _exhaustiveCheck: never = shape;
+      throw new Error(`Unhandled shape kind ${_exhaustiveCheck}`);
+  }
+}
+```
+
+Here, we have successfully implemented logics for both possible types and if the _shape_ is different from _circle or square_ we'll throw an error. But keep in mind all possible types should be handled.
+
+Lets understand it a little bit more
+
+Lets add a new shape in the _Shapee_ type
+
+```ts
+interface Rectangle {
+  king: "rectangle";
+  height: number;
+  width: number;
+}
+
+type Shapee = Circle | Square | Rectangle;
+
+function getAreaOfShapes(shape: Shapee) {
+  switch (shape.kind) {
+    case "circle":
+      return Math.PI * shape.radius ** 2;
+
+    case "square":
+      return shape.sideLength ** 2;
+
+    default:
+      const _exhaustiveCheck: never = shape;
+      throw new Error(`Unhandled shape kind ${_exhaustiveCheck}`);
+  }
+}
+```
+
+```bash
+warning
+  Type 'Rectangle' is not assignable to type 'never'.ts(2322)
+  const _exhaustiveCheck: never
+```
+
+This happened because we have not checked all possible value of the _Shapee_ type. Let's fix this :-
+
+```ts
+function getAreaOfShapes(shape: Shapee) {
+  switch (shape.kind) {
+    case "circle":
+      return Math.PI * shape.radius ** 2;
+
+    case "square":
+      return shape.sideLength ** 2;
+
+    case "rectangle":
+      return shape.height * shape.width;
+
+    default:
+      const _exhaustiveCheck: never = shape;
+      throw new Error(`Unhandled shape kind ${_exhaustiveCheck}`);
+  }
+}
+```
+
+```bash
+no warnings
+```
+
+## SUMMARY ===> Make sure the operation that we are doing on a value must have a specific type which TypeScript knows well. Otherwise, we'll get in trouble and TypeScript throw errors. That's it. Overall, Ensure the Type. If you are sure about the type of the value TypeScript never going to thrown errors to you.
