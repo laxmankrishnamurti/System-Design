@@ -6,8 +6,6 @@ module.exports = {
     entry: {
         index: './src/index.js',
         another: './src/anotherModule',
-        another: './src/anotherModule',
-        another: './src/anotherModule',
     },
     devtool: 'inline-source-map',
     devServer: {

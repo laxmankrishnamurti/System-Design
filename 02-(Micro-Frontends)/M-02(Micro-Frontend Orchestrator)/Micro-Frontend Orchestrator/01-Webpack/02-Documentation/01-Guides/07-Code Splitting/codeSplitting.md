@@ -7,7 +7,7 @@ It is used to achieve:
 - smaller bundles
 - control resource load prioritization
 
-It used correctly, can have a major impact on load time.
+If used correctly, can have a major impact on load time.
 
 **There are three general approaches to code splitting available:**
 
@@ -83,7 +83,7 @@ When webpack bundle our application, it generates extra code that is required to
 
 - The logic is necessary for
   - Loading modules dynamically
-  - Managin dependencies between modules.
+  - Managing dependencies between modules.
   - Handling things like _require_, _import_ and _export_.
 
 This does not refers to the main code that is in the main module instead it referes to the additional code that Webpack adds to our bundles to make them work correctly.
@@ -92,8 +92,6 @@ This does not refers to the main code that is in the main module instead it refe
   - Keep track of which module is loaded.
   - Resolve imports/exports between modules.
   - Manage caching for better performance.
-
-Your explanation is slightly off. Let me clarify:
 
 ---
 
@@ -194,7 +192,7 @@ By default, using one entry point simplifies our application and gives better pe
 
 ### SplitChunksPlugin
 
-## [With the given configuration file, let’s clarify the behavior:](./02-PreventDuplication/webpack.config.js)
+### [With the given configuration file, let’s clarify the behavior:](./02-PreventDuplication/webpack.config.js)
 
 ### **What the Configuration Does**
 
@@ -232,6 +230,7 @@ optimization: {
 ```
 
 - `splitChunks` ensures that shared dependencies (like `lodash` or any other common code) are extracted into a separate chunk **automatically**, even if `dependOn` wasn’t explicitly defined.
+
 - If there are shared dependencies that weren’t declared in `dependOn` but are large enough to meet Webpack’s size threshold, `splitChunks` will handle them.
 
 ---
@@ -242,9 +241,11 @@ optimization: {
 
 - Since both `index.js` and `another.js` import `lodash` (a common dependency), Webpack ensures it is moved to `shared.bundle.js`, leaving the main bundles (`index.bundle.js` and `another.bundle.js`) free of `lodash`.
 
+In short, it free up all bundles which are using a dependency which size meets the webpack's threshold.
+
 #### **“Remove the dead weight from our main bundle”**
 
-- By moving `lodash` to `shared.bundle.js`, your main bundles become smaller and load faster because they no longer carry the duplicate code for `lodash`.
+- By moving `lodash` to `shared.bundle.js`, our main bundles become smaller and load faster because they no longer carry the duplicate code for `lodash`.
 
 #### **“Common dependencies are only extracted into a separate chunk if they meet the size thresholds”**
 
@@ -256,7 +257,7 @@ optimization: {
 
 No, this configuration does **not extract runtime code** into a separate file.
 
-If you want to extract Webpack's **runtime code** (used to load and manage modules) into its own file, you need to add:
+If we want to extract Webpack's **runtime code** (used to load and manage modules) into its own file, we need to add:
 
 ```javascript
 optimization: {
@@ -271,3 +272,5 @@ Without `runtimeChunk`, the runtime logic will be included in **both `index.bund
 ### **Final Answer**
 
 This configuration ensures that `lodash` (the shared dependency) is extracted into `shared.bundle.js`, but **it does not extract the runtime logic**. Runtime code extraction requires the `runtimeChunk: 'single'` option.
+
+## Dynamic Imports
