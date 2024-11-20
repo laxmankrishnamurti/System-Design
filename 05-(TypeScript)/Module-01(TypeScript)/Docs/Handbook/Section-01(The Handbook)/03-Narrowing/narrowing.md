@@ -433,3 +433,5 @@ collection of Cars [
 ## Assertion Functions
 
 There is a specific set of functions that _throw_ an error if something unexpected happened. They are called **_Assertion function._**
+
+[Checkout](./src/assertionFunction.ts)
