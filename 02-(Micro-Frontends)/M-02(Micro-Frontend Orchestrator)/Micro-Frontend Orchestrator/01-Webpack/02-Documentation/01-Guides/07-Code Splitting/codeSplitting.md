@@ -274,3 +274,8 @@ Without `runtimeChunk`, the runtime logic will be included in **both `index.bund
 This configuration ensures that `lodash` (the shared dependency) is extracted into `shared.bundle.js`, but **it does not extract the runtime logic**. Runtime code extraction requires the `runtimeChunk: 'single'` option.
 
 ## Dynamic Imports
+
+There are two techniques for dynamic imports in webpack:
+
+1. **_import()_** : A ECMAScript proposal
+2. **_require.ensure_** : Webpack-specific approach
