@@ -282,8 +282,53 @@ There are two techniques for dynamic imports in webpack:
 
 ### _import()_
 
-- _import()_ calls use promises internally
+- _import(moduleName)_ calls use promises internally
 
 Instead of statically importing _lodash_, we'll use dynamic importing to separate a chunk:
 
 [Checkout](./03-DynamicImports/src/index.js)
+
+- We can also use dynamic expressions to import modules dynamically.
+  - import(modulePath)
+  - modulePath could potentially be any path to any file in our system or project.
+
+> **"The reason we need `default` is that since webpack 4, when importing a CommonJS module, the import will no longer resolve to the value of `module.exports`. Instead, it will create an artificial namespace object for the CommonJS module."**
+
+1. **Dynamic Imports and Namespaces:**
+   When we dynamically import `anotherModule.js` using `import('./anotherModule.js')`, Webpack creates an **ES Module-compatible namespace object** to handle the imported file. This namespace object looks like:
+
+   ```javascript
+   {
+     default: "webpack", // The default export
+     __esModule: true    // Marks it as an ES Module
+   }
+   ```
+
+2. **`default` and CommonJS Behavior:**
+
+   - If the file being imported is a CommonJS module (using `module.exports`), Webpack will wrap the CommonJS export in a namespace object instead of resolving directly to `module.exports`.
+   - In an ES Module, Webpack does the same to ensure compatibility with ES Modules. The `default` export is represented as a property of this namespace object.
+
+### Why `default` Matters
+
+The `default` property is Webpack's way of making imports compatible between CommonJS and ES Modules:
+
+- **For CommonJS Modules:**
+  Webpack wraps `module.exports` in a namespace object and assigns it to `default`. Example:
+
+  ```javascript
+  // CommonJS
+  module.exports = "Hello";
+
+  // When imported via Webpack:
+  const imported = await import("./someCommonJSModule");
+  console.log(imported.default); // "Hello"
+  ```
+
+- **For ES Modules:**
+  Webpack generates a namespace object as per ES Module standards. The `default` export is assigned to the `default` property, as seen in your case.
+
+---
+
+**Understand Webpack's Import Behavior**:
+Webpack ensures compatibility between CommonJS and ES Modules by wrapping imports in namespace objects. The `default` property plays a crucial role in making these compatible, as the statement describes.

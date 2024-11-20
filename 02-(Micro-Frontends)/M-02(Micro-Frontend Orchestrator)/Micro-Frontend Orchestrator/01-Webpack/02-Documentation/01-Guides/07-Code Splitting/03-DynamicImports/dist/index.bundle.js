@@ -9,13 +9,23 @@
 /******/ (() => { // webpackBootstrap
 /******/ 	var __webpack_modules__ = ({
 
+/***/ "./src/anotherModule.js":
+/*!******************************!*\
+  !*** ./src/anotherModule.js ***!
+  \******************************/
+/***/ ((module) => {
+
+eval("const microFrontendOrchestrator = \"webpack\"\nmodule.exports = microFrontendOrchestrator\n\n//# sourceURL=webpack://03-dynamicimports/./src/anotherModule.js?");
+
+/***/ }),
+
 /***/ "./src/index.js":
 /*!**********************!*\
   !*** ./src/index.js ***!
   \**********************/
 /***/ ((__unused_webpack_module, __unused_webpack_exports, __webpack_require__) => {
 
-eval("function getComponent(){\n    return __webpack_require__.e(/*! import() */ \"vendors-node_modules_lodash_lodash_js\").then(__webpack_require__.t.bind(__webpack_require__, /*! lodash */ \"./node_modules/lodash/lodash.js\", 23))\n    .then(({default: _}) => {\n        const element = document.createElement('div')\n        element.innerHTML = _.join(['Hello', 'webpack', 'dynamically', 'imported!!'], ' ');\n\n        return element;\n    })\n    .catch((error) => `An error occured while loading the component. Err: ${error}`)\n}\n\ngetComponent()\n.then((component) => {\n    document.body.appendChild(component)\n})\n\n//# sourceURL=webpack://03-dynamicimports/./src/index.js?");
+eval("// function getComponent(){\n//     return import('lodash')\n//     .then(({default: _}) => {\n//         const element = document.createElement('div')\n//         element.innerHTML = _.join(['Hello', 'webpack', 'dynamically', 'imported!!'], ' ');\n\n//         return element;\n//     })\n//     .catch((error) => `An error occured while loading the component. Err: ${error}`)\n// }\n\n// getComponent()\n// .then((component) => {\n//     document.body.appendChild(component)\n// })\n\n// As import() returns a promise, it can be used with \"async functions\".\n\nasync function getComponent(){\n    const element = document.createElement('div')\n    const {default: _} = await __webpack_require__.e(/*! import() */ \"vendors-node_modules_lodash_lodash_js\").then(__webpack_require__.t.bind(__webpack_require__, /*! lodash */ \"./node_modules/lodash/lodash.js\", 23))\n\n    element.innerHTML = _.join(['Hello webpack', 'dynamic import', 'successful'], ' ')\n    return element;\n}\n\ngetComponent()\n.then((component) => {\n    document.body.appendChild(component)\n})\n.then(async () => {\n    const imported = await Promise.resolve(/*! import() */).then(__webpack_require__.t.bind(__webpack_require__, /*! ./anotherModule.js */ \"./src/anotherModule.js\", 23));\n    console.log(\"Micro-Frontend Orchestrator : \", imported.default)\n})\n\n//# sourceURL=webpack://03-dynamicimports/./src/index.js?");
 
 /***/ })
 
@@ -317,7 +327,8 @@ eval("function getComponent(){\n    return __webpack_require__.e(/*! import() */
 /******/ 	// startup
 /******/ 	// Load entry module and return exports
 /******/ 	// This entry module can't be inlined because the eval devtool is used.
-/******/ 	var __webpack_exports__ = __webpack_require__("./src/index.js");
+/******/ 	__webpack_require__("./src/index.js");
+/******/ 	var __webpack_exports__ = __webpack_require__("./src/anotherModule.js");
 /******/ 	
 /******/ })()
 ;
