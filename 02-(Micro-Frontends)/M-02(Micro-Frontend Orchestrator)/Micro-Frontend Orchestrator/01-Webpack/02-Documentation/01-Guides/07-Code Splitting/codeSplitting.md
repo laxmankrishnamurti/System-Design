@@ -279,3 +279,11 @@ There are two techniques for dynamic imports in webpack:
 
 1. **_import()_** : A ECMAScript proposal
 2. **_require.ensure_** : Webpack-specific approach
+
+### _import()_
+
+- _import()_ calls use promises internally
+
+Instead of statically importing _lodash_, we'll use dynamic importing to separate a chunk:
+
+[Checkout](./03-DynamicImports/src/index.js)
