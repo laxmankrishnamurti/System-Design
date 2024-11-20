@@ -332,3 +332,108 @@ The `default` property is Webpack's way of making imports compatible between Com
 
 **Understand Webpack's Import Behavior**:
 Webpack ensures compatibility between CommonJS and ES Modules by wrapping imports in namespace objects. The `default` property plays a crucial role in making these compatible, as the statement describes.
+
+## Prefetching/Preloading modules
+
+- Both are inline directives which is used for _resource hinting_ which tells the browser that for:
+  - **prefetch** : resource is probably needed for some navigation in the future
+  - **preload** : resource will also be needed during the current navigation
+
+### 1. **prefetch**
+
+An example of this is having a HomePage component, which renders a LoginButton component which then on demand loads a LoginModal component after being clicked.
+
+```js
+import(/* webpackPrefetch: true*/ "path/to/the/module.js");
+```
+
+Webpack will convert this into this:
+
+```html
+<!-- Being appended in the head of the page. -->
+<link rel="prefetch" href="model-chunk.bundle.js" />
+```
+
+**_Webpack will add the prefetch hint once the parent chunk has been loaded._**
+
+### 2. **preload**
+
+Preload directive has a bunch of differences compared to prefetch:
+
+- A preloaded chunk starts loading in parallel to the parent chunk. A prefetched chunk starts after the parent chunk finishes loading.
+
+- A preloaded chunk has medium priority and is instantly downloaded. A prefetched chunk is downloaded while the browser is idle.
+
+- A preloaded chunk should be instantly requested by the parent chunk. A prefetched chunk can be used anytime in the future.
+
+- Browser support is different.
+
+_Let's imagine a component ChartComponent which needs a huge ChartingLibrary. It displays a LoadingIndicator when rendered and instantly does an on demand import of ChartingLibrary:_
+
+```js
+import(/*webpackPreload: true*/ "chartingLibrary");
+```
+
+When a page which uses the _ChartComponent_ is requested, the \_charting-library-chunk\_ is also requested via **<link rel="preload">**.
+
+<code>Using webpackPreload incorrectly can actually hurt performance, so be careful when using it</code>
+
+### **Get control over preload**
+
+Sometimes we need to have our own control over preload. For example, preload of any dynamic import can be done via async script. This can be useful in case of streaming server side rendering.
+
+```js
+const lazyComp = () =>
+  import("DynamicComponent").catch((error) => {
+    // Do something with the error.
+    // For example, we can retry the request in case of any net error
+  });
+```
+
+### What if it fails?
+
+- Webpack's runtime code manages the loading of chunks (dynamic modules) at runtime.
+- If the script loading (the chunk requested by `import('DynamicComponent')`) fails **before** Webpack's runtime has a chance to manage it (e.g., network issues, the script tag isn't even created yet), the **`catch` handler won't execute immediately.**
+- Instead, Webpack waits for a specific timeout (`chunkLoadTimeout`, usually 120 seconds by default) before triggering an error in the `catch` block.
+
+### Why This Happens:
+
+1. **Runtime Code's Role:**
+   Webpack’s runtime code dynamically injects `<script>` tags to load chunks. If these fail (e.g., script not found, network failure), the runtime code handles the error after the timeout period.
+
+2. **Failure Before Runtime:**
+   If the failure occurs **before** Webpack’s runtime creates the script tag or attempts the actual loading, the runtime has no awareness of the failure until the timeout occurs.
+
+---
+
+In summary:
+
+- Yes, the script Webpack refers to is its runtime code.
+- If the failure occurs before Webpack's runtime kicks in to handle module loading, the `catch` block won't execute until the `chunkLoadTimeout` expires.
+
+### Solution :: _To prevent such problem we can add our own onerror handler, which removes the script in case of any error:_
+
+```html
+<script
+  src="https://example.com/dist/dynamicComponent.js"
+  async
+  onerror="this.remove()"
+></script>
+```
+
+In that case, errored script will be removed. Webpack will create its own script(runtime code) and any error will be processed without any timeouts.
+
+## Bundle Analysis
+
+After spilitting the code we must analyze the output to check whether modules have ended up.
+
+[Official analyze tool](https://webpack.github.io/analyse/)
+
+There are some other community-supported options out there as well:
+
+- [webpack-chart](https://alexkuz.github.io/webpack-chart/)
+- [webpack-visualizer](https://chrisbateman.github.io/webpack-visualizer/)
+- [webpack-bundle-analyzer](https://github.com/webpack-contrib/webpack-bundle-analyzer)
+- [webpack-bundle-optimize-helper](https://webpack.jakoblind.no/optimize)
+- [bundle-stats](https://github.com/bundle-stats/bundle-stats)
+- [webpack-stats-viewer](https://github.com/moonrailgun/webpack-stats-viewer)
