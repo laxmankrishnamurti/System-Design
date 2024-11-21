@@ -77,3 +77,65 @@ No LHS expressions means it is just used before. That's it.
 Means when we call a function with _new_ keyword it creates a new object and runs the constructor(sayHello function in this case) function in the context of that new object.
 
 4. **import.meta**
+
+- This is an object in JavaScript that contain _metadata(data about data)_ about the current module(file).
+
+- It provides information specific to the module, such as its URL or environment.
+
+```js
+console.log(import.meta.url);
+```
+
+```bash
+# In the browser
+
+http://127.0.0.1:5500/System-Design-To-FullStack/03-(Micro-Services)/M-02(Node.js%20+%20Express.js%20+%20TypeScript)/01-Node.js/01-Getting%20Started/JavaScript/02-Expressions/src/index.html
+
+# In Node Environment
+file:///home/sonu/Desktop/System%20Design%20To%20FullStack/System-Design-To-FullStack/03-(Micro-Services)/M-02(Node.js%20+%20Express.js%20+%20TypeScript)/01-Node.js/01-Getting%20Started/JavaScript/02-Expressions/src/expression.js
+```
+
+- This can also be useful to import files dynamically
+
+```js
+async function loadModule() {
+  const currentDir = new URL(".", import.meta.url);
+  console.log("currentDir", currentDir);
+
+  //dynamically import a module from the same directory
+  const { default: fn } = await import(`${currentDir}/anotherFile.js`);
+  console.log("default", fn);
+  fn();
+}
+
+loadModule();
+```
+
+```js
+// Output
+
+currentDir URL {
+  href: 'file:///home/sonu/Desktop/System%20Design%20To%20FullStack/System-Design-To-FullStack/03-(Micro-Services)/M-02(Node.js%20+%20Express.js%20+%20TypeScript)/01-Node.js/01-Getting%20Started/JavaScript/02-Expressions/src/',
+  origin: 'null',
+  protocol: 'file:',
+  username: '',
+  password: '',
+  host: '',
+  hostname: '',
+  port: '',
+  pathname: '/home/sonu/Desktop/System%20Design%20To%20FullStack/System-Design-To-FullStack/03-(Micro-Services)/M-02(Node.js%20+%20Express.js%20+%20TypeScript)/01-Node.js/01-Getting%20Started/JavaScript/02-Expressions/src/',
+  search: '',
+  searchParams: URLSearchParams {},
+  hash: ''
+}
+
+default [Function: sayHello]
+Hello undefined!!
+```
+
+- Module bundler also uses the feature for setting environment variables.
+
+```js
+console.log(import.meta.env.MODE); // 'development' or 'production'
+console.log(import.meta.env.BASE_URL); // Base URL of your app
+```

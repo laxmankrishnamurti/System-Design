@@ -75,3 +75,19 @@ class Car {
 
 const myCar = new Car("Scorpio", 4)
 console.log("myCar", myCar)
+
+console.log("IMPORT.META")
+
+console.log(import.meta.url)
+
+async function loadModule(){
+    const currentDir = new URL('.', import.meta.url)
+    console.log("currentDir", currentDir)
+
+    //dynamically import a module from the same directory
+    const {default: fn} = await import(`${currentDir}/anotherFile.js`)
+    console.log("default", fn)
+    fn()
+}
+
+loadModule()
