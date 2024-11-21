@@ -14,7 +14,7 @@
   \**********************/
 /***/ ((__unused_webpack_module, __unused_webpack_exports, __webpack_require__) => {
 
-eval("async function getComponent(){\n    const element = document.createElement('div') \n\n    const {default: _} = await __webpack_require__.e(/*! import() */ \"vendors-node_modules_lodash_lodash_js\").then(__webpack_require__.t.bind(__webpack_require__, /*! lodash */ \"./node_modules/lodash/lodash.js\", 23))\n    element.innerHTML = _.join(['Hello webpcak', 'learning', 'caching'], ' ')\n\n    return element;\n}\n\ngetComponent()\n.then((component) => {\n    document.body.appendChild(component)\n})\n.catch((error) => {\n    console.log(`There was some error while trying to get component ${error}`)\n})\n\n//# sourceURL=webpack://src/./src/index.js?");
+eval("async function getComponent(){\n    const element = document.createElement('div') \n\n    const {default: _} = await __webpack_require__.e(/*! import() */ \"vendors\").then(__webpack_require__.t.bind(__webpack_require__, /*! lodash */ \"./node_modules/lodash/lodash.js\", 23))\n    element.innerHTML = _.join(['Hello webpcak', 'learning', 'caching'], ' ')\n\n    return element;\n}\n\ngetComponent()\n.then((component) => {\n    document.body.appendChild(component)\n})\n.catch((error) => {\n    console.log(`There was some error while trying to get component ${error}`)\n})\n\n//# sourceURL=webpack://src/./src/index.js?");
 
 /***/ })
 

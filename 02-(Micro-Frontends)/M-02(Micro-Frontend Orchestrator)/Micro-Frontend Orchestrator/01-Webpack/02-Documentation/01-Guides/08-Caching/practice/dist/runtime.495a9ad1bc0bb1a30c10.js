@@ -133,7 +133,7 @@
 /******/ 		// This function allow to reference async chunks
 /******/ 		__webpack_require__.u = (chunkId) => {
 /******/ 			// return url for filenames based on template
-/******/ 			return "" + chunkId + ".bundle.js";
+/******/ 			return "" + chunkId + "." + "4c483f57122d28ecde3a" + ".js";
 /******/ 		};
 /******/ 	})();
 /******/ 	
