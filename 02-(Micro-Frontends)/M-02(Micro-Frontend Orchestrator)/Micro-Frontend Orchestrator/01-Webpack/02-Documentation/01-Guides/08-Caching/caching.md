@@ -110,3 +110,37 @@ webpack 5.96.1 compiled successfully in 1835 ms
 _Size from 1.71KiB to 1.69KiB_
 
 ## Module Identifiers
+
+- When we make any changes in the build file.
+- It's filename name will be changed as well.
+
+[Checkout](./practice/src/print.js)
+
+- Recap:
+  - The _main_ bundle changed because of its new content.
+  - The _vendor_ bundle changed because its _module.id_ was changed.
+  - And, the _runtime_ bundle changed because it now contain a reference to the new module.
+
+Lets fix the _module.id_
+
+```js
+optimization: {
+    moduleIds: 'deterministic',
+    runtimeChunk: 'single',
+    splitChunks: {
+        cacheGroups: {
+            vendor: {
+                test: /[\\/]node_modules[\\/]/,
+                name: 'vendors',
+                chunks: 'all'
+            }
+        }
+    }
+}
+```
+
+This setting might useful in the current veersion of webpack, because webpack handles it automatically.
+
+## Conclusion
+
+Caching can be complicated, but the benefit to application or site users makes it worth the effort.
