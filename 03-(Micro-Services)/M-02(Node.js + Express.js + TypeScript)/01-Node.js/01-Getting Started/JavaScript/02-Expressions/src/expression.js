@@ -90,4 +90,47 @@ async function loadModule(){
     fn()
 }
 
-loadModule()
+// loadModule()
+
+console.log("SUPER")
+
+class Parent{
+    mode;
+    constructor(mode){
+        this.mode = mode
+    } 
+
+    getName = function () {
+        return "Parent"
+    }
+}
+
+class Child extends Parent{
+    process;
+    constructor(num){
+        super("development")
+        this.process = num
+    }
+
+    getProcesses = function(){
+        return this.process
+    }
+}
+
+const childObj = new Child(10)
+console.log("childObj", childObj)
+
+console.log("UNARY")
+
+const user = {
+    username: "laxmankrishnamurti",
+    age: 22,
+    getAge: function(){
+        return this.age
+    }
+}
+
+console.log("Before deleting the age property from the object", user)
+delete user.age
+delete user.getAge
+console.log("After deleting the age property from the object", user)

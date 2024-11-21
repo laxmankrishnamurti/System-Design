@@ -139,3 +139,148 @@ Hello undefined!!
 console.log(import.meta.env.MODE); // 'development' or 'production'
 console.log(import.meta.env.BASE_URL); // Base URL of your app
 ```
+
+5. **super**
+
+- This is a special kind of keyword which is used in classes.
+- It is used to call parent class constructor.
+- It allows to access properties of the parent object
+
+```js
+class Parent {
+  mode;
+  result;
+  constructor(mode, result) {
+    this.mode = mode;
+    this.result = result;
+  }
+
+  getName = function () {
+    return "Parent";
+  };
+}
+
+class Child extends Parent {
+  process;
+  constructor(num) {
+    // super()
+    this.process = num;
+  }
+
+  getProcesses = function () {
+    return this.process;
+  };
+}
+
+const childObj = new Child(10);
+console.log("childObj", childObj);
+```
+
+```bash
+file:///home/sonu/Desktop/System%20Design%20To%20FullStack/System-Design-To-FullStack/03-(Micro-Services)/M-02(Node.js%20+%20Express.js%20+%20TypeScript)/01-Node.js/01-Getting%20Started/JavaScript/02-Expressions/src/expression.js:114
+        this.process = num
+        ^
+
+ReferenceError: Must call super constructor in derived class before accessing 'this' or returning from derived constructor
+    at new Child (file:///home/sonu/Desktop/System%20Design%20To%20FullStack/System-Design-To-FullStack/03-(Micro-Services)/M-02(Node.js%20+%20Express.js%20+%20TypeScript)/01-Node.js/01-Getting%20Started/JavaScript/02-Expressions/src/expression.js:114:9)
+    at file:///home/sonu/Desktop/System%20Design%20To%20FullStack/System-Design-To-FullStack/03-(Micro-Services)/M-02(Node.js%20+%20Express.js%20+%20TypeScript)/01-Node.js/01-Getting%20Started/JavaScript/02-Expressions/src/expression.js:122:18
+    at ModuleJob.run (node:internal/modules/esm/module_job:234:25)
+    at async ModuleLoader.import (node:internal/modules/esm/loader:473:24)
+    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:123:5)
+
+Node.js v20.18.0
+```
+
+Lets fix the error by uncommenting the _super()_ keyword
+
+```js
+class Parent {
+  mode;
+  result;
+  constructor(mode, result) {
+    this.mode = mode;
+    this.result = result;
+  }
+
+  getName = function () {
+    return "Parent";
+  };
+}
+
+class Child extends Parent {
+  process;
+  constructor(num) {
+    super();
+    this.process = num;
+  }
+
+  getProcesses = function () {
+    return this.process;
+  };
+}
+
+const childObj = new Child(10);
+console.log("childObj", childObj);
+```
+
+```bash
+# Output
+
+childObj Child {
+  mode: 'development',
+  getName: [Function: getName],
+  process: 10,
+  getProcesses: [Function: getProcesses]
+}
+```
+
+6. **import()**
+
+This is what we have done previously. It is used to load files asynchronously and dynamically into a potentially non-module environment.
+
+_What does it mean by non-module environment?_
+
+A non-module environment means JavaScript code is written or executed in a more traditional or simpler context, such as:
+
+- Plain <script> tags in HTML (default is non-modular).
+- Older browsers or environments without ES Module support.
+- Node.js files using CommonJS (require) instead of ES Modules.
+
+Here, we cannot directly use **_import/export_** because the script is not treated as a module.
+
+```html
+<script>
+  // we can't use `import` directly here
+  console.log("This is a non-module script.");
+</script>
+```
+
+### 3. Increment and Decrement
+
+- **x++ :** Postfix increment operator
+- **x-- :** Postfix decrement operator
+- **++x :** Prefix increment operator
+- **--x :** Prefix increment operator
+
+### 4. Unary Operator
+
+As per their name suggest that this is an operator with only one operand.
+
+- **delete :** Used to delete a property from an object
+
+```js
+const user = {
+  username: "laxmankrishnamurti",
+  age: 22,
+  getAge: function () {
+    return this.age;
+  },
+};
+```
+
+```bash
+Output
+
+Before deleting the age property from the object { username: 'laxmankrishnamurti', age: 22, getAge: [Function: getAge] }
+After deleting the age property from the object { username: 'laxmankrishnamurti' }
+```
