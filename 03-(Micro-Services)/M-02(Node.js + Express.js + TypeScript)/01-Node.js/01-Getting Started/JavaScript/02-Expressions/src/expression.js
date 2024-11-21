@@ -54,5 +54,24 @@ console.log("constructorObj", constructorObj)
  * constructorObj constructorFunc {}
  */
 
-const constructorObj1 = constructorFunc() // Error: You must call this function with the 'new' keyword
-console.log("constructorObj1", constructorObj1)
+// const constructorObj1 = constructorFunc() // Error: You must call this function with the 'new' keyword
+// console.log("constructorObj1", constructorObj1)
+
+class Car {
+    brand;
+    wheel;
+
+    constructor(brand, wheel){
+        this.brand = brand;
+        this.wheel = wheel;
+
+        if(!new.target){
+            console.log("You must call the class with new keyword to create an instance of it")
+        }else {
+            console.log("Class has been used with the new keyword")
+        }
+    }
+}
+
+const myCar = new Car("Scorpio", 4)
+console.log("myCar", myCar)

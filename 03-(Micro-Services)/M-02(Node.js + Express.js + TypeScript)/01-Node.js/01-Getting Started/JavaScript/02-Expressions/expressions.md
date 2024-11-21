@@ -4,7 +4,7 @@ Lets' revise all JavaScript operators, expressions and keywords.
 
 ## **Expressions and operators by category**
 
-### **1. Primary Expressions**
+### 1. Primary Expressions
 
 These are the basic keywords and general expressions in JavaScript
 
@@ -47,7 +47,7 @@ These are the basic keywords and general expressions in JavaScript
 10. **()**
     - This is used to group an expression like this :- (1 + 2 + 3)
 
-### **2. Left-hand-side expressions**
+### 2. Left-hand-side expressions
 
 This is not like a typical LHS expression like this
 
@@ -75,3 +75,5 @@ No LHS expressions means it is just used before. That's it.
    - If not, it will be _undefined_
 
 Means when we call a function with _new_ keyword it creates a new object and runs the constructor(sayHello function in this case) function in the context of that new object.
+
+4. **import.meta**
