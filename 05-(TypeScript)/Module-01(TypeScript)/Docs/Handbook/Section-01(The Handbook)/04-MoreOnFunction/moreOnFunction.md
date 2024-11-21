@@ -75,4 +75,82 @@ parent1(child1);
 
 - This is the best place where we can use _type-aliases (a name for any type)_.
 
+### **_Limitations_**
+
+- This expression dosen't allow a function to have additional properties and methods being callable.
+
 ## Call Signatures
+
+In JavaScript, function can have properties in addition to being callable. What does it mean?
+
+Have a look on this code:
+
+```js
+function test(num) {
+  let randomNumber = Math.floor(Math.random() * 1e2);
+  console.log("function description :: ", test.description);
+  test.sayHello();
+  console.log(test.result);
+  return num > randomNumber;
+}
+
+test.description = "This is a test function";
+test.sayHello = () => {
+  console.log(`Hello from ${test.name} function`);
+};
+test.result = "All test cases passed!!";
+
+let result = test(100000);
+console.log("result", result);
+```
+
+```bash
+# Output
+
+function description ::  This is a test function
+Hello from test function
+All test cases passed!!
+result true
+```
+
+Yes, at the end function is also a type of object in JavaScript. So, it can have properties and methods being callable.
+
+How TypeScript make this possible? Let's learn:
+
+```ts
+type CallbackFunctionTypeWithAdditionalProperties = {
+  description: string;
+  result: string;
+  (num: number): boolean;
+};
+
+function parent2(fn: CallbackFunctionTypeWithAdditionalProperties): boolean {
+  const result = fn(1000);
+  console.log("Callback function description :: ", fn.description);
+  console.log("Test Result", fn.result);
+  return result;
+}
+
+function child2(num: number) {
+  const randomNumber = Math.floor(Math.random() * 1e2);
+  return num > randomNumber;
+}
+
+child2.description = "Calling from child2 function";
+child2.result = "All test cases passed!!";
+
+const result = parent2(child2);
+console.log("result", result);
+```
+
+```bash
+# Output
+
+Callback function description ::  Calling from child2 function
+Test Result All test cases passed!!
+result true
+```
+
+_Remember :: The syntax is slightly different compared to a function type expression - use **:** between the parameter list and the return type rather than **=>**_
+
+## Construct Signatures

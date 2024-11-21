@@ -12,5 +12,5 @@ test.sayHello = () => {
 }
 test.result = "All test cases passed!!"
 
-let result = test(100000)
-console.log("result", result)
+let resultVal = test(100000)
+console.log("result", resultVal)
