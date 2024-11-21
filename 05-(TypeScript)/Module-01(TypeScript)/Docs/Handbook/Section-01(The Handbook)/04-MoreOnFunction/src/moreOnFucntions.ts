@@ -134,5 +134,3 @@ function paren4(fn: SomeConstructor1){
 // }
 
 // const output = paren4(child4)
-
-
