@@ -203,3 +203,97 @@ If we have invoked the callback function without _new_ keyword then it is 100% s
 ```bash
 Value of type 'SomeConstructor' is not callable. Did you mean to include 'new'?ts(2348)
 ```
+
+**We can also combine _call_ and _construct_ signatures in the same type arbitrarily.**
+
+```ts
+interface SomeConstructor1 {
+  (num: number): boolean;
+  new (username: string): User | boolean;
+}
+```
+
+But the question is does TypeScript support this feature with a regular function like this one :-
+
+```ts
+function child4(input: number | string): boolean | User {
+  if (typeof input === "number") {
+    const randomNumber = Math.floor(Math.random() * 1e2);
+    return input > randomNumber;
+  } else if (input === "laxmankrishnamurti") {
+    return {
+      accountId: "12345",
+      userEmail: "laxmankrishnamurti",
+      ipAddress: "192.168.250.16",
+    };
+  }
+
+  return false;
+}
+
+const output = paren4(child4);
+```
+
+```bash
+warnings
+
+    Argument of type '(input: string | number) => boolean | User' is not assignable to parameter of type 'SomeConstructor1'.
+    Type 'boolean | User' is not assignable to type 'boolean'.
+        Type 'User' is not assignable to type 'boolean'.ts(2345)
+    function child4(input: number | string): boolean | User
+```
+
+No, TypeScript does not natively support creating a **regular function** that is both callable and constructible without additional tricks (e.g., using `Object.assign` or `Proxy`). We need to combine behaviors manually, as regular functions can't inherently have both capabilities in TypeScript.
+
+**_With Proxy_**
+
+```ts
+interface User {
+  accountId: string;
+  userEmail: string;
+  ipAddress: string;
+}
+
+interface SomeConstructor1 {
+  (num: number): boolean; // Callable signature
+  new (username: string): User | boolean; // Constructor signature
+}
+
+// Use a Proxy to define a constructible and callable object
+const child4: SomeConstructor1 = new Proxy(function () {}, {
+  apply(target, thisArg, argArray) {
+    const num = argArray[0];
+    if (typeof num === "number") {
+      const randomNumber = Math.floor(Math.random() * 1e2);
+      return num > randomNumber;
+    }
+    throw new Error("Invalid argument for call");
+  },
+  construct(target, argArray) {
+    const username = argArray[0];
+    if (typeof username === "string" && username === "laxmankrishnamurti") {
+      return {
+        accountId: "12345",
+        userEmail: "laxmankrishnamurti",
+        ipAddress: "192.168.250.16",
+      };
+    }
+    return false;
+  },
+});
+
+// Call the function with `paren4`
+const output = paren4(child4);
+console.log("Output:", output);
+```
+
+```bash
+warnings
+
+    # On Constructor
+
+    Type '(target: () => void, argArray: any[]) => false | { accountId: string; userEmail: string; ipAddress: string; }' is not assignable to type '(target: () => void, argArray: any[], newTarget: Function) => object'.
+    Type 'false | { accountId: string; userEmail: string; ipAddress: string; }' is not assignable to type 'object'.
+        Type 'boolean' is not assignable to type 'object'.ts(2322)
+    (method) ProxyHandler<SomeConstructor1>.construct?(target: SomeConstructor1, argArray: any[], newTarget: Function): object
+```

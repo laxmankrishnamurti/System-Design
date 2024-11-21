@@ -64,3 +64,75 @@ function child3 (username: string): User | false{
 
     return false;   // user dosen't exist 
 }
+interface User {
+    accountId: string;
+    userEmail: string;
+    ipAddress: string;
+}
+
+interface SomeConstructor1 {
+    (num: number): boolean; // Callable signature
+    new (username: string): User | boolean; // Constructor signature
+}
+
+function paren4(fn: SomeConstructor1){
+    // Passing an argument of type number to fn matches it against the first definition in the SomeConstructor1 interface
+    const result = fn(1000);
+
+    // Passing an argument of type string to fn matches it against the second definition in the SomeConstructor1 interface
+    const user = new fn("laxmankrishnamurti");
+
+    if(result){
+        return result
+    }else {
+        return user
+    }
+}
+
+
+// Use a Proxy to define a constructible and callable object
+// const child4: SomeConstructor1 = new Proxy(function () {}, {
+//     apply(target, thisArg, argArray) {
+//         const num = argArray[0];
+//         if (typeof num === "number") {
+//             const randomNumber = Math.floor(Math.random() * 1e2);
+//             return num > randomNumber;
+//         }
+//         throw new Error("Invalid argument for call");
+//     },
+//     construct(target, argArray) {
+//         const username = argArray[0];
+//         if (typeof username === "string" && username === "laxmankrishnamurti") {
+//             return {
+//                 accountId: "12345",
+//                 userEmail: "laxmankrishnamurti",
+//                 ipAddress: "192.168.250.16",
+//             };
+//         }
+//         return false;
+//     },
+// });
+
+// Call the function with `paren4`
+// const output = paren4(child4);
+// console.log("Output:", output);
+
+
+// function child4(input: number | string): boolean | User {
+//     if(typeof input === "number"){
+//         const randomNumber = Math.floor(Math.random() * 1e2)
+//         return input > randomNumber
+//     }else if(input === "laxmankrishnamurti"){
+//         return {
+//             accountId: "12345",
+//             userEmail: "laxmankrishnamurti",
+//             ipAddress: "192.168.250.16"
+//         }
+//     }
+
+//     return false
+// }
+
+// const output = paren4(child4)
+
+
