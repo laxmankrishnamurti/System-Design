@@ -81,6 +81,18 @@ parent1(child1);
 
 ## Call Signatures
 
+Before going deep dive into it let's understand the meaning of the word _signature._
+
+In TypeScript, the term **signature** referes to the a description of a function, method, or callable structure, rather than a traditional handwritten signature. It defines how a function or method should be called, what parameters it accepts, and what it returns.
+
+### **_Key parts of a signature:_**
+
+1. **Name** of the function or methods (optional in some context).
+2. **Parameter type:** The types of inputs the function takes.
+3. **Return type:** The type of value the function will return.
+
+**_Let's come to the topic now._**
+
 In JavaScript, function can have properties in addition to being callable. What does it mean?
 
 Have a look on this code:
@@ -154,3 +166,40 @@ result true
 _Remember :: The syntax is slightly different compared to a function type expression - use **:** between the parameter list and the return type rather than **=>**_
 
 ## Construct Signatures
+
+JavaScript functions can also be invoked with the _new_ operator. TypeScript refers to these as _constructors_ because they usually create a _new object_. We can write a _constructor signature_ by adding the _new_ keyword in front of a call signature.
+
+```ts
+interface User {
+  accountId: string;
+  userEmail: string;
+  ipAddress: string;
+}
+
+type SomeConstructor = {
+  new (username: string): User | false;
+};
+
+function parent3(fn: SomeConstructor) {
+  const userDetails = new fn("laxmankrishnamurti");
+  return userDetails;
+}
+
+function child3(username: string): User | false {
+  if (username === "laxmankrishnamurti") {
+    return {
+      accountId: "12345",
+      userEmail: "laxmankrishnamurti@gmail.com",
+      ipAddress: "192.168.250.26",
+    };
+  }
+
+  return false; // user dosen't exist
+}
+```
+
+If we have invoked the callback function without _new_ keyword then it is 100% sure TypeScript's type system will warn us with this message:
+
+```bash
+Value of type 'SomeConstructor' is not callable. Did you mean to include 'new'?ts(2348)
+```

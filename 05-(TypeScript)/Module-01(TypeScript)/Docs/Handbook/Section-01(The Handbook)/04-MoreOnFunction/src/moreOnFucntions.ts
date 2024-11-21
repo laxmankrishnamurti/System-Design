@@ -35,3 +35,32 @@ child2.result = "All test cases passed!!"
 
 const result = parent2(child2)
 console.log("result", result)
+
+console.log("CONSTRUCT SIGNATURE")
+
+interface User {
+    accountId: string;
+    userEmail: string;
+    ipAddress: string;
+}
+
+type SomeConstructor = {
+    new (username: string): User | false;
+}
+
+function parent3(fn: SomeConstructor){
+    const userDetails = new fn("laxmankrishnamurti")
+    return userDetails
+}
+
+function child3 (username: string): User | false{
+    if(username === "laxmankrishnamurti"){
+        return {
+            accountId: "12345",
+            userEmail: "laxmankrishnamurti@gmail.com",
+            ipAddress: "192.168.250.26"
+        }
+    }
+
+    return false;   // user dosen't exist 
+}
