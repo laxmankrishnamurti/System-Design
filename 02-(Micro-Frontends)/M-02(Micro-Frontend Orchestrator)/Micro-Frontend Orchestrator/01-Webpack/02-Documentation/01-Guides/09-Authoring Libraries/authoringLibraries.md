@@ -225,3 +225,11 @@ We must follow the standard practice for _npm packages_ and also ensure our code
     "module": "src/index.js"
   ```
   - The _module_ to [a proposal](https://github.com/rollup/rollup/wiki/pkg.module) to allow the JavaScript ecosystem upgrade the use ES2015 module without breaking backward compatibility.
+
+```bash
+warnings
+
+The module property should point to a script that utilizes ES2015 module syntax but no other syntax features that aren't yet supported by browsers or node. This enables webpack to parse the module syntax itself, allowing for lighter bundles via tree shaking if users are only consuming certain parts of the library.
+```
+
+Now we can [publish it as npm package](https://docs.npmjs.com/packages-and-modules/contributing-packages-to-the-registry) and find it at [unpkg.com](https://unpkg.com/#/) to distribute it to our users.
