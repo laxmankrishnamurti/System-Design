@@ -20,3 +20,13 @@ child2.description = "Calling from child2 function";
 child2.result = "All test cases passed!!";
 var result = parent2(child2);
 console.log("result", result);
+console.log("CONSTRUCT SIGNATURE");
+function fn(ctor) {
+    // Passing an argument of type `number` to `ctor` matches it against
+    // the first definition in the `CallOrConstruct` interface.
+    console.log(ctor(10));
+    // Similarly, passing an argument of type `string` to `ctor` matches it
+    // against the second definition in the `CallOrConstruct` interface.
+    console.log(new ctor("10"));
+}
+fn(Date);

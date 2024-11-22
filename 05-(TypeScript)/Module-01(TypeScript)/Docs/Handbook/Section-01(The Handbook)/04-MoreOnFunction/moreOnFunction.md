@@ -177,31 +177,43 @@ interface User {
 }
 
 type SomeConstructor = {
-  new (username: string): User | false;
+  new (username: string): User | boolean;
 };
 
 function parent3(fn: SomeConstructor) {
-  const userDetails = new fn("laxmankrishnamurti");
-  return userDetails;
+  const user = new fn("laxmankrishnamurti");
+  return user;
 }
 
-function child3(username: string): User | false {
+function child3(username: string): User | boolean {
   if (username === "laxmankrishnamurti") {
     return {
       accountId: "12345",
       userEmail: "laxmankrishnamurti@gmail.com",
-      ipAddress: "192.168.250.26",
+      ipAddress: "192.168.250.16",
     };
   }
 
-  return false; // user dosen't exist
+  return false;
 }
+
+const isExist = parent3(child3);
 ```
 
 If we have invoked the callback function without _new_ keyword then it is 100% sure TypeScript's type system will warn us with this message:
 
 ```bash
 Value of type 'SomeConstructor' is not callable. Did you mean to include 'new'?ts(2348)
+```
+
+```bash
+warnings
+
+  Argument of type '(username: string) => boolean | User' is not assignable to parameter of type 'SomeConstructor'.
+    Type '(us  Argument of type '(username: string) => boolean | User' is not assignable to parameter of type 'SomeConstructor'.
+    Type '(username: string) => boolean | User' provides no match for the signature 'new (username: string): boolean | User'.ts(2345)
+  functioername: string) => boolean | User' provides no match for the signature 'new (username: string): boolean | User'.ts(2345)
+  function child3(username: string): User | boolean
 ```
 
 **We can also combine _call_ and _construct_ signatures in the same type arbitrarily.**
