@@ -86,21 +86,21 @@ function parent3(fn: CallSignature){
 
 // parent3(CallSignatureConstructorFunction)
 
-class CallSignatureClass implements CallSignature {
+// class CallSignatureClass implements CallSignature {
 
-    accountId: string | null = null;
-    userEmail: string | null = null;
-    ipAddress: string | null = null;
-    isValid: boolean = false;
+//     accountId: string | null = null;
+//     userEmail: string | null = null;
+//     ipAddress: string | null = null;
+//     isValid: boolean = false;
 
-    constructor(username: string) {
-        if (username === "laxmankrishnamurti") {
-            this.accountId = "12345";
-            this.userEmail = "laxmankrishnamurti@gmail.com";
-            this.ipAddress = "192.168.250.16";
-            this.isValid = true;
-        }
-    }
-}
+//     constructor(username: string) {
+//         if (username === "laxmankrishnamurti") {
+//             this.accountId = "12345";
+//             this.userEmail = "laxmankrishnamurti@gmail.com";
+//             this.ipAddress = "192.168.250.16";
+//             this.isValid = true;
+//         }
+//     }
+// }
 
-parent3(CallSignatureClass)
+// parent3(CallSignatureClass)

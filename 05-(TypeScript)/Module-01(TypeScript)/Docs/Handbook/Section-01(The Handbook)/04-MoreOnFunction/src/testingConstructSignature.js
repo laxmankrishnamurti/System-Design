@@ -21,3 +21,4 @@ function child3(username){
 
 const newObj1 = new child3("laxmankrishnamurti")
 console.log(newObj1)
+

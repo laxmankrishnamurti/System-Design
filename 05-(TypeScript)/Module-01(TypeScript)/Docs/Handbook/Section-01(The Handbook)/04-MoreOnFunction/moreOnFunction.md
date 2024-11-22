@@ -309,3 +309,70 @@ warnings
         Type 'boolean' is not assignable to type 'object'.ts(2322)
     (method) ProxyHandler<SomeConstructor1>.construct?(target: SomeConstructor1, argArray: any[], newTarget: Function): object
 ```
+
+### **_Summary_**
+
+1. In JavaScript, all functions are technically constructors because the new keyword is allowed for any function. This behavior is built into the language.
+
+2. In TypeScript, only functions or classes with an explicit new signature are considered valid constructors for a construct signature. This provides stricter type safety and ensures meaningful usage of new.
+
+### Why Does TypeScript Differentiate?
+
+TypeScript adds type safety by enforcing these rules. If it allowed any function to satisfy a construct signature, it would defeat the purpose of using types to ensure correctness. By requiring an explicit new signature, TypeScript:
+
+1. Prevents misuse of functions not designed to be constructors.
+2. Ensures type-safe instantiation when working with classes or constructors.
+
+### Construct Signature
+
+```ts
+type SomeConstructor = {
+  new (username: string): User | boolean;
+};
+```
+
+- This is a contract
+- This defines a contract for a function or class that must:
+  - Be callable using new.
+  - Accept a single username string parameter.
+  - Return either a User object or boolean.
+
+### Mixed Call and Construct Signatures
+
+A mixed signature is where an entity supports both:
+
+- A call signature (function-like invocation).
+- A construct signature (constructor-like invocation with new).
+
+```ts
+interface CallOrConstruct {
+  (n?: number): string; // Call signature
+  new (s: string): Date; // Construct signature
+}
+```
+
+```ts
+interface CallOrConstruct {
+  (n?: number): string;
+  new (s: string): Date;
+}
+
+function fn(ctor: CallOrConstruct) {
+  // Passing an argument of type `number` to `ctor` matches it against
+  // the first definition in the `CallOrConstruct` interface.
+  console.log(ctor(10));
+
+  // Similarly, passing an argument of type `string` to `ctor` matches it
+  // against the second definition in the `CallOrConstruct` interface.
+  console.log(new ctor("10"));
+}
+
+fn(Date);
+```
+
+```bash
+# Output
+
+Fri Nov 22 2024 15:43:19 GMT+0530 (India Standard Time)
+2001-09-30T18:30:00.000Z
+```
