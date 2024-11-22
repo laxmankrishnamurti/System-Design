@@ -150,7 +150,7 @@ We'll see that the external module _lodash(used in the library)_ will be include
 
 Means when consument starts downloading our _library_, its external dependencies will also be downloaded and now consumer can use both libraries: our custom library and the external library which our library is also using.
 
-Lets declare the _lodash_ as peer dependencies.
+Lets declare the _lodash_ as peer dependencies. This is sort of code splitting that we did in previous chapters.
 
 This can be done using the _externals_ configuration:
 
