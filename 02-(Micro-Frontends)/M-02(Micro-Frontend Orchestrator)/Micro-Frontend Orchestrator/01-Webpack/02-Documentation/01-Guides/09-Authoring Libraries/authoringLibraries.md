@@ -137,3 +137,91 @@ output: {
     clean: true
 }
 ```
+
+## Externalize Lodash (or peer dependencies of your custom library)
+
+When we build the library by running the command:
+
+```bash
+npx webpack
+```
+
+We'll see that the external module _lodash(used in the library)_ will be included with our actual source code and we must don't want to do that and it's obvious that we would want to give access to the external library to the consumer.
+
+Means when consument starts downloading our _library_, its external dependencies will also be downloaded and now consumer can use both libraries: our custom library and the external library which our library is also using.
+
+Lets declare the _lodash_ as peer dependencies.
+
+This can be done using the _externals_ configuration:
+
+```js
+output: {
+    path: path.resolve(__dirname, 'dist'),
+    filename: 'webpack-number.js',
+    globalObject: 'this',
+    library: {
+        name: 'webpackNumbers',
+        type: 'umd'
+    },
+    clean: true
+},
+externals: {
+    lodash: {
+        commonjs: 'lodash',
+        commonjs2: 'lodash',
+        amd: 'lodash',
+        root: '_',
+    }
+}
+```
+
+This means that our library expects a dependencies named _lodash_ to be available in the consumer's environment.
+
+### External Limitations
+
+This is for the library that use several files from a dependency:
+
+```js
+import a from "library/one";
+import b from "library/two";
+import c from "library/three";
+import d from "library/four";
+import e from "library/five";
+.
+.
+.
+import n from "library/n";
+```
+
+It's obvious we won't be able to exclude them from the bundle by specifying _library_ in the externals. We'll either need to exclude them one by one or by using a regular expression.
+
+```js
+externals: [
+  "library/one",
+  "library/two",
+  "library/n",
+
+  //everything that starts with "library/"
+  /^library\/.+$/,
+];
+```
+
+## Final Steps
+
+We can optimize output for production by following the steps mentioned in the [Production guide](https://webpack.js.org/guides/production/)
+
+We must follow the standard practice for _npm packages_ and also ensure our code must be backward compatible.
+
+- Standard practice from package.json
+
+  ```json
+    "main": "dist/webpack-numbers.js"
+  ```
+
+  - Or to add it as a standard module as per [this guide](https://github.com/dherman/defense-of-dot-js/blob/master/proposal.md#typical-usage)
+
+- Backward compatibility
+  ```json
+    "module": "src/index.js"
+  ```
+  - The _module_ to [a proposal](https://github.com/rollup/rollup/wiki/pkg.module) to allow the JavaScript ecosystem upgrade the use ES2015 module without breaking backward compatibility.
