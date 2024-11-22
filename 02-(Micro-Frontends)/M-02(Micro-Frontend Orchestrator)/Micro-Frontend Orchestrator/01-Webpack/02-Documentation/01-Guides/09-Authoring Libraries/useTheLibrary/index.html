@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Testing Custom Library</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            font-family: sans-serif;
+        }
+    </style>
+    <script src="http://127.0.0.1:5500/System-Design-To-FullStack/02-(Micro-Frontends)/M-02(Micro-Frontend%20Orchestrator)/Micro-Frontend%20Orchestrator/01-Webpack/02-Documentation/01-Guides/09-Authoring%20Libraries/practice/dist/webpack-number.js"></script>
+</head>
+<body>
+    <h1 style="text-align: center; background-color: antiquewhite; padding: 1rem;">Testing Custom Library</h1>
+</body>
+<script>
+    console.log("Testing custom library")
+    const numToWord = webpacknumbers.numToWord(2)
+    console.log("numToWord", numToWord)
+
+    const numToWord1 = webpacknumbers.numToWord(9)
+    console.log("numToWord", numToWord1)
+    const numToWord2 = webpacknumbers.numToWord(0)
+    console.log("numToWord", numToWord2)
+    const numToWord3 = webpacknumbers.numToWord(5)
+    console.log("numToWord", numToWord3)
+
+    const wordToNum = webpacknumbers.wordToNum("Two")
+    console.log("wordToNum", wordToNum)
+</script>
+</html>
