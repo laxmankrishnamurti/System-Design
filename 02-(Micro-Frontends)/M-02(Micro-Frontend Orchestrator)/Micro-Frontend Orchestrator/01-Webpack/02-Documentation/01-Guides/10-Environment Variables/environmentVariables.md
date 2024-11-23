@@ -133,7 +133,7 @@ asset index.html 259 bytes [compared for emit]
 webpack 5.96.1 compiled successfully in 507 ms
 ```
 
-For both console value we have got different-different outputs becasue webpack has already set up some values as _env_ but the second console of _env.goal_ this is a custom value so webpack dosen't resolve because we have not passed any environment value such as _goal_.
+For both console value we got different-different outputs becasue webpack has already set up some values as _env_ but the second console of _env.goal_ this is a custom value so webpack dosen't resolve because we have not passed any environment value such as _goal_.
 
 Lets set up some environment values:
 
