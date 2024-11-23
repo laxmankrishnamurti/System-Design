@@ -376,3 +376,5 @@ fn(Date);
 Fri Nov 22 2024 15:43:19 GMT+0530 (India Standard Time)
 2001-09-30T18:30:00.000Z
 ```
+
+[Fresh Start](./ConstructSignature.md)

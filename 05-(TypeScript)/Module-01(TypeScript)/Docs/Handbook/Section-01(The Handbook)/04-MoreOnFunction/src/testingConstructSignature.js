@@ -1,24 +1,30 @@
-function sayHello(name){
-    console.log(`Hello ${name}`)
+function highOrderFunction(fn) {
+    var user = new fn("");
+    console.log(user);
 }
-
-const newObj = new sayHello("Laxman")
-console.log(newObj)
-newObj.name = "Harshad"
-console.log(newObj.name)
-
-function child3(username){
-    if (username === "laxmankrishnamurti") {
-      return {
-        accountId: "12345",
-        userEmail: "laxmankrishnamurti@gmail.com",
-        ipAddress: "192.168.250.16",
-      };
+var UserClass = /** @class */ (function () {
+    function UserClass(username) {
+        if (username === "laxmankrishnamurti") {
+            this.accountId = "12345";
+            this.userEmail = "laxmankrishnamurti@gmail.com";
+            this.ipAddress = "192.168.250.16";
+        }
+        else {
+            false;
+        }
     }
-  
-    return false;
-}
-
-const newObj1 = new child3("laxmankrishnamurti")
-console.log(newObj1)
-
+    return UserClass;
+}());
+// function compatibleFunction(username: string){
+//     if(!new.target){
+//         if(username === "laxmankrishnamurti"){
+//             return {
+//                 accountId:  "12345",
+//                 userEmail:  "laxmankrishnamurti@gmail.com",
+//                 ipAddress:  "192.168.250.16"
+//             }
+//         }
+//     }
+//     return false
+// }
+highOrderFunction(UserClass);
