@@ -79,7 +79,7 @@ parent1(child1);
 
 - This expression dosen't allow a function to have additional properties and methods being callable.
 
-## Call Signatures
+## `Call Signatures`
 
 Before going deep dive into it let's understand the meaning of the word _signature._
 
@@ -165,7 +165,7 @@ result true
 
 _Remember :: The syntax is slightly different compared to a function type expression - use **:** between the parameter list and the return type rather than **=>**_
 
-## Construct Signatures
+## `Construct Signatures`
 
 JavaScript functions can also be invoked with the _new_ operator. TypeScript refers to these as _constructors_ because they usually create a _new object_. We can write a _constructor signature_ by adding the _new_ keyword in front of a call signature.
 
@@ -378,3 +378,7 @@ Fri Nov 22 2024 15:43:19 GMT+0530 (India Standard Time)
 ```
 
 [Fresh Start](./ConstructSignature.md)
+
+## `Generic Functions`
+
+Dictionary meaning of _generic_ :: characteristic of or relating to a class or group of things; not specific.
