@@ -382,3 +382,44 @@ Fri Nov 22 2024 15:43:19 GMT+0530 (India Standard Time)
 ## `Generic Functions`
 
 Dictionary meaning of _generic_ :: characteristic of or relating to a class or group of things; not specific.
+
+We often create a function which return type is related to it's input type. Have a look on this function:
+
+```js
+// JavaScript
+
+function fn(arr) {
+  return arr[0];
+}
+```
+
+Here, the function _fn_ is taking an array(could be any type) as a parameter and returns the first element of the array which has the same type the input array's element.
+
+```ts
+// TypeScript
+
+function fn(arr: any[]) {
+  return arr[0]; // const firstElement: any
+}
+```
+
+The return type is _any_
+
+Now, the question is does TypeScript provides any sort of way to declare a type which interlink both types: input as well as its return type?
+
+The answer is **`yes.`**
+
+TypeScript introducing **`generic type`** that describe a _correspondence_ between two values.
+
+**In TypeScript, generics are used when we want to describe a correspondence between two values. We do this by declaring a type parameter in the function signature:**
+
+```ts
+function fn1<Type>(arr: Type[]): Type | undefined {
+  return arr[0];
+}
+
+const getFirstElement = fn1([1, 2, 3, 4, 5]); // const getFirstElement: number | undefined
+console.log("Get first element", getFirstElement); // const getFirstElement: number | undefined
+```
+
+By adding a type parameter Type to this function and using it in two places, we’ve created a link between the input of the function (the array) and the output (the return value). Now when we call it, a more specific type comes out:
