@@ -426,6 +426,8 @@ By adding a type parameter Type to this function and using it in two places, weâ
 
 Now, take more example in order to understand it very well because we'll be using it very frequently.
 
+### `Inference`
+
 ```ts
 function map<Input, Output>(
   arr: Input[],
@@ -464,3 +466,11 @@ Hence, the _Output parameter type_ will be a number.
 And at the second example the function is parsing the array's element to string. Hence, the _Output_ type will be a _string._
 
 **`Note:- If we passed a function that returns a function as _func_, the map would return an array  of functions.`**
+
+Here, the type of the parameter if being infered by the TypeScript based on the array value.
+
+### `Constraints`
+
+On the above examples the map function is accepting any kind of _type_. But we can restrict it to allow specific kind of value to pass in the function.
+
+We can use a _constraint_ to limit the kinds of types that a type parameter can accept. We _constrain_ the type parameter to that type by writing an **extends** clause:

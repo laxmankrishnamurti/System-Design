@@ -23,3 +23,14 @@ console.log("parsed", parsed);
 
 const parsed2 = map([1,2,3,4,5], (n) => String(n))
 console.log("parsed2", parsed2)
+
+function func<Type extends {length: number}>(x: Type, y: Type){
+  if(x.length >= y.length) {
+    console.log("x", x)
+  }else {
+    console.log("y", y)
+  }
+}
+
+func("abc", "def")
+// func([1,2,3,1], "laxman")
