@@ -20,3 +20,6 @@ function map<Input, Output>(
 
 const parsed = map(["1", "2", "3", "4", "5"], (n) => parseInt(n));
 console.log("parsed", parsed);
+
+const parsed2 = map([1,2,3,4,5], (n) => String(n))
+console.log("parsed2", parsed2)

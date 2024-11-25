@@ -424,4 +424,41 @@ console.log("Get first element", getFirstElement); // const getFirstElement: num
 
 By adding a type parameter Type to this function and using it in two places, we’ve created a link between the input of the function (the array) and the output (the return value). Now when we call it, a more specific type comes out:
 
-[Checkout](./src/GenericFunctions/genericFunctions.ts)
+Now, take more example in order to understand it very well because we'll be using it very frequently.
+
+```ts
+function map<Input, Output>(
+  arr: Input[],
+  func: (arg: Input) => Output
+): Output[] {
+  return arr.map(func);
+}
+
+const parsed = map(["1", "2", "3", "4", "5"], (n) => parseInt(n));
+console.log("parsed", parsed);
+
+const parsed2 = map([1, 2, 3, 4, 5], (n) => String(n));
+console.log("parsed2", parsed2);
+```
+
+Here, the map function is taking two parameter values and we have also assigned it two types first one is _Input_ and second one is _Output_ where both types are attached to the input parameter's type.
+
+What will be the type of Input and the Output. Lets analyze it.
+
+One thing that we should keep in our mind is that whenever we delcare a _type parameter_ will be always related to the _input parameter_ of the function of whatever the place where we've used to generic type. It will always depend on the input type.
+
+For better understanding just think it of as _a type which is not pre-defined but it will get fulfilled in the future._
+
+If we take the above example then we are cleary seeing that the _map_ function is taking two parameter the first one is an array and the second one is a function which is also taking an input as parameter and return a type.
+
+But the question is what will be the type of the Output. Well, at first look we might be thinking that the type of the _Output_ will be a function. Does it make sense?
+
+Absolutely not!
+
+Function is not a type for any kind of vlaue. A function type will always be determined based on the value that the function returns.
+
+It means the _Output_ type will be the return type of function which we'll pass the the map function. As of now, at first we are passing a function to the map function, which takes the array's element as a parameter and parse the element as an integer, means the return type of the function is a _number_
+
+Hence, the _Output parameter type_ will be a number.
+
+And at the second example the function is parsing the array's element and return a string value. Hence, the _Output_ type will be a _string._
