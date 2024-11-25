@@ -423,3 +423,5 @@ console.log("Get first element", getFirstElement); // const getFirstElement: num
 ```
 
 By adding a type parameter Type to this function and using it in two places, we’ve created a link between the input of the function (the array) and the output (the return value). Now when we call it, a more specific type comes out:
+
+[Checkout](./src/GenericFunctions/genericFunctions.ts)
