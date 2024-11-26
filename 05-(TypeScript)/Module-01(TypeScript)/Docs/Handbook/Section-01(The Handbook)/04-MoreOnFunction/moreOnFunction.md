@@ -482,3 +482,27 @@ Here, the type of the parameter if being infered by the TypeScript based on the 
 On the above examples the map function is accepting any kind of _type_. But we can restrict it to allow specific kind of value to pass in the function.
 
 We can use a _constraint_ to limit the kinds of types that a type parameter can accept. We _constrain_ the type parameter to that type by writing an **extends** clause:
+
+```ts
+function func<Type extends { length: number }>(x: Type, y: Type) {
+  if (x.length >= y.length) {
+    console.log("x", x);
+  } else {
+    console.log("y", y);
+  }
+}
+```
+
+Here, the function only accept a parameter which have _length_ property. Lets analyze the function by passing some arguments:
+
+```ts
+func("abc", "def");
+func([1, 2, 3, 1], "laxman"); // Argument of type 'number[]' is not assignable to parameter of type 'string'.ts(2345)
+func([1, 2, 3, 1], ["sdf"]);
+```
+
+TypeScript is saying that the second argument that you have passed to the function does not have a length property and the most important part is after passing the first argument to the function the _Type parameter_ value becomes an array of numbers. So that's why we must pass another array which is also an array regardless of the element type.
+
+Because TypeScript is not forcing us to pass another array which element type is also a number. Not!
+
+The only key thing that matters here is that whatever the parameter we are passing to the function must have the _length_ property. That's it!
