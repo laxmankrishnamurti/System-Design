@@ -554,3 +554,76 @@ In this arguments the object has lenght property but it's not atleast _minimum_.
 I hope this make sense.
 
 So, in this condition the function is not fulfilling their promise. Hence, TypeScript type system is giving warning to us.
+
+### `Specifying Type Arguments`
+
+As of now, we have seen that at many scenarios TypeScript uses inference to infer the type for generic type based on the input which we pass to the function. Right!
+
+But, at some cases TypeScript type inference also struggles to find the type of the vlaue. On that case we must explicitly define the type. Take a look on the function:
+
+```ts
+function print<T>(para: T): T {
+  console.log("para", para);
+  return para;
+}
+
+print(42);
+```
+
+In this case TypeScript is smart engough to infer the _para_ type. TypeScript looked at the input value (42) and infered that _T_ should be _number_
+
+But, take a look at this example:
+
+```ts
+function identify<T>(value: T):j T {
+  return value
+}
+
+const result = identify(null)
+```
+
+Here, _null_ doesn't give TypeScript engough information to determine _T_. We must provide it explicitly.
+
+```ts
+const result = identity<string | null>(null);
+```
+
+Just take another example:
+
+```ts
+function combine<T>(arr1: T[], arr2: T[]): T[] {
+  return arr1.concat(arr2);
+}
+
+const union = combine([1, 2, 3, 4, 5], ["laxman"]);
+```
+
+```bash
+warning
+
+Type 'string' is not assignable to type 'number'.t
+```
+
+Because TypeScript has already infered the _T_ when we passed the first argument to the function. Now, the infered type looks like:
+
+```bash
+function combine<number>(arr1: number[], arr2: number[]): number[]
+```
+
+But at the same time we are passing an array of type _String_. That is obviouos, is not assignable to type _number_. It's time to explicitly assing type to the function.
+
+```ts
+const union = combine<number | string>([1, 2, 3, 4, 5], ["laxman"]);
+```
+
+Now, the type will be:
+
+```ts
+function combine<string | number>(arr1: (string | number)[], arr2: (string | number)[]): (string | number)[]
+```
+
+```bash
+# Output
+
+Union [ 1, 2, 3, 4, 5, 'laxman' ]
+```

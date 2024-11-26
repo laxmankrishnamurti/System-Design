@@ -72,3 +72,10 @@ minimumLength(
   },
   20
 );
+
+function combine<T>(arr1: T[], arr2: T[]): T[] {
+  return arr1.concat(arr2);
+}
+
+const union = combine<number | string>([1, 2, 3, 4, 5], ["laxman"]);
+console.log("Union", union);
