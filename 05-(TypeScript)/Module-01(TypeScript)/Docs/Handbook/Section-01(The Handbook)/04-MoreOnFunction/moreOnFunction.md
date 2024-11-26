@@ -627,3 +627,39 @@ function combine<string | number>(arr1: (string | number)[], arr2: (string | num
 
 Union [ 1, 2, 3, 4, 5, 'laxman' ]
 ```
+
+Just take one more example to make it clear.
+
+```ts
+function makePair<T, U>(first: T, second: U): [T, U] {
+  return [first, second];
+}
+
+const pair = makePair(1, "hello"); // T is inferred as number, U as string.
+```
+
+But if one of the vlaue is _undefined_, TypeScript may struggle:
+
+```ts
+const pair = makePair(undefined, "hello"); // Error: T is not inferred correctly.
+```
+
+and the generic type will look like this:
+
+```bash
+function makePair<undefined, string>(first: undefined, second: string): [undefined, string]
+```
+
+So, what we can do? The answer would be same explicitly assign type for _generics_. We just have to make sure that TypeScript got the right type for the vlaue. That's it.
+
+Becuase if TypeScript doesn't know what kind of vlaue that we are passing to the function this the place where our code might get buggy.
+
+```ts
+const pair = makePair<number | undefined, string>(undefined, "hello");
+```
+
+and the generic type will look like this:
+
+```ts
+function makePair<number | undefined, string>(first: number | undefined, second: string): [number | undefined, string]
+```

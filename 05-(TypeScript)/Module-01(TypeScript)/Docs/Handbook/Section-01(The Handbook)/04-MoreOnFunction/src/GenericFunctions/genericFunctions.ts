@@ -79,3 +79,9 @@ function combine<T>(arr1: T[], arr2: T[]): T[] {
 
 const union = combine<number | string>([1, 2, 3, 4, 5], ["laxman"]);
 console.log("Union", union);
+
+function makePair<T, U>(first: T, second: U): [T, U] {
+  return [first, second];
+}
+
+const pair = makePair<number | undefined, string>(undefined, "hello");
