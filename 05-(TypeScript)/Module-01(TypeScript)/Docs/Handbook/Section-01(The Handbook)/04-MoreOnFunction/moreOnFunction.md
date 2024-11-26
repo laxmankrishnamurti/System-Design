@@ -4,6 +4,8 @@ Functions are the basic building block of any application, whether they're local
 
 In this section we'll learn about how to write **types** that describe functions. Let's learn.
 
+---
+
 ## Function Type Expressions
 
 - Simplest way to describe a function.
@@ -78,6 +80,8 @@ parent1(child1);
 ### **_Limitations_**
 
 - This expression dosen't allow a function to have additional properties and methods being callable.
+
+---
 
 ## `Call Signatures`
 
@@ -164,6 +168,8 @@ result true
 ```
 
 _Remember :: The syntax is slightly different compared to a function type expression - use **:** between the parameter list and the return type rather than **=>**_
+
+---
 
 ## `Construct Signatures`
 
@@ -378,6 +384,8 @@ Fri Nov 22 2024 15:43:19 GMT+0530 (India Standard Time)
 ```
 
 [Fresh Start](./ConstructSignature.md)
+
+---
 
 ## `Generic Functions`
 
