@@ -4,7 +4,7 @@ Lets' revise all JavaScript operators, expressions and keywords.
 
 ## **Expressions and operators by category**
 
-### 1. Primary Expressions
+### `1. Primary Expressions`
 
 These are the basic keywords and general expressions in JavaScript
 
@@ -40,14 +40,16 @@ These are the basic keywords and general expressions in JavaScript
 
    - This is a regular expression that is trying to find a single _ab_ or more character in the form of proceesing tokens that ends up with _c_ and this is actually a case-sensitive because of the _i_ flag.
 
-9. **`string`**
+9. **string**
 
    - This is a new sytax to write a string this feature is introduce by ES2015.
 
 10. **()**
     - This is used to group an expression like this :- (1 + 2 + 3)
 
-### 2. Left-hand-side expressions
+---
+
+### `2. Left-hand-side expressions`
 
 This is not like a typical LHS expression like this
 
@@ -255,14 +257,18 @@ Here, we cannot directly use **_import/export_** because the script is not treat
 </script>
 ```
 
-### 3. Increment and Decrement
+---
+
+### `3. Increment and Decrement`
 
 - **x++ :** Postfix increment operator
 - **x-- :** Postfix decrement operator
 - **++x :** Prefix increment operator
 - **--x :** Prefix increment operator
 
-### 4. Unary Operator
+---
+
+### `4. Unary Operator`
 
 As per their name suggest that this is an operator with only one operand.
 
@@ -283,4 +289,99 @@ Output
 
 Before deleting the age property from the object { username: 'laxmankrishnamurti', age: 22, getAge: [Function: getAge] }
 After deleting the age property from the object { username: 'laxmankrishnamurti' }
+```
+
+- **void :** The void operator evaluates the given expression and then returns undefined.
+
+```js
+const output = void 1;
+console.log(output);
+void function voidFunction() {
+  console.log("vodi function is executed");
+};
+
+try {
+  voidFunction();
+} catch (error) {
+  console.log("void function is not defined");
+}
+```
+
+```bash
+# Outputs
+
+undefined
+void function is not defined
+```
+
+Because _try-catch_ is only used in _async function._
+
+- **typeof : ** The operator determine the type of a given object.
+
+- **+ : ** The unary plus operator converts its operand to number type and adds it.
+
+```js
+const x = 1;
+const y = -1;
+
+console.log(+x);
+console.log(+y);
+console.log(+"");
+console.log(+true);
+console.log(+false);
+console.log(+"hello");
+```
+
+```bash
+# Outputs
+
+1
+-1
+0
+1
+0
+NaN
+```
+
+- **- : ** Converts its operand to number type and then negates it.
+
+```js
+const x = 1;
+const y = -1;
+
+console.log(-x);
+console.log(-y);
+console.log(-"");
+console.log(-true);
+console.log(-false);
+console.log(-"hello");
+```
+
+```bash
+# Outputs
+
+-1
+1
+-0
+-1
+-0
+NaN
+```
+
+- **~ : ** Bitwise NOT operator (1 -> 0 ; 0 -> 1) on every single bit.
+- **! : ** Logical not operator (inverse the value)
+
+```js
+const username = null;
+if (!username) {
+  console.log("falsy value");
+} else {
+  console.log("truthy value");
+}
+```
+
+```bash
+# Output
+
+falsy value
 ```

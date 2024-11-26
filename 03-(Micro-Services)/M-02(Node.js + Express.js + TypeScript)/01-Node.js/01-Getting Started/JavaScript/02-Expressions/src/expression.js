@@ -1,53 +1,53 @@
-console.log("PRIMARY EXPRESSIONS")
+console.log("PRIMARY EXPRESSIONS");
 
 const person = {
-    name: "Laxman Krishnamurti",
-    age: 21,
-    getUserAge: function(){
-        return this.age
-    }
-}
-console.log(person.getUserAge())
+  name: "Laxman Krishnamurti",
+  age: 21,
+  getUserAge: function () {
+    return this.age;
+  },
+};
+console.log(person.getUserAge());
 
 // new keyword
-console.log("CLASS")
+console.log("CLASS");
 
-class User{
-    username;
-    age;
+class User {
+  username;
+  age;
 
-    constructor(username, age){
-        this.username = username;
-        this.age = age
-    }
+  constructor(username, age) {
+    this.username = username;
+    this.age = age;
+  }
 }
-const user1 = new User("Laxman Krishnamurti", 21)
-console.log("user1", user1)
+const user1 = new User("Laxman Krishnamurti", 21);
+console.log("user1", user1);
 
 // new.target
-console.log("new.target")
+console.log("new.target");
 
-function sayHello(){
-    return "Hello!"
+function sayHello() {
+  return "Hello!";
 }
 
-const obj = new sayHello()
-obj.name = "Laxman Krishnamurti"
-console.log(obj)
-console.log(obj.name)
+const obj = new sayHello();
+obj.name = "Laxman Krishnamurti";
+console.log(obj);
+console.log(obj.name);
 
-console.log("USING NEW.TARGET WITH CONSTRUCTOR")
+console.log("USING NEW.TARGET WITH CONSTRUCTOR");
 
-function constructorFunc(){
-    if(!new.target){
-        throw new Error("You must call this function with the 'new' keyword")
-    }
+function constructorFunc() {
+  if (!new.target) {
+    throw new Error("You must call this function with the 'new' keyword");
+  }
 
-    console.log("Constructor is called with new")
+  console.log("Constructor is called with new");
 }
 
-const constructorObj = new constructorFunc()
-console.log("constructorObj", constructorObj)
+const constructorObj = new constructorFunc();
+console.log("constructorObj", constructorObj);
 
 /**
  * Constructor is called with new
@@ -58,79 +58,105 @@ console.log("constructorObj", constructorObj)
 // console.log("constructorObj1", constructorObj1)
 
 class Car {
-    brand;
-    wheel;
+  brand;
+  wheel;
 
-    constructor(brand, wheel){
-        this.brand = brand;
-        this.wheel = wheel;
+  constructor(brand, wheel) {
+    this.brand = brand;
+    this.wheel = wheel;
 
-        if(!new.target){
-            console.log("You must call the class with new keyword to create an instance of it")
-        }else {
-            console.log("Class has been used with the new keyword")
-        }
+    if (!new.target) {
+      console.log(
+        "You must call the class with new keyword to create an instance of it"
+      );
+    } else {
+      console.log("Class has been used with the new keyword");
     }
+  }
 }
 
-const myCar = new Car("Scorpio", 4)
-console.log("myCar", myCar)
+const myCar = new Car("Scorpio", 4);
+console.log("myCar", myCar);
 
-console.log("IMPORT.META")
+console.log("IMPORT.META");
 
-console.log(import.meta.url)
+console.log(import.meta.url);
 
-async function loadModule(){
-    const currentDir = new URL('.', import.meta.url)
-    console.log("currentDir", currentDir)
+async function loadModule() {
+  const currentDir = new URL(".", import.meta.url);
+  console.log("currentDir", currentDir);
 
-    //dynamically import a module from the same directory
-    const {default: fn} = await import(`${currentDir}/anotherFile.js`)
-    console.log("default", fn)
-    fn()
+  //dynamically import a module from the same directory
+  const { default: fn } = await import(`${currentDir}/anotherFile.js`);
+  console.log("default", fn);
+  fn();
 }
 
 // loadModule()
 
-console.log("SUPER")
+console.log("SUPER");
 
-class Parent{
-    mode;
-    constructor(mode){
-        this.mode = mode
-    } 
+class Parent {
+  mode;
+  constructor(mode) {
+    this.mode = mode;
+  }
 
-    getName = function () {
-        return "Parent"
-    }
+  getName = function () {
+    return "Parent";
+  };
 }
 
-class Child extends Parent{
-    process;
-    constructor(num){
-        super("development")
-        this.process = num
-    }
+class Child extends Parent {
+  process;
+  constructor(num) {
+    super("development");
+    this.process = num;
+  }
 
-    getProcesses = function(){
-        return this.process
-    }
+  getProcesses = function () {
+    return this.process;
+  };
 }
 
-const childObj = new Child(10)
-console.log("childObj", childObj)
+const childObj = new Child(10);
+console.log("childObj", childObj);
 
-console.log("UNARY")
+console.log("UNARY");
 
 const user = {
-    username: "laxmankrishnamurti",
-    age: 22,
-    getAge: function(){
-        return this.age
-    }
+  username: "laxmankrishnamurti",
+  age: 22,
+  getAge: function () {
+    return this.age;
+  },
+};
+
+console.log("Before deleting the age property from the object", user);
+delete user.age;
+delete user.getAge;
+console.log("After deleting the age property from the object", user);
+
+console.log("VOID");
+
+void function voidFunction() {
+  console.log("vodi function is executed");
+};
+
+try {
+  voidFunction();
+} catch (error) {
+  console.log("void function is not defined");
 }
 
-console.log("Before deleting the age property from the object", user)
-delete user.age
-delete user.getAge
-console.log("After deleting the age property from the object", user)
+console.log("BITWISE NOT OPERATOR");
+
+const num = 2;
+console.log("Bit Not : ", ~num);
+
+const username = null;
+if (!username) {
+  console.log("falsy value");
+} else {
+  console.log("truthy value");
+}
