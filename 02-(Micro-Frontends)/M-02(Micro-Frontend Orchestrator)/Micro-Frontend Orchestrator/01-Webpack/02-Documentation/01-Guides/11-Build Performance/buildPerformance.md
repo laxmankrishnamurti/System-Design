@@ -2,7 +2,7 @@
 
 In this section we'll learn about how we can improve our **`build/compilation`** performance.
 
-## **`1. General`**
+## `1. General`
 
 The following best practices should help, whether we're running build script in [development](../06-Development/practice/webpack.config.js) or **production.**
 
@@ -14,7 +14,7 @@ The following best practices should help, whether we're running build script in 
 
 Webpack alsways making performance improvements and newer version create more efficient module trees and increase resolving speed.
 
-### **`Loaders`**
+### `Loaders`
 
 Out of the box, webpack only understand JavaScript and JSON files. **Loaders** allow webpack to process other types of files and convert them into valid _modules_ that can be consumed by our application and added to the **dependency graph**
 
@@ -67,4 +67,18 @@ module.exports = {
 };
 ```
 
-**`Each additional loader/plugin has a bootup time. Try to use as few tools as possible.`**
+- **`Each additional loader/plugin has a bootup time. Try to use as few tools as possible.`**
+- **`Resolving.`**
+
+### `DII Plugin`
+
+### `Smaller = Faster`
+
+Decrease the total size of the compilation to increase build performance. Try to keep chunk small:
+
+- Use fewer/smaller libraries.
+- Use the **SplitChunksPlugin** in **async** mode Multi-page Applications.
+- Remove unused code
+- Only compile part of the code we are currently developing on.
+
+### `Worker Pool`
