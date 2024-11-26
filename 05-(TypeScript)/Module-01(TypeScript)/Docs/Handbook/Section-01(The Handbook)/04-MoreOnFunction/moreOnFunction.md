@@ -506,3 +506,51 @@ TypeScript is saying that the second argument that you have passed to the functi
 Because TypeScript is not forcing us to pass another array which element type is also a number. Not!
 
 The only key thing that matters here is that whatever the parameter we are passing to the function must have the _length_ property. That's it!
+
+### `Working with Constrained Values`
+
+Take a look on the generic function:
+
+```ts
+function minimumLength<Type extends { length: number }>(
+  obj: Type,
+  minimum: number
+): Type {
+  if (obj.length >= minimum) {
+    return obj;
+  } else {
+    return {
+      length: minimum,
+    };
+  }
+}
+```
+
+```bash
+warning
+
+Type '{ length: number; }' is not assignable to type 'Type'.
+'{ length: number; }' is assignable to the constraint of type 'Type', but 'Type' could be instantiated with a different subtype of  constraint '{ length: number; }'.
+```
+
+This is a common error that we face while working with generic function with constraints.
+
+TypeScript is saying that hey! the function has promised that i will return a type of _Type_. But the function is not fulfilling the promise because let say the _if-branch_ condition is not matched then the function is returning an object which may not have necessary values. For example:
+
+```ts
+minimumLength(
+  {
+    username: "laxmankrishnamurti",
+    email: "laxmankrishnamurti@gmail.com",
+    age: 22,
+    length: 12,
+  },
+  20
+);
+```
+
+In this arguments the object has lenght property but it's not atleast _minimum_. So, in this condition the function is returning a random object instead of the object that we have passed as the first argument.
+
+I hope this make sense.
+
+So, in this condition the function is not fulfilling their promise. Hence, TypeScript type system is giving warning to us.

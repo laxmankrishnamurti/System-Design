@@ -33,5 +33,42 @@ function func<Type extends { length: number }>(x: Type, y: Type) {
 }
 
 func("abc", "def");
-// func([1, 2, 3, 1], "laxman");
+func([1, 2, 3, 1], ["laxman"]);
 func([1, 2, 3, 1], ["sdf"]);
+
+function test<Type>(para: Type) {
+  if (para) {
+    return true;
+  }
+
+  return false;
+}
+
+const testReturn = test([1, 2, 3, 4, 5]);
+const testReturn1 = test("laxman");
+const testReturn3 = test(10);
+
+function minimumLength<Type extends { length: number }>(
+  obj: Type,
+  minimum: number
+): Type {
+  if (obj.length >= minimum) {
+    return obj;
+  } else {
+    // return {
+    //   length: minimum,
+    // };
+  }
+
+  return obj;
+}
+
+minimumLength(
+  {
+    username: "laxmankrishnamurti",
+    email: "laxmankrishnamurti@gmail.com",
+    age: 22,
+    length: 12,
+  },
+  20
+);
