@@ -84,3 +84,85 @@ The following best practices should help, whether we're running build script in 
   Webpack initialize all loaders and plugins before starting the build process.
 
 - **`Resolving`**
+
+  Resolving means _finding the location of the module that is being used in the dependency graph._
+
+  The given steps are optimizations to make Webpack resolve module paths faster. Here's a simple explanation with configuration examples:
+
+  ***
+
+  1. **Minimize resolve options**: Reduce the number of directories and file extensions Webpack searches to avoid unnecessary file system operations.  
+     Example:
+
+  ```javascript
+  module.exports = {
+    resolve: {
+      modules: ["node_modules"], // Keep this minimal.
+      extensions: [".js", ".json"], // List only essential extensions.
+      mainFiles: ["index"], // Only consider specific filenames.
+      descriptionFiles: ["package.json"], // Limit files to check for descriptions.
+    },
+  };
+  ```
+
+  ***
+
+  2. **Disable `resolve.symlinks`**: If we don't use symbolic links (like `npm link`), turn this off to skip resolving symlinks and improve speed.  
+     Example:
+
+  ```javascript
+  module.exports = {
+    resolve: {
+      symlinks: false, // Skips resolving symbolic links.
+    },
+  };
+  ```
+
+  ***
+
+  3. **Disable `resolve.cacheWithContext`**: If our custom plugins don’t depend on the resolving context (like the location of the file), disable this to prevent extra caching overhead.  
+     Example:
+
+  ```javascript
+  module.exports = {
+    resolve: {
+      cacheWithContext: false, // Optimizes caching without considering context.
+    },
+  };
+  ```
+
+  These tweaks ensure Webpack spends less time resolving paths, speeding up the build.
+
+  ***
+
+  ### **`What will happen if we don't use the optimization options.`**
+
+  If we don't apply these optimizations in our Webpack configuration, here's what will happen:
+
+  ***
+
+  1. **Not minimizing resolve options**:
+
+  - Webpack will check multiple directories (`resolve.modules`), extensions (`resolve.extensions`), and files (`resolve.mainFiles`, `resolve.descriptionFiles`) unnecessarily.
+  - This increases the number of file system calls, slowing down the module resolution process.  
+    Example: If we list unused extensions like `.jsx` or unnecessary directories, Webpack will still try to look for those, wasting time.
+
+  ***
+
+  2. **Not disabling `resolve.symlinks`**:
+
+  - Webpack will resolve symbolic links (created by `npm link` or `yarn link`) every time.
+  - If our project doesn't use symlinks, this step becomes redundant and adds unnecessary overhead to the resolution process.
+
+  ***
+
+  3. **Not disabling `resolve.cacheWithContext`**:
+
+  - Webpack will include context (e.g., the directory path of the importing file) in its caching logic.
+  - If our custom plugins don’t rely on context, this extra step wastes memory and time for caching irrelevant details, leading to slower builds.
+
+  ### Impact:
+
+  Without these configurations, Webpack will perform redundant operations during the build, causing slower module resolution and longer build times, especially for large projects.
+
+  ***
