@@ -411,7 +411,7 @@ The if-branch code will not execute untill the promise will not either get fulfi
 
 ---
 
-### `Arithmetic Operators`
+### `5. Arithmetic Operators`
 
 - ( \*\* ) : Exponential operator
 
@@ -420,3 +420,191 @@ The if-branch code will not execute untill the promise will not either get fulfi
 - (%) : Remainder
 - (+) : Plus
 - (-) : Subtract
+
+### `6. Relational Operator`
+
+- >
+- <
+- > =
+- <=
+
+- _instanceof_ ===> The **`instanceof`** operator determine whether an object is an instance of another object.
+- _in_ ===> The **`in`** operator determines whether an object has a given property.
+
+```js
+const newUser = {
+  username: "laxmankrishnamurti",
+  email: "laxmankrishnamurti@gmail.com",
+};
+
+console.log(newUser instanceof Object);
+console.log(newUser instanceof Array);
+console.log(newUser instanceof String);
+console.log("age" in newUser);
+```
+
+```bash
+# Output
+
+true
+false
+false
+false
+```
+
+### `7. Equality operators`
+
+The result of evaluating an equality operator is always of type boolean on whether the comparison is true.
+
+- == ===> Equality check (ease)
+- != ==> Inequality check (ease)
+- === ===> Equality check (Including type)
+- !== ===> Strict inequality check
+
+### `8. Bitwise shift operators`
+
+- << ===> Bitwise left-shift operator
+- > > ===> Bitwise right-shift operator
+- > > > ==> Bitwise unsigned right-shift operator
+
+```js
+console.log(5 >> 1);
+console.log(5 << 1);
+console.log(5 >>> 1);
+```
+
+```bash
+# Output
+
+2
+10
+2
+```
+
+### `9. Binary bitwise operators`
+
+Bitwise operator treat their operands as a set of 32 bits and return standard JavaScript numerical values.
+
+- & ===> Bitwise AND
+- | ===> Bitwise OR
+- ^ ===> Bitwise XOR (atleast 1 significant bit)
+
+```js
+console.log(2 & 5);
+console.log(2 | 5);
+console.log(2 ^ 5);
+```
+
+```bash
+# Output
+
+0
+7
+7
+```
+
+### `10. Binary logical operators`
+
+- &&
+- ||
+- ?? (Nullish Coalescing Operator) ===> The nullish coalescing (??) operator is a logical operator that returns its right-hand side operand when its left-hand side operand is null or undefined, and otherwise returns its left-hand side operand.
+
+```js
+console.log(null ?? "laxman");
+console.log(undefined ?? "harshad");
+console.log("sonu" ?? 42);
+console.log("harshad" ?? undefined);
+```
+
+```bash
+laxman
+harshad
+sonu
+harshad
+```
+
+### `11. Conditional (ternary) operator`
+
+```js
+const age = 18;
+console.log(age >= 18 ? "Eligible to vote" : "Oops! You are a teenager");
+```
+
+```bash
+# Output
+
+Eligible to vote
+```
+
+### `12. Assignment operators`
+
+- =
+- \*=
+- /=
+- %= (Remainder assignment)
+
+```js
+let num = 11;
+num %= 10;
+console.log("num", num);
+```
+
+```bash
+# Output
+
+num 1
+```
+
+- +=
+- -=
+- <<= (left-shift assignment)
+- > > = (right-shift assignment)
+- > > > = (unsigned right-shift assignment)
+- &= (Bitwise AND assignment)
+- ^= (Bitwise XOR assignment)
+- |= (Bitwise OR assignment)
+- \*\*= (Exponential assignment)
+- &&= (Logical AND assignment)
+- ||= (Logical OR assignment)
+- ??= (Nullish coalescing assignment)
+
+- Destructuring assignment ===> The destructuring assignment syntax is a JavaScript expression that makes it possible to unpack values from arrays, or properties from objects, into distinct variables.
+
+```js
+let a, b;
+[a, b] = [10, 20];
+console.log("a", a);
+console.log("b", b);
+
+// adding extra elements to a variable
+
+let rest;
+[a, b, ...rest] = [10, 20, 30, 40, 50];
+console.log("rest", rest);
+
+const myProfile = {
+  username: "laxmankrishnamurt",
+  age: 21,
+  email: "freelancing.laxman@gmail.com",
+};
+
+console.log("myProfile", myProfile);
+const { age, email: userEmail } = myProfile;
+console.log("age", age);
+console.log("userEmail", userEmail);
+```
+
+```bash
+a 10
+b 20
+rest [ 30, 40, 50 ]
+myProfile {
+  username: 'laxmankrishnamurt',
+  age: 21,
+  email: 'freelancing.laxman@gmail.com'
+}
+age 21
+userEmail freelancing.laxman@gmail.com
+```
+
+- Spread syntax

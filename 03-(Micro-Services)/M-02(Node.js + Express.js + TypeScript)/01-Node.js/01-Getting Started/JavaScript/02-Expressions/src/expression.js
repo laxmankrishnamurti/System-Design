@@ -160,3 +160,60 @@ if (!username) {
 } else {
   console.log("truthy value");
 }
+
+console.log("RELATIONAL OPERATOR");
+
+const newUser = {
+  username: "laxmankrishnamurti",
+  email: "laxmankrishnamurti@gmail.com",
+};
+
+console.log(newUser instanceof Object);
+console.log(newUser instanceof Array);
+console.log(newUser instanceof String);
+console.log("age" in newUser);
+
+console.log("BITWISE SHIFT");
+
+console.log(5 >> 1);
+console.log(5 << 1);
+console.log(5 >>> 1);
+
+console.log("BINARY LOGICAL");
+
+console.log(2 & 5);
+console.log(2 | 5);
+console.log(2 ^ 5);
+
+console.log(null ?? "laxman");
+console.log(undefined ?? "harshad");
+console.log("sonu" ?? 42);
+console.log("harshad" ?? undefined);
+
+let num1 = 11;
+num1 %= 10;
+console.log("num", num1);
+
+console.log("DESTRUCTURING ASSIGNMENT");
+
+let a, b;
+[a, b] = [10, 20];
+console.log("a", a);
+console.log("b", b);
+
+// adding extra elements to a variable
+
+let rest;
+[a, b, ...rest] = [10, 20, 30, 40, 50];
+console.log("rest", rest);
+
+const myProfile = {
+  username: "laxmankrishnamurt",
+  age: 21,
+  email: "freelancing.laxman@gmail.com",
+};
+
+console.log("myProfile", myProfile);
+const { age, email: userEmail } = myProfile;
+console.log("age", age);
+console.log("userEmail", userEmail);
