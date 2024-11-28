@@ -75,7 +75,7 @@ The following best practices should help, whether we're running build script in 
 
   Bootup time refers to the time it takes for a loader or plugin in webpack to initialize and start working during the build process. Fewer tools mean faster builds because less initialization is required.
 
-  It means when we run our bild command like this:
+  It means when we run the bild command:
 
   ```bash
   $ npm run build
@@ -85,7 +85,7 @@ The following best practices should help, whether we're running build script in 
 
 - **`Resolving`**
 
-  Resolving means _finding the location of the module that is being used in the dependency graph._
+  Resolving means _finding the location of the module where it is located._
 
   The given steps are optimizations to make Webpack resolve module paths faster. Here's a simple explanation with configuration examples:
 

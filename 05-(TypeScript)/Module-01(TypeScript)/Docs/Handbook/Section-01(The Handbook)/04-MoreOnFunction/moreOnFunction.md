@@ -434,6 +434,8 @@ By adding a type parameter Type to this function and using it in two places, weâ
 
 Now, take more example in order to understand it very well because we'll be using it very frequently.
 
+---
+
 ### `Inference`
 
 ```ts
@@ -477,6 +479,8 @@ And at the second example the function is parsing the array's element to string.
 
 Here, the type of the parameter if being infered by the TypeScript based on the array value.
 
+---
+
 ### `Constraints`
 
 On the above examples the map function is accepting any kind of _type_. But we can restrict it to allow specific kind of value to pass in the function.
@@ -506,6 +510,8 @@ TypeScript is saying that the second argument that you have passed to the functi
 Because TypeScript is not forcing us to pass another array which element type is also a number. Not!
 
 The only key thing that matters here is that whatever the parameter we are passing to the function must have the _length_ property. That's it!
+
+---
 
 ### `Working with Constrained Values`
 
@@ -555,11 +561,13 @@ I hope this make sense.
 
 So, in this condition the function is not fulfilling their promise. Hence, TypeScript type system is giving warning to us.
 
+---
+
 ### `Specifying Type Arguments`
 
 As of now, we have seen that at many scenarios TypeScript uses inference to infer the type for generic type based on the input which we pass to the function. Right!
 
-But, at some cases TypeScript type inference also struggles to find the type of the vlaue. On that case we must explicitly define the type. Take a look on the function:
+But, at some cases TypeScript type inference also struggles to find the type of the vlaue. On that case we must have to define the type explicitly. Take a look on the function:
 
 ```ts
 function print<T>(para: T): T {
@@ -570,16 +578,16 @@ function print<T>(para: T): T {
 print(42);
 ```
 
-In this case TypeScript is smart engough to infer the _para_ type. TypeScript looked at the input value (42) and infered that _T_ should be _number_
+In this case TypeScript is smart engough to infer the _type parameter_. TypeScript looked at the input value (42) and infered that _T_ should be _number_
 
 But, take a look at this example:
 
 ```ts
-function identify<T>(value: T):j T {
-  return value
+function identify<T>(value: T): T {
+  return value;
 }
 
-const result = identify(null)
+const result = identify(null);
 ```
 
 Here, _null_ doesn't give TypeScript engough information to determine _T_. We must provide it explicitly.
@@ -588,7 +596,7 @@ Here, _null_ doesn't give TypeScript engough information to determine _T_. We mu
 const result = identity<string | null>(null);
 ```
 
-Just take another example:
+Let me make it more clear. Have a look on this generic function:
 
 ```ts
 function combine<T>(arr1: T[], arr2: T[]): T[] {
@@ -604,7 +612,7 @@ warning
 Type 'string' is not assignable to type 'number'.t
 ```
 
-Because TypeScript has already infered the _T_ when we passed the first argument to the function. Now, the infered type looks like:
+Because TypeScript has already infered the _T_ when we passed the first argument to the function. Now, the infered type looks like this:
 
 ```bash
 function combine<number>(arr1: number[], arr2: number[]): number[]
@@ -620,6 +628,8 @@ Now, the type will be:
 
 ```ts
 function combine<string | number>(arr1: (string | number)[], arr2: (string | number)[]): (string | number)[]
+
+const union: (string | number)[]
 ```
 
 ```bash
@@ -648,11 +658,12 @@ and the generic type will look like this:
 
 ```bash
 function makePair<undefined, string>(first: undefined, second: string): [undefined, string]
+const pair: [number | undefined, string]
 ```
 
-So, what we can do? The answer would be same explicitly assign type for _generics_. We just have to make sure that TypeScript got the right type for the vlaue. That's it.
+So, what we can do? The answer is same we have to assign type for _generics_ explicitly. We just have to make sure that TypeScript got the right type for the vlaue. That's it.
 
-Becuase if TypeScript doesn't know what kind of vlaue that we are passing to the function this the place where our code might get buggy.
+Becuase if TypeScript doesn't know what kind of vlaue that we are passing to the function this the place where our code might get buggy because on that time TypeScript is unable to help us because of unintensional values.
 
 ```ts
 const pair = makePair<number | undefined, string>(undefined, "hello");
@@ -663,3 +674,97 @@ and the generic type will look like this:
 ```ts
 function makePair<number | undefined, string>(first: number | undefined, second: string): [number | undefined, string]
 ```
+
+And this is obviouos that, at this point of stage of learning TypeScript we're able to find the potential areas where we could make mistakes. Passing such kind of values to the function which doesn't make sense, i mean why should we pass _undefined_ to the function which doesn't have any use-case.
+
+---
+
+### `Guidelines for writing Good Generic Functions`
+
+It can be easy to get carried away with type parameters. But there are some key point which we should keep in mind while making a generic function:
+
+1. **`Try to avoid too many type parameter (When possible, use the type parameter itself rather than constraining it.)`**
+
+   - Generic function will start getting complex
+   - Make less efficient ot TypeScript type inference machanism
+   - Using **`constraints`** where it's most neede, because:
+     - TypeScript has to resolve the **`constraints expression`**, rather than 'waiting' to resolve the element during a call.
+
+Lets combine all these points into a function:
+
+```ts
+function firstFunction<T>(arg: T[]) {
+  return arg[0];
+}
+
+function secondFunction<T extends any[]>(arg: T) {
+  return arg[0];
+}
+
+const firstFunElement = firstFunction([1, 2, 3, 4, 5]);
+const seconFunElement = secondFunction([1, 2, 3, 4, 5]);
+```
+
+```bash
+# Types
+
+const firstFunElement: number
+const seconFunElement: any
+```
+
+Both functions are doing same job but second function has more complex structure than firstFunction. Avoid such kind of complexity. Make simpler and easy to understandable Generic function. If ther is need use appropriate structure or whatever structure you need. But keep in mind don't make things complex.
+
+Things are always easy, we make things complicated.
+
+2. **`Use fewer type parameter (Always use few type parameter as possible)`**
+
+```ts
+function thirdFunction<T>(arr: T[], func: (arg: T) => boolean): T[] {
+  return arr.filter(func);
+}
+
+function fourthFunction<T, Func extends (arg: T) => boolean>(
+  arr: T[],
+  func: Func
+): T[] {
+  return arr.filter(func);
+}
+```
+
+There is no difference between both functions as it's working. Both are doing same job. But the _third function_ has simple code structure, easy to understandable, high readability.
+
+On the other hand in the _fourth function_ we've created an extra _type parameter_ to the function which does not make sense anymore as compare to the first one.
+
+So, just be simple and also make your code simple.
+
+3. **`Type parameter should appear Twice`**
+
+Just think for a while, why TypeScript introduced _generic functions_?
+
+Just because if a function is taking more than one arguments with similar types, we must have some sort of ways to define one single type for both arguments that relate both values. Right!
+
+Good. Just have a look on this function:
+
+```ts
+function greet<T extends string>(name: T) {
+  console.log(`Hello ${name}`);
+}
+```
+
+Does it make sense to use _Generic function_ in this scenario?
+
+Absolutely not!
+
+Because we can simple use a normal function with a single type. Like this:
+
+```ts
+function greet1(name: string) {
+  console.log(`Hello ${name}!!`);
+}
+```
+
+That's the rules is saying that we should not use _generic functions_ where we can easily work with normal function and types.
+
+Use generic function where we need to relate two values. That's it.
+
+**_If a type parameter only appears in one location, strongly reconsider if we actually need it._**

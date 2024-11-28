@@ -85,3 +85,33 @@ function makePair<T, U>(first: T, second: U): [T, U] {
 }
 
 const pair = makePair<number | undefined, string>(undefined, "hello");
+
+console.log("GUIDELINE")
+
+function firstFunction<T>(arg: T[]){
+  return arg[0]
+}
+
+function secondFunction<T extends any[]>(arg: T){
+  return arg[0]
+}
+
+
+const firstFunElement = firstFunction([1,2,3,4,5])
+const seconFunElement = secondFunction([1,2,3,4,5])
+
+function thirdFunction<T>(arr: T[], func: (arg: T) => boolean): T[]{
+  return arr.filter(func) 
+}
+
+function fourthFunction<T, Func extends (arg: T) =>  boolean>(arr: T[], func: Func): T[]{
+  return arr.filter(func)
+}
+
+function greet<T extends string>(name: T){
+  console.log(`Hello ${name}!!`)
+}
+
+function greet1(name: string){
+  console.log(`Hello ${name}!!`)
+}
