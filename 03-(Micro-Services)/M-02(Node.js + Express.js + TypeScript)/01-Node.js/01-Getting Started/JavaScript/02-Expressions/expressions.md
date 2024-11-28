@@ -244,7 +244,7 @@ _What does it mean by non-module environment?_
 
 A non-module environment means JavaScript code is written or executed in a more traditional or simpler context, such as:
 
-- Plain <script> tags in HTML (default is non-modular).
+- Plain _script_ tags in HTML (default is non-modular).
 - Older browsers or environments without ES Module support.
 - Node.js files using CommonJS (require) instead of ES Modules.
 
@@ -316,9 +316,9 @@ void function is not defined
 
 Because _try-catch_ is only used in _async function._
 
-- **typeof : ** The operator determine the type of a given object.
+- **typeof :** The operator determine the type of a given object.
 
-- **+ : ** The unary plus operator converts its operand to number type and adds it.
+- **+ :** The unary plus operator converts its operand to number type and adds it.
 
 ```js
 const x = 1;
@@ -343,7 +343,7 @@ console.log(+"hello");
 NaN
 ```
 
-- **- : ** Converts its operand to number type and then negates it.
+- **- :** Converts its operand to number type and then negates it.
 
 ```js
 const x = 1;
@@ -368,8 +368,8 @@ console.log(-"hello");
 NaN
 ```
 
-- **~ : ** Bitwise NOT operator (1 -> 0 ; 0 -> 1) on every single bit.
-- **! : ** Logical not operator (inverse the value)
+- **~ :** Bitwise NOT operator (1 -> 0 ; 0 -> 1) on every single bit.
+- **! :** Logical not operator (inverse the value)
 
 ```js
 const username = null;
@@ -385,3 +385,38 @@ if (!username) {
 
 falsy value
 ```
+
+- **await :** Pause and resume an async function and wait for the promise's fulfillment/rejection.
+
+```js
+function getUserAccount(username){
+
+  const user = await USER.findOne({
+    username: username
+  })
+
+  if(user){
+    return {
+      status: 200,
+      message: "success",
+      user: user
+    }
+  }
+
+  return next(new CustomError("User doesn't exist!!))
+}
+```
+
+The if-branch code will not execute untill the promise will not either get fulfilled or rejected.
+
+---
+
+### `Arithmetic Operators`
+
+- ( \*\* ) : Exponential operator
+
+- (\*) : Multiplication
+- (/): Division
+- (%) : Remainder
+- (+) : Plus
+- (-) : Subtract
