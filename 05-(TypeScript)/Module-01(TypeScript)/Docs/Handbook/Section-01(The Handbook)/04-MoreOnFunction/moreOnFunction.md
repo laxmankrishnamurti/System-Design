@@ -810,3 +810,54 @@ finalPrice 524516.124
 ```
 
 If we pass undefined to the function in which there is already a default value is set, JavaScript will automatically re-assign the undefined with the default value.
+
+### `Optional Parameter in Callback`
+
+Have a look on this function:
+
+```ts
+function parentFunction(
+  arr: number[],
+  callback: (val: number, opt?: number) => number
+) {
+  const fixedArray: number[] = [];
+  for (let i = 0; i < arr.length; i++) {
+    fixedArray.push(callback(arr[i], i));
+  }
+  return fixedArray;
+}
+
+function childFunction(val: number, opt?: number): number {
+  return +val.toFixed(opt);
+}
+
+const finalArray = parentFunction(
+  [10.215, 25.24521, 63541.21523],
+  childFunction
+);
+console.log("finalArray", finalArray);
+```
+
+```bash
+# Output
+
+finalArray [ 10, 25.2, 63541.22 ]
+```
+
+Lets modify the child function?
+
+```ts
+function childFunction(val: number, opt?: number): number {
+  const modifyOpt = opt > 2 ? 3 : 5;
+  return +val.toFixed(modifyOpt);
+}
+```
+
+```bash
+Warnings
+
+'opt' is possibly 'undefined'.ts(18048)
+(parameter) opt: number | undefined
+```
+
+**`Rule : When writing a function type for a callback, never write an optional parameter unless we intend to call the function without passing that argument`**

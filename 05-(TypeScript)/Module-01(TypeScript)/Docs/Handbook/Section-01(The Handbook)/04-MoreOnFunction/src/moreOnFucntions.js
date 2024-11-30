@@ -71,3 +71,15 @@ function fixedPriceBy(x) {
 fixedPriceBy();
 fixedPriceBy(10);
 fixedPriceBy(undefined);
+function parentFunction(arr, callback) {
+    var fixedArray = [];
+    for (var i = 0; i < arr.length; i++) {
+        fixedArray.push(callback(arr[i]));
+    }
+    return fixedArray;
+}
+function childFunction(val, opt) {
+    return +val.toFixed(opt);
+}
+var finalArray = parentFunction([10.215, 25.24521, 63541.21523], childFunction);
+console.log("finalArray", finalArray);

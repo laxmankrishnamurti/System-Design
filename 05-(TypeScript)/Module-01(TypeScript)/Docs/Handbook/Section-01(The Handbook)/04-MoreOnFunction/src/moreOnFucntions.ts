@@ -115,3 +115,19 @@ function fixedPriceBy(x = 3){
 fixedPriceBy()
 fixedPriceBy(10)
 fixedPriceBy(undefined)
+
+function parentFunction(arr: number[], callback: (val: number, opt?:number) => number){
+    const fixedArray: number[] = []
+    for(let i = 0; i < arr.length; i++){
+        fixedArray.push(callback(arr[i], i))
+    }
+    return fixedArray;
+}
+
+function childFunction(val: number, opt?: number): number{
+    // const modifyOpt = opt > 2 ? 3 : 5;
+    return +val.toFixed(opt)
+}
+
+const finalArray = parentFunction([10.215, 25.24521,63541.21523],childFunction)
+console.log("finalArray", finalArray)
