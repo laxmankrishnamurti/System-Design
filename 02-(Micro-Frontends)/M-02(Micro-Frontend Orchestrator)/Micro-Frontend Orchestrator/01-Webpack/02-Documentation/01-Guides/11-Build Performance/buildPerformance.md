@@ -167,13 +167,13 @@ The following best practices should help, whether we're running build script in 
 
   ***
 
-  #### **`How webpack resolve modules?`**
+  ### **`How webpack resolve modules?`**
 
   Webpack doesn't traverse _all system files_ to resolve modules—it follows a structured and efficient process for finding the modules required to build our application. Here's how the underlying process works:
 
   ***
 
-  ### 1. **Finding `webpack.config.js`**
+  #### 1. **Finding `webpack.config.js`**
 
   When we run the `webpack` command:
 
@@ -185,7 +185,7 @@ The following best practices should help, whether we're running build script in 
 
   ***
 
-  ### 2. **Module Resolution Process**
+  #### 2. **Module Resolution Process**
 
   When Webpack encounters an `import` or `require` statement in our code (e.g., `import myModule from './file'`), it resolves the module path using these steps:
 
@@ -227,7 +227,7 @@ The following best practices should help, whether we're running build script in 
 
   ***
 
-  ### 3. **Custom Plugins and Rules**
+  #### 3. **Custom Plugins and Rules**
 
   Webpack uses plugins and rules from our `webpack.config.js`:
 
@@ -241,7 +241,7 @@ The following best practices should help, whether we're running build script in 
 
   ***
 
-  ### 4. **File System Calls**
+  #### 4. **File System Calls**
 
   Without optimization:
 
@@ -256,7 +256,7 @@ The following best practices should help, whether we're running build script in 
 
   ***
 
-  ### Summary of the Build Process:
+  #### Summary of the Build Process:
 
   1. **Read Config File**: Webpack loads `webpack.config.js` (or default settings).
   2. **Parse Entry Point**: Starts from the `entry` file defined in the config.
