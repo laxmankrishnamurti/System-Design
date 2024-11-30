@@ -860,4 +860,6 @@ Warnings
 (parameter) opt: number | undefined
 ```
 
+Note ==> In JavaScript, if you call a function with more arguments than there are parameters, the extra arguments are simply ignored. TypeScript behaves the same way. Functions with fewer parameters (of the same types) can always take the place of functions with more parameters.
+
 **`Rule : When writing a function type for a callback, never write an optional parameter unless we intend to call the function without passing that argument`**
