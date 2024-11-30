@@ -107,7 +107,7 @@ The following best practices should help, whether we're running build script in 
 
   ***
 
-  2. **Disable `resolve.symlinks`**: If we don't use symbolic links (like `npm link`), turn this off to skip resolving symlinks and improve speed.  
+  2. **Disable `resolve.symlinks`**: If we've not used symbolic links (like `npm link`), turn this off to skip resolving symlinks and improve speed.  
      Example:
 
   ```javascript
@@ -135,7 +135,7 @@ The following best practices should help, whether we're running build script in 
 
   ***
 
-  ### **`What will happen if we don't use the optimization options.`**
+  #### **`What will happen if we don't use the optimization options.`**
 
   If we don't apply these optimizations in our Webpack configuration, here's what will happen:
 
@@ -166,3 +166,103 @@ The following best practices should help, whether we're running build script in 
   Without these configurations, Webpack will perform redundant operations during the build, causing slower module resolution and longer build times, especially for large projects.
 
   ***
+
+  #### **`How webpack resolve modules?`**
+
+  Webpack doesn't traverse _all system files_ to resolve modules—it follows a structured and efficient process for finding the modules required to build our application. Here's how the underlying process works:
+
+  ***
+
+  ### 1. **Finding `webpack.config.js`**
+
+  When we run the `webpack` command:
+
+  - Webpack looks for the configuration file named `webpack.config.js` in the **current working directory** (where we run the command).
+  - If we use a custom file name or location, we must specify it using `--config`:
+    ```bash
+    webpack --config /path/to/our/custom-config.js
+    ```
+
+  ***
+
+  ### 2. **Module Resolution Process**
+
+  When Webpack encounters an `import` or `require` statement in our code (e.g., `import myModule from './file'`), it resolves the module path using these steps:
+
+  #### a) **Resolve Direct File Paths**
+
+  - If the module is a file (`./file.js`), Webpack checks:
+    1.  **Exact Match**: Looks for the file directly (`./file.js` or `./file`).
+    2.  **Extensions**: If no exact match is found, Webpack appends extensions from `resolve.extensions` (e.g., `.js`, `.json`).
+  - Example:
+    ```javascript
+    resolve: {
+      extensions: ['.js', '.json'], // Default extensions.
+    }
+    ```
+    If we `import './file'`, Webpack tries:
+    - `./file.js`
+    - `./file.json`
+
+  #### b) **Resolve Node Modules**
+
+  - If the module is not a relative/absolute path (e.g., `import lodash from 'lodash'`), Webpack:
+    1.  Looks in `node_modules` directories defined in `resolve.modules`.  
+        By default, it searches:
+        - `/current/project/node_modules`
+        - Parent directories' `node_modules` (e.g., `/home/laxmankrishnamurti/node_modules`).
+    2.  Checks the module's `package.json` `main` field or `exports`.
+
+  #### c) **Resolve Index Files**
+
+  - If the module is a folder (e.g., `import module from './folder'`), Webpack looks for an **index file** in the folder:
+    - `./folder/index.js`
+    - `./folder/index.json`
+  - This behavior is defined by `resolve.mainFiles`:
+    ```javascript
+    resolve: {
+      mainFiles: ['index'], // Files to look for in folders.
+    }
+    ```
+
+  ***
+
+  ### 3. **Custom Plugins and Rules**
+
+  Webpack uses plugins and rules from our `webpack.config.js`:
+
+  - **Loaders**: Transform specific file types (e.g., `babel-loader` for `.js` files, `css-loader` for `.css`).
+  - **Plugins**: Handle additional tasks like optimization or environment variables.
+
+  During module resolution:
+
+  - Webpack applies loaders to process the file contents.
+  - Plugins may customize or optimize the resolution process.
+
+  ***
+
+  ### 4. **File System Calls**
+
+  Without optimization:
+
+  - Webpack makes **file system calls** to check all possible locations for a module.
+  - Example:
+    For `import x from './file'`:
+    - Webpack checks:
+      - `./file.js`
+      - `./file.json`
+      - `./file/index.js`  
+        This is why minimizing `resolve.modules`, `resolve.extensions`, and other options improves speed.
+
+  ***
+
+  ### Summary of the Build Process:
+
+  1. **Read Config File**: Webpack loads `webpack.config.js` (or default settings).
+  2. **Parse Entry Point**: Starts from the `entry` file defined in the config.
+  3. **Module Resolution**: Resolves all `import`/`require` statements using the steps above.
+  4. **Apply Loaders**: Transforms files based on loaders.
+  5. **Bundle Modules**: Combines all resolved modules into one (or more) output files.
+  6. **Output**: Writes the bundled files to the `output` directory.
+
+  By default, Webpack is efficient, but careful configuration (e.g., resolve settings) ensures it doesn't waste time on unnecessary file checks.
