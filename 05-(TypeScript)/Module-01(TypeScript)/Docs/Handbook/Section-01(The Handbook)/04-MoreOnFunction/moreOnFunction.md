@@ -768,3 +768,45 @@ That's the rules is saying that we should not use _generic functions_ where we c
 Use generic function where we need to relate two values. That's it.
 
 **_If a type parameter only appears in one location, strongly reconsider if we actually need it._**
+
+---
+
+## `Optional Parameters`
+
+TypeScript offers a type which makes parameters as an optional value, by **`?`**
+
+```ts
+function fixedPriceBy(x?: number) {
+  const finalPrice = 524516.1242;
+  console.log("finalPrice", finalPrice.toFixed(x));
+}
+
+fixedPriceBy(2);
+```
+
+But there is a problem with the code, I guess you probably get understand to which i'm talking about.
+
+Yes, the _undefined_ value.
+
+Let's fix this
+
+```ts
+function fixedPriceBy(x = 3) {
+  const finalPrice = 524516.1242;
+  console.log("finalPrice", finalPrice.toFixed(x));
+}
+
+fixedPriceBy();
+fixedPriceBy(10);
+fixedPriceBy(undefined);
+```
+
+```bash
+# Output
+
+finalPrice 524516.124
+finalPrice 524516.1242000000
+finalPrice 524516.124
+```
+
+If we pass undefined to the function in which there is already a default value is set, JavaScript will automatically re-assign the undefined with the default value.

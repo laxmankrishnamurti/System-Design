@@ -30,3 +30,44 @@ function fn(ctor) {
     console.log(new ctor("10"));
 }
 fn(Date);
+function parent3(fn) {
+    var user = new fn("laxmankrishnamurti");
+    return user;
+}
+// const CallSignatureConstructorFunction: CallSignature = class {
+//     constructor(username: string){
+//         if(username === "laxmankrishnamurti"){
+//             return {
+//                 accountId: "12345",
+//                 userEmail: "laxmankrishnamurti@gmail.com",
+//                 ipAddress: "192.168.250.16",
+//               };
+//         }
+//         return false
+//     }
+// }
+// parent3(CallSignatureConstructorFunction)
+// class CallSignatureClass implements CallSignature {
+//     accountId: string | null = null;
+//     userEmail: string | null = null;
+//     ipAddress: string | null = null;
+//     isValid: boolean = false;
+//     constructor(username: string) {
+//         if (username === "laxmankrishnamurti") {
+//             this.accountId = "12345";
+//             this.userEmail = "laxmankrishnamurti@gmail.com";
+//             this.ipAddress = "192.168.250.16";
+//             this.isValid = true;
+//         }
+//     }
+// }
+// parent3(CallSignatureClass)
+console.log("OPTIONAL PARAMETERS");
+function fixedPriceBy(x) {
+    if (x === void 0) { x = 3; }
+    var finalPrice = 524516.1242;
+    console.log("finalPrice", finalPrice.toFixed(x));
+}
+fixedPriceBy();
+fixedPriceBy(10);
+fixedPriceBy(undefined);

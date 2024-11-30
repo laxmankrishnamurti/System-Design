@@ -104,3 +104,14 @@ function parent3(fn: CallSignature){
 // }
 
 // parent3(CallSignatureClass)
+
+console.log("OPTIONAL PARAMETERS")
+
+function fixedPriceBy(x = 3){
+    const finalPrice = 524516.1242;
+    console.log("finalPrice", finalPrice.toFixed(x))
+}
+
+fixedPriceBy()
+fixedPriceBy(10)
+fixedPriceBy(undefined)
