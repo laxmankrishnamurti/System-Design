@@ -2,6 +2,21 @@
 
 Lets' revise all JavaScript operators, expressions and keywords.
 
+1. [Primary Expressions](#1-primary-expressions)
+2. [Left Hand Side Expressions](#2-left-hand-side-expressions)
+3. [Increment And Decrement](#3-increment-and-decrement)
+4. [Unary Operator](#4-unary-operator)
+5. [Arithmetic Operators](#5-arithmetic-operators)
+6. [Relational Operators](#6-relational-operator)
+7. [Equality Operators](#7-equality-operators)
+8. [Bitwise Shift Operators](#8-bitwise-shift-operators)
+9. [Binary Bitwise Operators](#9-binary-bitwise-operators)
+10. [Binary Logical Operators](#10-binary-logical-operators)
+11. [Conditional Ternary Operator](#11-conditional-ternary-operator)
+12. [Assignment Operator](#12-assignment-operators)
+13. [Spread Operator](#13-spread-syntax)
+14. [Comma Operator](#14-comma-operator)
+
 ## **Expressions and operators by category**
 
 ### `1. Primary Expressions`
@@ -681,3 +696,5 @@ console.log("productPrice", productPrice);
 myAge 13
 productPrice 170
 ```
+
+[Back to Top](#javascript-expressions)
