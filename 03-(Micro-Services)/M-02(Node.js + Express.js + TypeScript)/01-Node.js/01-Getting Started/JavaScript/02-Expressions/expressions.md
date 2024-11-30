@@ -591,7 +591,7 @@ const myProfile = {
 console.log("myProfile", myProfile);
 const { age, email: userEmail } = myProfile;
 console.log("age", age);
-console.log("userEmail", userEmail);
+console.log("userEmail", userEmail); // Modifying existing property name to new one
 ```
 
 ```bash
@@ -607,4 +607,77 @@ age 21
 userEmail freelancing.laxman@gmail.com
 ```
 
-- Spread syntax
+### `13. Spread syntax`
+
+As their name suggests it's used to spread values, which is iterable such as arrays, string, objects.
+
+- Arrays ===> Spread each element of the array
+- String ===> Spread each character of the string
+- Object ===> Spread each properties of the object
+
+Even though, it can also add additional vlaues into it.
+
+```js
+const marks = [90, 98, 95, 85, 75, 89];
+const spreadMarksAndAddNewElement = [...marks, 100];
+console.log("new arr", spreadMarksAndAddNewElement);
+
+const myUsername = "laxmankrishnamurti";
+const modifyUsername = ["new", ...myUsername];
+console.log("new usernmae", modifyUsername);
+
+const myProfileDetails = {
+  username: "laxmankrishnamurti",
+  age: 22,
+  email: "laxmankrishnamurti@gmail.com",
+};
+
+const newProfileDetails = { ...myProfileDetails, dob: "31/10/2002" };
+console.log("new Profile Details", newProfileDetails);
+```
+
+```bash
+# Output
+
+new arr [
+  90, 98,  95, 85,
+  75, 89, 100
+]
+new usernmae [
+  'new', 'l', 'a', 'x',
+  'm',   'a', 'n', 'k',
+  'r',   'i', 's', 'h',
+  'n',   'a', 'm', 'u',
+  'r',   't', 'i'
+]
+new Profile Details {
+  username: 'laxmankrishnamurti',
+  age: 22,
+  email: 'laxmankrishnamurti@gmail.com',
+  dob: '31/10/2002'
+}
+```
+
+Note: Keep in mind that the expression should be iterable with which we are going to use the spread operator.
+
+### `14. Comma Operator`
+
+The comman(,) operator evaluates each of its operands (from left to right) and returns the value of the last operand.
+
+```js
+let myAge = 22;
+myAge = (myAge++, myAge - 10);
+console.log("myAge", myAge);
+
+let productPrice = 200;
+productPrice > 150 ? (productPrice = (0, 200 - 200 * 0.15)) : productPrice;
+
+console.log("productPrice", productPrice);
+```
+
+```bash
+# Output
+
+myAge 13
+productPrice 170
+```

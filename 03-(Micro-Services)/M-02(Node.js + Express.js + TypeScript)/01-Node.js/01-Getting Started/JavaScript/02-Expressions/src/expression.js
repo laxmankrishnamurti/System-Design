@@ -217,3 +217,33 @@ console.log("myProfile", myProfile);
 const { age, email: userEmail } = myProfile;
 console.log("age", age);
 console.log("userEmail", userEmail);
+
+console.log("SPREAD OPERATOR")
+
+const marks = [90,98,95, 85, 75, 89]
+const spreadMarksAndAddNewElement = [...marks, 100]
+console.log("new arr", spreadMarksAndAddNewElement)
+
+const myUsername = "laxmankrishnamurti";
+const modifyUsername = ["new",...myUsername]
+console.log("new usernmae", modifyUsername)
+
+const myProfileDetails  = {
+  username: "laxmankrishnamurti",
+  age: 22,
+  email: "laxmankrishnamurti@gmail.com"
+}
+
+const newProfileDetails = {...myProfileDetails, dob: "31/10/2002"}
+console.log("new Profile Details", newProfileDetails)
+
+console.log("COMMA OPERATOR")
+
+let myAge = 22;
+myAge = (myAge++, myAge-10)
+console.log("myAge", myAge)
+
+let productPrice = 200;
+productPrice > 150 ? productPrice = (0,200 - (200*0.15)) : productPrice
+
+console.log("productPrice", productPrice)
