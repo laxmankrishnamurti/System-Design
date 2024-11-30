@@ -862,4 +862,46 @@ Warnings
 
 Note ==> In JavaScript, if you call a function with more arguments than there are parameters, the extra arguments are simply ignored. TypeScript behaves the same way. Functions with fewer parameters (of the same types) can always take the place of functions with more parameters.
 
+```ts
+type Func1 = (a: number) => void;
+type Func2 = (a: number, b: number) => void;
+
+let fn1: Func1 = (a) => console.log(a);
+let fn2: Func2 = (a, b) => console.log(a, b);
+
+// Func1 can replace Func2:
+fn2 = fn1; // ✅ Works because fn1 doesn't need the second parameter.
+```
+
 **`Rule : When writing a function type for a callback, never write an optional parameter unless we intend to call the function without passing that argument`**
+
+## `Function overloads`
+
+In TypeScript we can defined **multiple signature** of a function.
+
+Key Idea:
+
+- Overload signature describe how the function can be called.
+- The implementation handles all the possible calls.
+
+In short,
+
+Function overload means having multiple version of the same function with different parameter lists or type of parameters. It allows a function to behave differently based on how it is called.
+
+With function overload, we're defining specific valid combinations of parameter types. If a combination is not defined in the overloads, TypeScript will issue an error.
+
+```ts
+function combine(input1: number, input2: string): string; // Valid combination
+function combine(input1: string, input2: string): string; // Valid combination
+
+function combine(input1: string | number, input2: string | number): string {
+  return input1.toString() + input2.toString();
+}
+
+// Valid calls:
+combine(1, "test"); // ✅ Matches 1st overload
+combine("Hello", "Bye"); // ✅ Matches 2nd overload
+
+// Invalid call:
+combine(1, 2); // ❌ Error: No overload matches this call
+```
