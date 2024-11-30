@@ -266,3 +266,215 @@ The following best practices should help, whether we're running build script in 
   6. **Output**: Writes the bundled files to the `output` directory.
 
   By default, Webpack is efficient, but careful configuration (e.g., resolve settings) ensures it doesn't waste time on unnecessary file checks.
+
+- **`DLLs (Dynamic-link library)`**
+
+  This is a type of plugin that provide means of spliting bundles in a way that can drastically improve build time performance.
+
+  This was originally introduced by _Microsoft_.
+
+  ### **`Basics`**
+
+  In simple terms:
+
+  ### What is a DLL?
+
+  DLL stands for **Dynamic Link Library**. In the context of Webpack, it means a set of precompiled libraries or files that our application uses frequently (e.g., React, Lodash). Instead of bundling these libraries repeatedly for every build, they are precompiled and linked dynamically.
+
+  ### What is DLLReferencePlugin?
+
+  `DLLReferencePlugin` is a Webpack plugin that helps our project connect to these precompiled DLL bundles. Instead of including those libraries in our app's bundle every time we build, it tells Webpack to "refer" to the precompiled versions.
+
+  ***
+
+  ### Why do we need it?
+
+  Imagine we're building an application and using React and Lodash. Normally, every time we build, Webpack processes these libraries along with our code. This can slow down the build process.
+
+  Using a DLL:
+
+  1. **Precompile the libraries**: Webpack generates a separate bundle for libraries we don't change often.
+  2. **Reference them in our app**: With `DLLReferencePlugin`, Webpack skips bundling these libraries again, making the build process much faster.
+
+  ***
+
+  ### How it works step by step:
+
+  1. **Create a DLL file**: we use the `DllPlugin` to generate a file containing precompiled code of our libraries.
+  2. **Reference the DLL**: Use `DLLReferencePlugin` in our main Webpack config to link to the precompiled DLL file.
+
+  ***
+
+  ### **`Deep Dive`**
+
+  Let's dive deeper into the **DLLPlugin** and **DLLReferencePlugin** with a practical example and detailed explanation.
+
+  ***
+
+  ### Why DLL and DLLReferencePlugin Exist
+
+  When we work on large projects, some libraries or modules (like React, Lodash, or Moment.js) don’t change often. Every time we build our project, Webpack bundles these libraries again, which is redundant and slows down the process.
+
+  **Solution**:  
+   By using the **DLLPlugin**, we can precompile these libraries into a separate bundle. Then, with the **DLLReferencePlugin**, we tell Webpack to reuse this precompiled bundle instead of processing it repeatedly.
+
+  ***
+
+  ### Key Components
+
+  1. **DLLPlugin**: Creates a precompiled bundle of frequently used libraries.
+  2. **DLLReferencePlugin**: Links our main application to that precompiled bundle.
+
+  ***
+
+  ### Step-by-Step Example
+
+  #### 1. Setting Up the Project
+
+  Let’s say we have a project that uses **React** and **Lodash**.
+
+  Directory structure:
+
+  ```
+  project/
+  ├── src/
+  │   ├── index.js
+  ├── dist/
+  ├── webpack.config.js
+  ├── package.json
+  ```
+
+  Install dependencies:
+
+  ```bash
+  npm install webpack webpack-cli react react-dom lodash --save
+  ```
+
+  ***
+
+  #### 2. Create a DLL Bundle (Precompile Libraries)
+
+  Add a separate Webpack config for the DLL bundle.
+
+  **webpack.dll.js**:
+
+  ```javascript
+  const path = require("path");
+  const webpack = require("webpack");
+
+  module.exports = {
+    entry: {
+      vendor: ["react", "react-dom", "lodash"], // Libraries to precompile
+    },
+    output: {
+      filename: "[name].dll.js", // Output file (vendor.dll.js)
+      path: path.resolve(__dirname, "dist"),
+      library: "[name]_library", // Expose the bundle as a global variable
+    },
+    plugins: [
+      new webpack.DllPlugin({
+        name: "[name]_library", // Match the library name
+        path: path.resolve(__dirname, "dist/[name].manifest.json"), // Manifest file
+      }),
+    ],
+  };
+  ```
+
+  Run the DLL build:
+
+  ```bash
+  npx webpack --config webpack.dll.js
+  ```
+
+  This generates:
+
+  - **dist/vendor.dll.js**: The precompiled bundle.
+  - **dist/vendor.manifest.json**: A file describing the bundle's contents.
+
+  ***
+
+  #### 3. Link the DLL Bundle to our App
+
+  Update our main Webpack config to use the precompiled bundle.
+
+  **webpack.config.js**:
+
+  ```javascript
+  const path = require("path");
+  const webpack = require("webpack");
+
+  module.exports = {
+    entry: "./src/index.js",
+    output: {
+      filename: "bundle.js",
+      path: path.resolve(__dirname, "dist"),
+    },
+    plugins: [
+      new webpack.DllReferencePlugin({
+        context: path.resolve(__dirname), // Base directory
+        manifest: require("./dist/vendor.manifest.json"), // Link to the manifest
+      }),
+    ],
+    mode: "development",
+  };
+  ```
+
+  ***
+
+  #### 4. Use the DLL Bundle in our HTML
+
+  Reference the precompiled bundle in our HTML file so our app can use it.
+
+  **index.html**:
+
+  ```html
+  <!DOCTYPE html>
+  <html lang="en">
+    <head>
+      <meta charset="UTF-8" />
+      <title>Webpack DLL Example</title>
+    </head>
+    <body>
+      <script src="vendor.dll.js"></script>
+      <!-- Precompiled DLL -->
+      <script src="bundle.js"></script>
+      <!-- our app's bundle -->
+    </body>
+  </html>
+  ```
+
+  ***
+
+  ### How It Works
+
+  1. **First Build (DLL)**:
+
+     - `webpack.dll.js` creates a bundle (`vendor.dll.js`) with React, ReactDOM, and Lodash.
+     - A manifest file (`vendor.manifest.json`) is created, mapping these libraries.
+
+  2. **Main Build**:
+
+     - our app's Webpack config (`webpack.config.js`) uses `DLLReferencePlugin` to read the manifest.
+     - Instead of bundling React, ReactDOM, or Lodash, Webpack references the precompiled DLL.
+
+  3. **Runtime**:
+
+     - The browser first loads `vendor.dll.js`.
+     - our app's `bundle.js` reuses the precompiled libraries.
+
+  ***
+
+  ### Benefits
+
+  - **Faster Builds**: Libraries like React are not rebuilt unless they change.
+  - **Smaller Bundles**: our main app bundle does not include the libraries.
+  - **Improved Caching**: If the libraries don’t change, the browser can cache `vendor.dll.js`.
+
+  ***
+
+  ### When to Use
+
+  - Use DLLPlugin if our project heavily relies on large, stable libraries (e.g., React, Angular, or utility libraries like Lodash).
+  - For small projects, it's overkill; modern Webpack optimizations like **code splitting** and **tree shaking** may suffice.
+
+  ***
