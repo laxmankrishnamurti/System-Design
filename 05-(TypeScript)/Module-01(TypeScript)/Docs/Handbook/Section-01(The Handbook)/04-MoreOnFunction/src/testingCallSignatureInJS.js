@@ -14,7 +14,3 @@ test.result = "All test cases passed!!";
 
 let resultVal = test(100000);
 console.log("result", resultVal);
-
-function sayHello() {
-  console.log("Hello TypeScript");
-}
