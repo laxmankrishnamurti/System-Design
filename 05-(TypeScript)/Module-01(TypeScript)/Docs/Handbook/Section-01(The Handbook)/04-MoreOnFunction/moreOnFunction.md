@@ -209,7 +209,7 @@ const isExist = parent3(child3);
 If we have invoked the callback function without _new_ keyword then it is 100% sure TypeScript's type system will warn us with this message:
 
 ```bash
-Value of type 'SomeConstructor' is not callable. Did you mean to include 'new'?ts(2348)
+Value of type 'SomeConstructor' is not callable. Did we mean to include 'new'?ts(2348)
 ```
 
 ```bash
@@ -505,7 +505,7 @@ func([1, 2, 3, 1], "laxman"); // Argument of type 'number[]' is not assignable t
 func([1, 2, 3, 1], ["sdf"]);
 ```
 
-TypeScript is saying that the second argument that you have passed to the function does not have a length property and the most important part is after passing the first argument to the function the _Type parameter_ value becomes an array of numbers. So that's why we must pass another array which is also an array regardless of the element type.
+TypeScript is saying that the second argument that we have passed to the function does not have a length property and the most important part is after passing the first argument to the function the _Type parameter_ value becomes an array of numbers. So that's why we must pass another array which is also an array regardless of the element type.
 
 Because TypeScript is not forcing us to pass another array which element type is also a number. Not!
 
@@ -712,7 +712,7 @@ const firstFunElement: number
 const seconFunElement: any
 ```
 
-Both functions are doing same job but second function has more complex structure than firstFunction. Avoid such kind of complexity. Make simpler and easy to understandable Generic function. If ther is need use appropriate structure or whatever structure you need. But keep in mind don't make things complex.
+Both functions are doing same job but second function has more complex structure than firstFunction. Avoid such kind of complexity. Make simpler and easy to understandable Generic function. If ther is need use appropriate structure or whatever structure we need. But keep in mind don't make things complex.
 
 Things are always easy, we make things complicated.
 
@@ -735,7 +735,7 @@ There is no difference between both functions as it's working. Both are doing sa
 
 On the other hand in the _fourth function_ we've created an extra _type parameter_ to the function which does not make sense anymore as compare to the first one.
 
-So, just be simple and also make your code simple.
+So, just be simple and also make our code simple.
 
 3. **`Type parameter should appear Twice`**
 
@@ -775,7 +775,7 @@ Use generic function where we need to relate two values. That's it.
 
 2. First Argument's Type Sets the Context: In a generic function, the first argument often provides the context for type inference.
 
-3. Stick to the Predictable Inference Order: If your function heavily relies on type inference, place the most "informative" argument (e.g., arr) first.
+3. Stick to the Predictable Inference Order: If our function heavily relies on type inference, place the most "informative" argument (e.g., arr) first.
 
 4. Explicit Generics as a Backup: When reversing the argument order, always provide the generic explicitly to avoid ambiguity.
 
@@ -794,7 +794,7 @@ function fixedPriceBy(x?: number) {
 fixedPriceBy(2);
 ```
 
-But there is a problem with the code, I guess you probably get understand to which i'm talking about.
+But there is a problem with the code, I guess we probably get understand to which i'm talking about.
 
 Yes, the _undefined_ value.
 
@@ -870,7 +870,7 @@ Warnings
 (parameter) opt: number | undefined
 ```
 
-Note ==> In JavaScript, if you call a function with more arguments than there are parameters, the extra arguments are simply ignored. TypeScript behaves the same way. Functions with fewer parameters (of the same types) can always take the place of functions with more parameters.
+Note ==> In JavaScript, if we call a function with more arguments than there are parameters, the extra arguments are simply ignored. TypeScript behaves the same way. Functions with fewer parameters (of the same types) can always take the place of functions with more parameters.
 
 ```ts
 type Func1 = (a: number) => void;
@@ -921,3 +921,200 @@ combine(1, 2); // ❌ Error: No overload matches this call
 **`The implimentation signature must also be compatible with the overload signature.`**
 
 - TypeScript can only resolve a function call to a single overload
+- Always prefer parameters with union types instead of overloads when possible
+
+## `Declaring this in a Function`
+
+This syntax in TypeScript is slightly different from plain JavaScript because of **TypeScript's strict type-checking**, especially around the `this` keyword in functions. Let's break it down in simple terms.
+
+---
+
+### 1. **What’s happening in this code?**
+
+#### Interface:
+
+```typescript
+interface DB {
+  filterUsers(filter: (this: User) => boolean): User[];
+}
+```
+
+- `filterUsers` is a method of the `DB` interface.
+- It accepts a callback function `filter` as its argument.
+- The `filter` function has a special `this` context declared as `(this: User)`. This means the `this` inside the callback refers to a `User` object.
+
+---
+
+#### Function Call:
+
+```typescript
+const db = getDB(); // Assume this fetches a DB object
+const admins = db.filterUsers(function (this: User) {
+  return this.admin;
+});
+```
+
+- The callback function inside `filterUsers` is defined using the `function` keyword.
+- The `this` in the function is explicitly tied to the `User` type, as defined in the interface. So, when `filterUsers` runs, `this` will point to a `User` object.
+
+---
+
+### 2. **Why do we declare `(this: User)`?**
+
+In TypeScript:
+
+- By default, **TypeScript doesn’t know the type of `this` in a function**.
+- If we don't explicitly tell TypeScript the type of `this`, it assumes `this: any`, which means we lose type safety.
+
+Declaring `(this: User)` ensures that:
+
+1. TypeScript knows `this` inside the function is a `User`.
+2. we get proper type-checking and autocompletion for `this`.
+
+---
+
+### 3. **Does this work the same way in JavaScript?**
+
+Yes, in JavaScript, it works similarly **in terms of behavior**, but there’s no strict type-checking because JavaScript doesn’t have a type system.
+
+Here’s the equivalent JavaScript:
+
+```javascript
+const db = getDB();
+const admins = db.filterUsers(function () {
+  return this.admin;
+});
+```
+
+- In JavaScript, `this` will still point to the object that calls `filterUsers` (like a `User` object).
+- However, **JavaScript doesn’t enforce or check the type of `this`**, so if something goes wrong (like `this` being `undefined`), we only find out at runtime.
+
+---
+
+### 4. **Why can’t we use an arrow function here?**
+
+If we change the function to an arrow function, like this:
+
+```typescript
+db.filterUsers(() => this.admin);
+```
+
+It will not work as expected because:
+
+- Arrow functions **don’t have their own `this` context**.
+- Instead, they inherit `this` from their surrounding scope.
+
+In this case, the `this` in the arrow function will refer to whatever the outer context is (likely not a `User`), causing issues.
+
+Using a `function` keyword ensures that `this` is explicitly tied to the object calling the method (a `User` object in this case).
+
+---
+
+### 5. **Simplified Explanation**
+
+- `(this: User)` tells TypeScript that `this` in the callback refers to a `User` object.
+- This adds type safety, ensuring we don’t accidentally misuse `this`.
+- we need to use the `function` keyword (not arrow functions) to allow `this` binding correctly in TypeScript.
+
+---
+
+### 6. **Example in Action**
+
+Let’s assume this example:
+
+```typescript
+interface Mismatch {
+  name: string;
+}
+
+interface User {
+  name: string;
+  admin: boolean;
+}
+
+interface DB {
+  filterUsers(filter: (this: User) => boolean): User[];
+}
+
+const miss: Mismatch[] = [
+  { name: "Laxman Krishnamurti" },
+  { name: "Pallavi jain" },
+  { name: "Kawya Krishnamurti" },
+  { name: "Fruti Kumari" },
+  { name: "Vikram Dhanush" },
+  { name: "Jitendra Yadav" },
+];
+
+const users: User[] = [
+  {
+    name: "Laxman Krishnamurti",
+    admin: true,
+  },
+  {
+    name: "Kawya Krishnamurti",
+    admin: false,
+  },
+  {
+    name: "Pallavi Jain",
+    admin: false,
+  },
+  {
+    name: "Jitendra Yadav",
+    admin: true,
+  },
+  {
+    name: "Anjali Kumari",
+    admin: true,
+  },
+];
+
+const db: DB = {
+  filterUsers(filter) {
+    return users.filter((user) => filter.call(user));
+  },
+};
+
+const admins = db.filterUsers(function (this: User) {
+  return this.admin;
+});
+
+console.log("Admins", admins);
+```
+
+Here:
+
+1. `filterUsers` calls `filter` using `filter.call(user)`, so `this` in the callback refers to each `User` object.
+2. By declaring `(this: User)` in the callback, TypeScript ensures type safety for `this`.
+
+```bash
+# Output
+
+Admins [
+  { name: 'Laxman Krishnamurti', admin: true },
+  { name: 'Jitendra Yadav', admin: true },
+  { name: 'Anjali Kumari', admin: true }
+]
+```
+
+Lets try to modify the _this context_ to see does TypeScript able to find the mismatch values.
+
+```ts
+const admins = db.filterUsers(function (this: Mismatch) {
+  return this.admin;
+});
+```
+
+```bash
+Warnings
+
+Property 'admin' does not exist on type 'Mismatch'.ts(2339)
+any
+```
+
+---
+
+### Key Takeaways:
+
+- `(this: User)` is a TypeScript-specific feature for defining the `this` type in functions.
+- JavaScript doesn’t enforce such types, so this is to ensure **type safety** in TypeScript.
+- Use the `function` keyword to allow correct `this` binding. Arrow functions don’t work in this case because they inherit `this` from the outer context.

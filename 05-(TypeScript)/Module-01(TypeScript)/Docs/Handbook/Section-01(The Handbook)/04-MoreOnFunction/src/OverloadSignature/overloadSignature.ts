@@ -40,3 +40,62 @@ fn1([0])
 
 const condition = true
 // fn1(condition ? "true": ["false"])
+
+console.log("THIS IN A FUNCTION")
+
+interface Mismatch {
+    name: string
+}
+
+interface User {
+    name: string;
+    admin: boolean
+}
+
+interface DB {
+    filterUsers(filter: (this: User) => boolean): User[]
+}
+
+const miss: Mismatch[] = [
+    {name: "Laxman Krishnamurti"},
+    {name: "Pallavi jain"},
+    {name: "Kawya Krishnamurti"},
+    {name: "Fruti Kumari"},
+    {name: "Vikram Dhanush"},
+    {name: "Jitendra Yadav"},
+]
+
+const users: User[] = [
+    {
+        name: "Laxman Krishnamurti",
+        admin: true
+    },
+    {
+        name: "Kawya Krishnamurti",
+        admin: false
+    },
+    {
+        name: "Pallavi Jain",
+        admin: false
+    },
+    {
+        name: "Jitendra Yadav",
+        admin: true
+    },
+    {
+        name: "Anjali Kumari",
+        admin: true
+    },
+]
+
+const db: DB = {
+    filterUsers(filter){
+        return users.filter((user) => filter.call(user))
+    }
+}
+
+const admins = db.filterUsers(function (this: User) {
+    return this.admin
+})
+
+console.log("Admins", admins)

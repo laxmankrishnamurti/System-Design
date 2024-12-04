@@ -1,22 +1,62 @@
-function highOrderFunction(callback, arr) {
+function highOrderFunction(arr, callback) {
     var newArr = [];
     for (var i = 0; i < arr.length; i++) {
         newArr.push(callback(arr[i]));
     }
+    console.log("newArr", newArr);
     return newArr;
 }
-var arr = highOrderFunction(function (ele) { return +ele; }, ["1", "2", "3"]);
-console.log("arr", arr);
-console.log(typeof arr[0]);
-// function highOrderFunction<T>(arr: T[], callback: (ele: T) => number): number[] {
-//     const newArr: number[] = [];
-//     for(let i = 0; i < arr.length; i++){
-//         newArr.push(callback(arr[i]))
-//     }
-//     console.log("newArr", newArr)
-//     return newArr
-// }
-// function callback(ele: any): number{
-//     return +ele
-// }
-// highOrderFunction(["1", "2", "3", "4", "5"], callback)
+function callback(ele) {
+    return +ele;
+}
+highOrderFunction(["1", "2", "3", "4", "5"], callback);
+function fn(x, y) {
+}
+// 2nd part (Function implimentation signature)
+function fn1(x) {
+    return x.length;
+}
+fn1("");
+fn1([0]);
+var condition = true;
+// fn1(condition ? "true": ["false"])
+console.log("THIS IN A FUNCTION");
+var miss = [
+    { name: "Laxman Krishnamurti" },
+    { name: "Pallavi jain" },
+    { name: "Kawya Krishnamurti" },
+    { name: "Fruti Kumari" },
+    { name: "Vikram Dhanush" },
+    { name: "Jitendra Yadav" },
+];
+var users = [
+    {
+        name: "Laxman Krishnamurti",
+        admin: true
+    },
+    {
+        name: "Kawya Krishnamurti",
+        admin: false
+    },
+    {
+        name: "Pallavi Jain",
+        admin: false
+    },
+    {
+        name: "Jitendra Yadav",
+        admin: true
+    },
+    {
+        name: "Anjali Kumari",
+        admin: true
+    },
+];
+var db = {
+    filterUsers: function (filter) {
+        return users.filter(function (user) { return filter.call(user); });
+    }
+};
+var admins = db.filterUsers(function () {
+    return this.admin;
+});
+console.log("Admins", admins);
