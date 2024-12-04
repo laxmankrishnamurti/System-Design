@@ -887,7 +887,7 @@ fn2 = fn1; // ✅ Works because fn1 doesn't need the second parameter.
 
 ## `Function overloads`
 
-In TypeScript we can defined **multiple signature** of a function.
+TypeScript also facilitates to defined **multiple signature** of a function.
 
 Key Idea:
 
@@ -896,7 +896,7 @@ Key Idea:
 
 In short,
 
-Function overload means having multiple version of the same function with different parameter lists or type of parameters. It allows a function to behave differently based on how it is called.
+Function overload means **`having multiple version`** of the same function with different parameter lists or type of parameters. It allows a function to behave differently based on how it is called.
 
 With function overload, we're defining specific valid combinations of parameter types. If a combination is not defined in the overloads, TypeScript will issue an error.
 
@@ -916,4 +916,4 @@ combine("Hello", "Bye"); // ✅ Matches 2nd overload
 combine(1, 2); // ❌ Error: No overload matches this call
 ```
 
-Let's deep dive into it.
+**`The implimentation signature must also be compatible with the overload signature.`**

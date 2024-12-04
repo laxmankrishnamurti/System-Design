@@ -17,3 +17,9 @@ function callback(ele: any): number{
 }
 
 highOrderFunction(["1", "2", "3", "4", "5"], callback)
+
+function fn(x: boolean, y: string): void;
+function fn(x: string, y: boolean): void;
+function fn(x: string | boolean, y: string | boolean){
+
+}
