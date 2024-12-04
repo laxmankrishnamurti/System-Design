@@ -901,9 +901,11 @@ Function overload means **`having multiple version`** of the same function with 
 With function overload, we're defining specific valid combinations of parameter types. If a combination is not defined in the overloads, TypeScript will issue an error.
 
 ```ts
+//1st part (Function overloads signature)
 function combine(input1: number, input2: string): string; // Valid combination
 function combine(input1: string, input2: string): string; // Valid combination
 
+//2nd part (Function implimentation signature)
 function combine(input1: string | number, input2: string | number): string {
   return input1.toString() + input2.toString();
 }
@@ -917,3 +919,5 @@ combine(1, 2); // ❌ Error: No overload matches this call
 ```
 
 **`The implimentation signature must also be compatible with the overload signature.`**
+
+- TypeScript can only resolve a function call to a single overload
