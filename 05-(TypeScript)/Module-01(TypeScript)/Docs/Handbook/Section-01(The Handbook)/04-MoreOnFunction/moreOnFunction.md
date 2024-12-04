@@ -769,6 +769,16 @@ Use generic function where we need to relate two values. That's it.
 
 **_If a type parameter only appears in one location, strongly reconsider if we actually need it._**
 
+### `KEY TAKEAWAYS`
+
+1. Type Inference Order Matters: The order of arguments affects how TypeScript infers generics.
+
+2. First Argument's Type Sets the Context: In a generic function, the first argument often provides the context for type inference.
+
+3. Stick to the Predictable Inference Order: If your function heavily relies on type inference, place the most "informative" argument (e.g., arr) first.
+
+4. Explicit Generics as a Backup: When reversing the argument order, always provide the generic explicitly to avoid ambiguity.
+
 ---
 
 ## `Optional Parameters`
