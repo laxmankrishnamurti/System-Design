@@ -80,3 +80,7 @@ marks.sort(function (a, b) {
     return a - b;
 });
 console.log("marks", marks);
+function sayHello(name) {
+    console.log("Hello ".concat(name, " !!"));
+}
+sayHello("Laxman");

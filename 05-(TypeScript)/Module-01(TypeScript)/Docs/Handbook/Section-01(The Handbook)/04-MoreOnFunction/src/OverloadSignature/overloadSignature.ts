@@ -129,3 +129,9 @@ marks.sort((a,b) => {
     return a - b
 })
 console.log("marks", marks)
+
+function sayHello(name: unknown){
+    // let checkLength = name.length;
+    console.log(`Hello ${name} !!`)
+}
+sayHello("Laxman")

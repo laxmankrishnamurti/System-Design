@@ -1129,3 +1129,31 @@ Like all types, We can use them everywhere, but these are especially relevant in
 - It’s the inferred type any time if:
   - a function doesn’t have any return statements
   - or doesn’t return any explicit value from those return statements:
+
+In JavaScript, a function that don't return any value will implicitly return the value _undefined._ However, _void_ and _undefined_ are not the same thing in TypeScript.
+
+In short, In TypeScript both _void_ and _undefined_ are two different thing.
+
+2. **object**
+
+- This is a special type that refers to any value that isn't a primitive (string, number, bigint, boolean, symbol, null, or undefined)
+
+- This is different from the empty object ({}), and also different from the global type _Object._
+
+3. **unknown**
+
+- This represent any value.
+- Using unknown is a bit safer than _any_ type because it's not legal to do anything with an _unknown_ value.
+
+4. **never**
+
+- Two important use-cases
+  1. If a function is using the type _never_ as it's return type it means the function throws an exception or terminates execution of the program.
+  2. _never_ also appears when TypeScript determines there's nothing left in a union.
+
+5. **Function**
+
+- This is a global type.
+- It also has the special property that values of type **_Function_** can always be called; these calls return **_any_**.
+
+## `Rest Parameters and Arguments`
