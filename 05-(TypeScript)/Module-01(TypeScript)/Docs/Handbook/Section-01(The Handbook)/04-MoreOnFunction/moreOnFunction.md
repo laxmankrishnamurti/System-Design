@@ -1118,3 +1118,14 @@ any
 - `(this: User)` is a TypeScript-specific feature for defining the `this` type in functions.
 - JavaScript doesn’t enforce such types, so this is to ensure **type safety** in TypeScript.
 - Use the `function` keyword to allow correct `this` binding. Arrow functions don’t work in this case because they inherit `this` from the outer context.
+
+## `Other Types to know about`
+
+Like all types, We can use them everywhere, but these are especially relevant in the context of functions.
+
+1. **void**
+
+- Represents the return value of functions which don't return a value.
+- It’s the inferred type any time if:
+  - a function doesn’t have any return statements
+  - or doesn’t return any explicit value from those return statements:
