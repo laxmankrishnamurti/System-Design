@@ -1222,3 +1222,38 @@ sum({
 ```
 
 ## `Assignability of Functions`
+
+Contextual typing with a return type of void does not force functions to not return something. Another way to say this is a contextual function type with a void return type (type voidFunc = () => void), when implemented, can return any other value, but it will be ignored.
+
+```ts
+type voidFunc = () => void;
+
+const f1: voidFunc = () => {
+  return true;
+};
+
+const f2: voidFunc = () => true;
+
+const f3: voidFunc = function () {
+  return true;
+};
+
+const v1 = f1(); // const v1: void :: const f1: () => void
+const v2 = f2(); // const v2: void :: const f2: () => void
+const v3 = f3(); // const v3: void :: const f3: () => void
+```
+
+- There is one other special case to be aware of, when a literal function definition has a void return type, that function must not return anything.
+
+```ts
+function greet(name: string): void {
+  return `Hello ${name} !!!`;
+}
+greet("laxman");
+```
+
+```bash
+Warning
+
+Type 'string' is not assignable to type 'void'.ts(2322)
+```
