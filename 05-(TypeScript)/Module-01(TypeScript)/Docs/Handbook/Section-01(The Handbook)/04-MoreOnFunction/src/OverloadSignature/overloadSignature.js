@@ -81,6 +81,18 @@ marks.sort(function (a, b) {
 });
 console.log("marks", marks);
 function sayHello(name) {
+    // let checkLength = name.length;
     console.log("Hello ".concat(name, " !!"));
 }
 sayHello("Laxman");
+function multiply(first) {
+    var m = [];
+    for (var _i = 1; _i < arguments.length; _i++) {
+        m[_i - 1] = arguments[_i];
+    }
+    return m.map(function (n) { return n * 10; });
+}
+console.log("multiply", multiply(0, 1, 2, 3, 4, 5));
+var args = [8, 5];
+var angle = Math.atan2.apply(Math, args);
+console.log("angle", angle);

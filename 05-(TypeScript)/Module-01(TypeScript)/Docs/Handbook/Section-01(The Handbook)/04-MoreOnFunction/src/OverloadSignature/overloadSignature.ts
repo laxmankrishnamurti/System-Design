@@ -135,3 +135,13 @@ function sayHello(name: unknown){
     console.log(`Hello ${name} !!`)
 }
 sayHello("Laxman")
+
+function multiply(first: number, ...m: number[]){
+    return m.map((n) => n * 10)
+}
+
+console.log("multiply", multiply(0, 1,2,3,4,5))
+
+const args = [8,5] as const;
+const angle = Math.atan2(...args)
+console.log("angle", angle)

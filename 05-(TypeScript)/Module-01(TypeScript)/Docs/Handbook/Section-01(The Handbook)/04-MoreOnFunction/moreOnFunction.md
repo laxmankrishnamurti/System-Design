@@ -1157,3 +1157,33 @@ In short, In TypeScript both _void_ and _undefined_ are two different thing.
 - It also has the special property that values of type **_Function_** can always be called; these calls return **_any_**.
 
 ## `Rest Parameters and Arguments`
+
+### `Rest Parameter`
+
+```ts
+function multiply(first: number, ...m) {
+  // (parameter) m: any[] ===> Implicitly
+  return m.map((n) => n * 10);
+}
+
+console.log("multiply", multiply(0, 1, 2, 3, 4, 5));
+
+function multiply(first: number, ...m: number[]) {
+  // (parameter) m: number[] ===> Explicitly
+  return m.map((n) => n * 10);
+}
+
+console.log("multiply", multiply(0, 1, 2, 3, 4, 5));
+```
+
+### `Rest Arguments`
+
+Condition :: Variable should be an iterable object.
+
+```ts
+const args = [8, 5] as const;
+const angle = Math.atan2(...args);
+console.log("angle", angle);
+```
+
+Because in general, TypeScript doesn't assume that arrays are immutable.
