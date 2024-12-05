@@ -60,3 +60,18 @@ var admins = db.filterUsers(function () {
     return this.admin;
 });
 console.log("Admins", admins);
+var person = {
+    name: "Laxman Krishnamurti",
+    age: 22,
+    email: "laxmankrishnamurti@gmail.com",
+    getUsername: function (name) {
+        if (name === "Laxman Krishnamurti") {
+            return "laxmankrishnamurti";
+        }
+        else {
+            return "Oops! user doesn't exist";
+        }
+    }
+};
+console.log("username", person.getUsername("Laxman Krishnamurti"));
+console.log("username", person.getUsername("Harshad Mehta"));
