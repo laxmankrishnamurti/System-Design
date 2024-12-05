@@ -96,3 +96,12 @@ console.log("multiply", multiply(0, 1, 2, 3, 4, 5));
 var args = [8, 5];
 var angle = Math.atan2.apply(Math, args);
 console.log("angle", angle);
+function sum(_a) {
+    var a = _a.a, b = _a.b, c = _a.c;
+    console.log("sum", a + b + c);
+}
+sum({
+    a: 10,
+    b: 20,
+    c: 30
+});

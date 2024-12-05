@@ -145,3 +145,19 @@ console.log("multiply", multiply(0, 1,2,3,4,5))
 const args = [8,5] as const;
 const angle = Math.atan2(...args)
 console.log("angle", angle)
+
+
+type ABC = {
+    a: number;
+    b: number;
+    c: number
+}
+function sum({a, b, c}: ABC){
+    console.log("sum", a + b + c)
+}
+
+sum({
+    a: 10,
+    b: 20,
+    c: 30
+})

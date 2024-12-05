@@ -1187,3 +1187,38 @@ console.log("angle", angle);
 ```
 
 Because in general, TypeScript doesn't assume that arrays are immutable.
+
+## `Parameter Destructuring`
+
+Condition :: Variable should be an iterable object.
+
+```ts
+function sum({ a, b, c }: { a: number; b: number; c: number }) {
+  console.log("sum", a + b + c);
+}
+
+sum({
+  a: 10,
+  b: 20,
+  c: 30,
+});
+
+OR;
+
+type ABC = {
+  a: number;
+  b: number;
+  c: number;
+};
+function sum({ a, b, c }: ABC) {
+  console.log("sum", a + b + c);
+}
+
+sum({
+  a: 10,
+  b: 20,
+  c: 30,
+});
+```
+
+## `Assignability of Functions`
