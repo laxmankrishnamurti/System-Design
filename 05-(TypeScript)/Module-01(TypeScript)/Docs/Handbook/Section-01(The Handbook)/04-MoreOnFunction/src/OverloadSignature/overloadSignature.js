@@ -75,3 +75,8 @@ var person = {
 };
 console.log("username", person.getUsername("Laxman Krishnamurti"));
 console.log("username", person.getUsername("Harshad Mehta"));
+var marks = [91, 95, 85, 75, 89];
+marks.sort(function (a, b) {
+    return a - b;
+});
+console.log("marks", marks);

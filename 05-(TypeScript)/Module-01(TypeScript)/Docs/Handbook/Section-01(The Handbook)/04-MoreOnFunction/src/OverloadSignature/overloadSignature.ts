@@ -122,3 +122,10 @@ const person: Person = {
 
 console.log("username", person.getUsername("Laxman Krishnamurti"))
 console.log("username", person.getUsername("Harshad Mehta"))
+
+
+const marks = [91,95, 85, 75, 89]
+marks.sort((a,b) => {
+    return a - b
+})
+console.log("marks", marks)
