@@ -36,5 +36,17 @@ var person5 = {
     age: 22
 };
 var person6 = person5;
-console.log("person6 name", person6.name);
-console.log("person6 age", person6.age);
+console.log("person6 name", person6.name); // person6 name Laxman Krishnamurti
+console.log("person6 age", person6.age); //  person6 age 22
+console.log("INDEX SIGNATURE");
+var dictionary = {
+    hello: "नमस्ते",
+    bye: "अलविदा",
+    welcome: "स्वागत है",
+};
+console.log(dictionary.hello); // नमस्ते
+console.log(dictionary.bye); // अलविदा
+var myArray = ["1", "2", "3"];
+console.log("second item", myArray[1]); // second item 2
+console.log("second item", myArray["1"]);
+// myArray.push("4")

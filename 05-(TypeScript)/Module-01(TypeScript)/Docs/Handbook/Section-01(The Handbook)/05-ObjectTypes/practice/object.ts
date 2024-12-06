@@ -94,3 +94,51 @@ const person5: Person5 = {
 const person6: Person6 = person5
 console.log("person6 name", person6.name) // person6 name Laxman Krishnamurti
 console.log("person6 age", person6.age)  //  person6 age 22
+
+console.log("INDEX SIGNATURE")
+
+interface EnglishToHindi {
+    [key: string]: string;
+}
+
+const dictionary: EnglishToHindi = {
+  hello: "नमस्ते",
+  bye: "अलविदा",
+  welcome: "स्वागत है",
+}
+
+console.log(dictionary.hello) // नमस्ते
+console.log(dictionary.bye)   // अलविदा
+
+interface StringArray {
+    [index: number]: string;
+}
+
+const myArray: StringArray = ["1", "2", "3"]
+console.log("second item", myArray[1]) // second item 2
+console.log("second item", myArray["1"])
+// myArray.push("4")
+
+interface DynamicObject{
+    name: string;
+    age: number;
+    [key: string]: number | string;
+}
+
+
+interface DynamicObject2 {
+    readonly [key: string]: string
+}
+
+const user: DynamicObject2 = {
+    name: "Laxman Krishnamurti",
+    age: "22",
+    email: "laxmankrishnamurti@gmail.com"
+}
+// user.name = "Sonu Kumar"
+
+//Warnings
+/*
+ Index signature in type 'DynamicObject2' only permits reading.ts(2542)
+ (index) DynamicObject2[string]: string
+*/
