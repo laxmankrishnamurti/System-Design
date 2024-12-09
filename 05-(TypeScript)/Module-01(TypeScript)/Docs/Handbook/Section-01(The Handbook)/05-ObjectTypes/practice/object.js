@@ -17,14 +17,14 @@ function fetchAccountDetails(_a) {
 console.log("READONLY PROPERTY");
 var Person3 = {
     name: "Laxman Krishnamurti",
-    age: 22
+    age: 22,
 };
 var Person4 = {
     name: {
         firstName: "Laxman",
-        lastName: "Krishnamurti"
+        lastName: "Krishnamurti",
     },
-    age: 22
+    age: 22,
 };
 // Person4.name = {}
 // Warning: Cannot assign to 'name' because it is a read-only property.ts(2540)
@@ -33,7 +33,7 @@ Person4.name.lastName = "Mehta";
 console.log("Person4", Person4);
 var person5 = {
     name: "Laxman Krishnamurti",
-    age: 22
+    age: 22,
 };
 var person6 = person5;
 console.log("person6 name", person6.name); // person6 name Laxman Krishnamurti
@@ -49,4 +49,21 @@ console.log(dictionary.bye); // अलविदा
 var myArray = ["1", "2", "3"];
 console.log("second item", myArray[1]); // second item 2
 console.log("second item", myArray["1"]);
-// myArray.push("4")
+var user = {
+    name: "Laxman Krishnamurti",
+    age: "22",
+    email: "laxmankrishnamurti@gmail.com",
+};
+var person = {
+    name: "Laxman Krishnamurti",
+    age: 22,
+};
+function createSqare(obj) {
+    return {
+        color: obj.color ? obj.color : "Oranged",
+        area: obj.width ? obj.width * obj.width : 200,
+    };
+}
+var square = { colour: "Salmon", width: 200 };
+var myShape = createSqare(square);
+console.log("myShape", myShape);

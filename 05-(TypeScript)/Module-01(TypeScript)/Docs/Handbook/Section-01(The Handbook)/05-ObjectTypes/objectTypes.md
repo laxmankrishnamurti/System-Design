@@ -162,3 +162,45 @@ Warning
 Object literal may only specify known properties, but 'namee' does not exist in type 'ObjectInterface'. Did you mean to write 'name'?ts(2561)
 (property) namee: string
 ```
+
+- Type Assertion is also a good way to apply these checks.
+
+- One final way to get around these checks, which might be a bit surprising, is to assign the object to another variable. Since, assigning variable directly to a function won't undergo _excess property checks_, the compiler won't give us any error:
+
+```ts
+interface SqureConfig {
+  color?: string;
+  width?: number;
+}
+
+function createSqare(obj: SqureConfig): { color: string; area: number } {
+  return {
+    color: obj.color ? obj.color : "Oranged",
+    area: obj.width ? obj.width * obj.width : 200,
+  };
+}
+
+const square = { colour: "Salmon", width: 200 };
+
+const myShape = createSqare(square);
+console.log("myShape", myShape);
+```
+
+```bash
+# Output
+
+myShape { color: 'Oranged', area: 40000 }
+```
+
+Let's change the argument:
+
+```ts
+const myShape = createSqare({ colour: "Salmon", width: 200 });
+```
+
+```bash
+Warning
+
+Object literal may only specify known properties, but 'colour' does not exist in type 'SqureConfig'. Did you mean to write 'color'?ts(2561)
+(property) colour: string
+```
