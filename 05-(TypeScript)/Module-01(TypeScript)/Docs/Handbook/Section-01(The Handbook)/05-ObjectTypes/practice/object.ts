@@ -228,3 +228,21 @@ interface Fourth {
 type userAge = Third & Fourth;
 declare const UserAge: userAge;
 UserAge.age;
+
+console.log("GENERIC OBJECT TYPES");
+
+interface Box<Type> {
+  name: Type;
+}
+
+interface Apple {
+  maxAge: string;
+}
+
+type AppleBox = Box<Apple>;
+
+const appleBox: AppleBox = {
+  name: {
+    maxAge: "4 days",
+  },
+};
