@@ -259,3 +259,48 @@ const data3: TypeMany<null> = null;
 console.log("data1", data1);
 console.log("data2", data2);
 console.log("data3", data3);
+
+interface GenericWithTwoType<T, U> {
+  name: T;
+  age: U;
+}
+
+const newUserAdded: GenericWithTwoType<string, number> = {
+  name: "Laxman Krishnamurti",
+  age: 22,
+};
+console.log("newUserAdded", newUserAdded);
+
+class Stack<Type> {
+  private items: Type[] = [];
+
+  push(item: Type): void {
+    this.items.push(item);
+  }
+
+  pop(): Type | undefined {
+    return this.items.pop();
+  }
+
+  peek(): Type | undefined {
+    return this.items[this.items.length - 1];
+  }
+
+  isEmpty(): boolean {
+    return this.items.length === 0;
+  }
+
+  getItem(): Type[] {
+    return this.items;
+  }
+}
+
+const numberStack = new Stack<number>();
+console.log(numberStack.isEmpty());
+console.log(numberStack.getItem());
+numberStack.push(10);
+console.log(numberStack.peek());
+console.log(numberStack.getItem());
+console.log(numberStack.isEmpty());
+console.log(numberStack.pop());
+console.log(numberStack.isEmpty());

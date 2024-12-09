@@ -326,3 +326,115 @@ data3 null
 ```
 
 ### `The Array Type`
+
+```bash
+# Generic Array type
+
+Array<Type>
+```
+
+```ts
+// Array of numbers
+let numbers: Array<number> = [1, 2, 3, 4];
+
+// Array of Strings
+let strings: Array<string> = ["apple", "banana", "cherry"];
+
+// Array of objects
+interface Person {
+  name: string;
+  age: number;
+}
+
+let people: Array<Person> = [
+  { name: "Laxman", age: 25 },
+  { name: "Sonu", age: 30 },
+];
+
+// Jagged array (Matrix)
+
+let matrix: Array<Array<number>> = [
+  [1, 2, 3],
+  [4, 5, 6],
+  [7, 8, 9],
+];
+
+function printMatrix(matrix: Array<Array<number>>): void {
+  matrix.forEach((row) => console.log(row.join(" ")));
+}
+
+printMatrix(matrix);
+// Output:
+// 1 2 3
+// 4 5 6
+// 7 8 9
+
+// Combining Generic Array Types with Constraints
+function getNames<Type extends { name: string }>(
+  items: Array<Type>
+): Array<string> {
+  return items.map((item) => item.name);
+}
+
+let products = [
+  { name: "Laptop", price: 1000 },
+  { name: "Phone", price: 500 },
+];
+
+console.log(getNames(products)); // Output: ["Laptop", "Phone"]
+```
+
+At last example:-
+
+- Type extends { name: string } means Type must have a name property.
+- You can pass arrays of any objects that follow this structure.
+
+```ts
+// Generic Array in Data Structure
+
+class Stack<Type> {
+  private items: Type[] = [];
+
+  push(item: Type): void {
+    this.items.push(item);
+  }
+
+  pop(): Type | undefined {
+    return this.items.pop();
+  }
+
+  peek(): Type | undefined {
+    return this.items[this.items.length - 1];
+  }
+
+  isEmpty(): boolean {
+    return this.items.length === 0;
+  }
+
+  getItem(): Type[] {
+    return this.items;
+  }
+}
+
+const numberStack = new Stack<number>();
+console.log(numberStack.isEmpty());
+console.log(numberStack.getItem());
+numberStack.push(10);
+console.log(numberStack.peek());
+console.log(numberStack.getItem());
+console.log(numberStack.isEmpty());
+console.log(numberStack.pop());
+console.log(numberStack.isEmpty());
+```
+
+```bash
+# Output
+
+true
+[]
+10
+[ 10 ]
+false
+10
+true
+```

@@ -90,3 +90,38 @@ var data3 = null;
 console.log("data1", data1);
 console.log("data2", data2);
 console.log("data3", data3);
+var newUserAdded = {
+    name: "Laxman Krishnamurti",
+    age: 22,
+};
+console.log("newUserAdded", newUserAdded);
+var Stack = /** @class */ (function () {
+    function Stack() {
+        this.items = [];
+    }
+    Stack.prototype.push = function (item) {
+        this.items.push(item);
+    };
+    Stack.prototype.pop = function () {
+        return this.items.pop();
+    };
+    Stack.prototype.peek = function () {
+        return this.items[this.items.length - 1];
+    };
+    Stack.prototype.isEmpty = function () {
+        return this.items.length === 0;
+    };
+    Stack.prototype.getItem = function () {
+        return this.items;
+    };
+    return Stack;
+}());
+var numberStack = new Stack();
+console.log(numberStack.isEmpty());
+console.log(numberStack.getItem());
+numberStack.push(10);
+console.log(numberStack.peek());
+console.log(numberStack.getItem());
+console.log(numberStack.isEmpty());
+console.log(numberStack.pop());
+console.log(numberStack.isEmpty());
