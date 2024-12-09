@@ -269,3 +269,11 @@ newBook {
   year: 2020
 }
 ```
+
+## `Interface Extension vs. Intersection`
+
+Can you imagine, what will happen if we are trying to merge two types with different context, like interface and the type alias.
+
+1. If interfaces are defined with the same name, TypeScript will attempt to merge them if the properties are compatible. If the properties are not compatible (i.e., they have the same property name but different types), TypeScript will raise an error.
+
+2. In the case of intersection types, properties with different types will be merged automatically. When the type is used later, TypeScript will expect the property to satisfy both types simultaneously, which may produce unexpected results and the result will be _never_ type.

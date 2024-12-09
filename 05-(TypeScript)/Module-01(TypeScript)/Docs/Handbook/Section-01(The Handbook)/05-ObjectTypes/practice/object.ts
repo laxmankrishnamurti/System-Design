@@ -193,3 +193,38 @@ const newBook: AuthorBook = {
 };
 
 console.log("newBook", newBook);
+
+console.log("DIFFERENCE BETWEEN EXTEND AND INTERSECTION");
+
+interface First {
+  name: string;
+}
+
+interface First {
+  name: string;
+}
+
+const myUser: First = {
+  name: "Laxman Krishnamurti",
+};
+
+interface Second {
+  username: string;
+}
+
+// Interface re-opening
+interface Second {
+  //   username: number;
+}
+
+interface Third {
+  age: number;
+}
+
+interface Fourth {
+  age: string;
+}
+
+type userAge = Third & Fourth;
+declare const UserAge: userAge;
+UserAge.age;
