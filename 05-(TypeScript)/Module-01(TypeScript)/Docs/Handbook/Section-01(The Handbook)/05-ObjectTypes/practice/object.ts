@@ -369,3 +369,12 @@ function getParameterList(...args: [number, string, ...boolean[]]) {
 }
 
 getParameterList(10000, "object", false, true, true, false);
+
+let point = [3, 4] as const;
+
+function distanceFromOrigin(...args: [number, number]) {
+  return Math.sqrt(args[0] ** 2 + args[1] ** 2);
+}
+
+let distance = distanceFromOrigin(...point);
+console.log("distance", distance);

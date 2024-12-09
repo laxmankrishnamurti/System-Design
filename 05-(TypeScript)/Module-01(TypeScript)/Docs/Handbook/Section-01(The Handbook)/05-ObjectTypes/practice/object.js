@@ -173,3 +173,13 @@ function getParameterList() {
     console.log("isValid", isValid);
 }
 getParameterList(10000, "object", false, true, true, false);
+var point = [3, 4];
+function distanceFromOrigin() {
+    var args = [];
+    for (var _i = 0; _i < arguments.length; _i++) {
+        args[_i] = arguments[_i];
+    }
+    return Math.sqrt(Math.pow(args[0], 2) + Math.pow(args[1], 2));
+}
+var distance = distanceFromOrigin.apply(void 0, point);
+console.log("distance", distance);

@@ -584,3 +584,46 @@ function getParameterList(
 ```
 
 **`This is handy when we want to take a variable number of arguments with a rest parameter, and we need to minimum number of elements, but we don't want to introduce intermediate variable.`**
+
+### `readonly Tuple Types`
+
+Tuple types have _readonly_ variants, and can be specified by sticking a _readonly_ modifier in front of them - just like with array shorthand syntax.
+
+And it is obvious we can't write any property of a _readonly_ tuple.
+
+```ts
+// Type Assertion
+let point = [3, 4] as const;
+
+function distanceFromOrigin([x, y]: [number, number]) {
+  return Math.sqrt(x ** 2 + y ** 2);
+}
+
+distanceFromOrigin(point);
+```
+
+```bash
+Warning
+
+Argument of type 'readonly [3, 4]' is not assignable to parameter of type '[number, number]'.
+  The type 'readonly [3, 4]' is 'readonly' and cannot be assigned to the mutable type '[number, number]'.
+```
+
+TypeScript is trying to protect us from accidentally changing a readonly value. For example, imagine if the function tried to modify the tuple:
+
+```ts
+function distanceFromOrigin([x, y]: [number, number]) {
+  x = 5; // This is allowed for mutable tuples
+  return Math.sqrt(x ** 2 + y ** 2);
+}
+```
+
+If point were readonly, this modification would violate the rules of immutability. To prevent this, TypeScript blocks the assignment.
+
+**SOLUTION**
+
+```ts
+let point = [3,4]
+// OR
+[x, y]: readonly [number, number]
+```
