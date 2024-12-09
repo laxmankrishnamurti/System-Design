@@ -137,3 +137,28 @@ const user: DynamicObject2
 ```
 
 We can't override the value of the dynamic object because they set to be _readonly_.
+
+## `Excess Property Checks`
+
+If an object literal has any properties that the _target type_ doesn't have, we'll get an error. Because, Object literal get special treatment and undergo _excess property checking_ when assigning them to a variable, or passing them as arguments.
+
+For instance,
+
+```ts
+interface ObjectInterface {
+  name: string;
+  age: number;
+}
+
+const person: ObjectInterface = {
+  namee: "Laxman Krishnamurti",
+  age: 22,
+};
+```
+
+```bash
+Warning
+
+Object literal may only specify known properties, but 'namee' does not exist in type 'ObjectInterface'. Did you mean to write 'name'?ts(2561)
+(property) namee: string
+```

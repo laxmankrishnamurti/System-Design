@@ -142,3 +142,13 @@ const user: DynamicObject2 = {
  Index signature in type 'DynamicObject2' only permits reading.ts(2542)
  (index) DynamicObject2[string]: string
 */
+
+interface ObjectInterface{
+    name: string;
+    age: number;
+}
+
+const person: ObjectInterface = {
+    name: 'Laxman Krishnamurti',
+    age: 22
+}
