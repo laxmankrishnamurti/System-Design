@@ -281,3 +281,21 @@ Can you imagine, what will happen if we are trying to merge two types with diffe
 [Checkout](./practice/object.ts)
 
 ## `Generic Object Types`
+
+This is same as _generic function_. Where _Type_ is a placeholder that will get replaced with some other type.
+
+- _Interfaces_ can be used to make generic objects.
+- Instead, we can also use _Type aliases_ to create more generic types for different types.
+
+```ts
+interface Person<T> {
+  data: T;
+}
+
+type Person<T> = {
+  data: T;
+};
+
+type userid<T> = T | null;
+type data<T> = T | T[];
+```
