@@ -67,3 +67,9 @@ function createSqare(obj) {
 var square = { colour: "Salmon", width: 200 };
 var myShape = createSqare(square);
 console.log("myShape", myShape);
+var newBook = {
+    author: "Acharya Prashant",
+    name: "KARMA",
+    year: 2020,
+};
+console.log("newBook", newBook);

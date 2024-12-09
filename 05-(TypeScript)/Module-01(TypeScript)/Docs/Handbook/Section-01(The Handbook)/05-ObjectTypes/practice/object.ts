@@ -183,10 +183,13 @@ interface Author {
   author: string;
 }
 
-interface AuthorBook extends Book, Author {}
+// interface AuthorBook extends Book, Author {}
+type AuthorBook = Book & Author;
 
 const newBook: AuthorBook = {
   author: "Acharya Prashant",
   name: "KARMA",
   year: 2020,
 };
+
+console.log("newBook", newBook);

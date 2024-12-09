@@ -207,6 +207,8 @@ Object literal may only specify known properties, but 'colour' does not exist in
 
 ## `Extending Types`
 
+\_Interface_s allows us to build up new types from other types by extending them.
+
 This allows to cut down the amount of type declaration boilerplate we have to write, and for signaling intent that several different declaration of the same property might be related.
 
 Interface can also extend from multiple types.
@@ -230,4 +232,40 @@ const newBook: AuthorBook = {
   name: "KARMA",
   year: 2020,
 };
+```
+
+## `Intersection Types`
+
+TypeScript also provides another construct called _intersection types_ that is mainly used to combine existing object types.
+
+An intersection type is defined using the _&_ operator. We can say this is similar to _extends_.
+
+```ts
+interface Book {
+  name: string;
+  year: number;
+}
+
+interface Author {
+  author: string;
+}
+
+// interface AuthorBook extends Book, Author {}
+type AuthorBook = Book & Author;
+
+const newBook: AuthorBook = {
+  author: "Acharya Prashant",
+  name: "KARMA",
+  year: 2020,
+};
+```
+
+```bash
+# Output
+
+newBook {
+  author: 'Acharya Prashant',
+  name: 'KARMA',
+  year: 2020
+}
 ```
