@@ -438,3 +438,45 @@ false
 10
 true
 ```
+
+### `The ReadonlyArray Type`
+
+The _ReadonlyArray_ is a special type that describe arrays that shouldn't be changed. We should only use it for intent.
+
+When we see a function that returns \_ReadonlyArray_s, it tells us we're not meant to change the content at all, and when we see a function that consumes \_ReadonlyArray_s, it tells us that we can pass any array into that function without worrying that it will change its contents.
+
+```ts
+// ReadonlyArray constructor (only accept a type)
+
+new ReadonlyArray(number);
+```
+
+```ts
+const marks: ReadonlyArray<number> = [1, 2, 3, 4, 5];
+const marks2: readonly number[] = [1, 2, 3, 4, 5];
+
+marks.push(6);
+marks2.push(6);
+```
+
+```bash
+Property 'push' does not exist on type 'readonly number[]'.ts(2339)
+any
+```
+
+**`Important!`**
+
+Unlike the _readonly_ property modifier, assignability isn't bidirectional(functioning in two direction) between regular _Arrays_ and _ReadonlyArrays_.
+
+```ts
+let a: readonly string[] = ["a", "b", "c"];
+let b: string[] = [];
+a = b;
+b = a;
+```
+
+```bash
+Warning
+
+The type 'readonly string[]' is 'readonly' and cannot be assigned to the mutable type 'string[]'.ts(4104)
+```

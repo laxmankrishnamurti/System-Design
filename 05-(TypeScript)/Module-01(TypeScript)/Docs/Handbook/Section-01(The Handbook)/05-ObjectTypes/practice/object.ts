@@ -304,3 +304,16 @@ console.log(numberStack.getItem());
 console.log(numberStack.isEmpty());
 console.log(numberStack.pop());
 console.log(numberStack.isEmpty());
+
+const marks: ReadonlyArray<number> = [1, 2, 3, 4, 5];
+const marks2: readonly number[] = [1, 2, 3, 4, 5];
+// console.log("marks", marks)
+// console.log("marks2", marks2)
+
+// marks.push(6);
+// marks2.push(6);
+
+let a: readonly string[] = ["a", "b", "c"];
+let b: string[] = [];
+a = b;
+// b = a
