@@ -173,3 +173,20 @@ const square = { colour: "Salmon", width: 200 };
 
 const myShape = createSqare(square);
 console.log("myShape", myShape);
+
+interface Book {
+  name: string;
+  year: number;
+}
+
+interface Author {
+  author: string;
+}
+
+interface AuthorBook extends Book, Author {}
+
+const newBook: AuthorBook = {
+  author: "Acharya Prashant",
+  name: "KARMA",
+  year: 2020,
+};

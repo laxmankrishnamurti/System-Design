@@ -204,3 +204,30 @@ Warning
 Object literal may only specify known properties, but 'colour' does not exist in type 'SqureConfig'. Did you mean to write 'color'?ts(2561)
 (property) colour: string
 ```
+
+## `Extending Types`
+
+This allows to cut down the amount of type declaration boilerplate we have to write, and for signaling intent that several different declaration of the same property might be related.
+
+Interface can also extend from multiple types.
+
+In short, the _extend types_ allow us to copy or inherit property from different type declaration.
+
+```ts
+interface Book {
+  name: string;
+  year: number;
+}
+
+interface Author {
+  author: string;
+}
+
+interface AuthorBook extends Book, Author {}
+
+const newBook: AuthorBook = {
+  author: "Acharya Prashant",
+  name: "KARMA",
+  year: 2020,
+};
+```
