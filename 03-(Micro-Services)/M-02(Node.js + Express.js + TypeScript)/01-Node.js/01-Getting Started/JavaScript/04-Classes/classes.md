@@ -1,6 +1,6 @@
 # `Classes`
 
-Classes are a template for creating objects. They encapsulate data with code to work on that data. Classes in JavaScript are built on _prototypes_ but also have some syntax and semantics that are unique to classes.
+Classes are a template for creating objects. They encapsulate data with code to work on that data. Classes in JavaScript are built on [prototypes](#inheritance-and-the-prototype-chain) but also have some syntax and semantics that are unique to classes.
 
 ---
 
@@ -11,3 +11,10 @@ In programming, inheritance refers to passing down characteristics from a parent
 JavaScript is a bit confusing for developers experienced in class-based languages (like Java or C++), as it is dynamic and does not have static types. While this confusion is often considered to be one of JavaScript's weaknesses, the prototypal inheritance model itself is, in fact, more powerful than the classic model. It is, for example, fairly trivial to build a classic model on top of a prototypal model — which is how classes are implemented.
 
 Although classes are now widely adopted and have become a new paradigm in JavaScript, classes do not bring a new inheritance pattern. While classes abstract most of the prototypal mechanism away, understanding how prototypes work under the hood is still useful.
+
+In short,
+
+- Inheritance means passing down characteristics from a parent to a child.
+- And, Prototype means the object which is interlink with other object.
+- This chain will continue untill an object will not reach to _null_.
+- Because, _null_ doesn't have any kind of prototypes.
