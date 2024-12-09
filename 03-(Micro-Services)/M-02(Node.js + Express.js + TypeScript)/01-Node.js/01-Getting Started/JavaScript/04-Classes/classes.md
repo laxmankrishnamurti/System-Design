@@ -15,6 +15,6 @@ Although classes are now widely adopted and have become a new paradigm in JavaSc
 In short,
 
 - Inheritance means passing down characteristics from a parent to a child.
-- And, Prototype means the object which is interlink with other object.
+- And, Prototype means the object which is interlink with other object or the _internal property of an object._
 - This chain will continue untill an object will not reach to _null_.
 - Because, _null_ doesn't have any kind of prototypes.
