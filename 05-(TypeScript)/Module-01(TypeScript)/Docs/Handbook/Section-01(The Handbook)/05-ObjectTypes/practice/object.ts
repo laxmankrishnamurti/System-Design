@@ -317,3 +317,29 @@ let a: readonly string[] = ["a", "b", "c"];
 let b: string[] = [];
 a = b;
 // b = a
+
+console.log("TUPLES");
+
+interface StringNumberPair {
+  length: 2;
+  0: string;
+  1: number;
+}
+
+const myTuple: StringNumberPair = {
+  length: 2,
+  0: "Laxman Krishnamurti",
+  1: 22,
+};
+
+type myTuple2 = [number, string, string?];
+const myTuple2Example = [22, "Laxman Krishnamurti"];
+console.log("myTuple2Example lenght", myTuple2Example.length);
+
+type myTuple3 = [number, string?, string?];
+const myTuple3Example = [
+  22,
+  "Laxman Krishnamurt",
+  "laxmankrishnamurti@gmail.com",
+];
+console.log("myTuple3Example length", myTuple3Example.length);

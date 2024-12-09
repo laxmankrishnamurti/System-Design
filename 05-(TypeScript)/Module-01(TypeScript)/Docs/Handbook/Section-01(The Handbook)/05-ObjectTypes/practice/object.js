@@ -125,3 +125,27 @@ console.log(numberStack.getItem());
 console.log(numberStack.isEmpty());
 console.log(numberStack.pop());
 console.log(numberStack.isEmpty());
+var marks = [1, 2, 3, 4, 5];
+var marks2 = [1, 2, 3, 4, 5];
+// console.log("marks", marks)
+// console.log("marks2", marks2)
+// marks.push(6);
+// marks2.push(6);
+var a = ["a", "b", "c"];
+var b = [];
+a = b;
+// b = a
+console.log("TUPLES");
+var myTuple = {
+    length: 2,
+    0: "Laxman Krishnamurti",
+    1: 22,
+};
+var myTuple2Example = [22, "Laxman Krishnamurti"];
+console.log("myTuple2Example lenght", myTuple2Example.length);
+var myTuple3Example = [
+    22,
+    "Laxman Krishnamurt",
+    "laxmankrishnamurti@gmail.com",
+];
+console.log("myTuple3Example length", myTuple3Example.length);

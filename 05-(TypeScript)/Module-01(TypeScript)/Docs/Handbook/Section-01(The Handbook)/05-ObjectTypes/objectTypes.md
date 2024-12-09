@@ -480,3 +480,39 @@ Warning
 
 The type 'readonly string[]' is 'readonly' and cannot be assigned to the mutable type 'string[]'.ts(4104)
 ```
+
+### `Tuple Types`
+
+A tupele is like an array, but it has a fixed number of elements, and each element can have a specific type.
+
+```ts
+let myTuples: [string, number] = ["Laxman Krishnamurti", 22];
+```
+
+- This tuple has exactly two elements.
+- The first element must be a _string_.
+- The second element must be a _number_.
+
+- Tuples can have _optional property_ by writing out a question mark(?, after the element's type).
+- _Optional tuple_ elements can only come at the end, and also affect the type of _length._
+
+```ts
+type myTuple2 = [number, string, string?];
+const myTuple2Example = [22, "Laxman Krishnamurti"];
+console.log("myTuple2Example lenght", myTuple2Example.length);
+
+type myTuple3 = [number, string?, string?];
+const myTuple3Example = [
+  22,
+  "Laxman Krishnamurt",
+  "laxmankrishnamurti@gmail.com",
+];
+console.log("myTuple3Example length", myTuple3Example.length);
+```
+
+```bash
+# Output
+
+myTuple2Example lenght 2
+myTuple3Example length 3
+```
