@@ -299,3 +299,30 @@ type Person<T> = {
 type userid<T> = T | null;
 type data<T> = T | T[];
 ```
+
+Example :-
+
+```ts
+type TypeOrNull<Type> = Type | null;
+type TypeOrArray<Type> = Type | Type[];
+
+type TypeMany<Type> = TypeOrNull<TypeOrArray<Type>>;
+
+const data1: TypeMany<number> = [1, 2, 3, 4, 5];
+const data2: TypeMany<string> = "Laxman Krishnamurti";
+const data3: TypeMany<null> = null;
+
+console.log("data1", data1);
+console.log("data2", data2);
+console.log("data3", data3);
+```
+
+```bash
+# Output
+
+data1 [ 1, 2, 3, 4, 5 ]
+data2 Laxman Krishnamurti
+data3 null
+```
+
+### `The Array Type`

@@ -227,7 +227,7 @@ interface Fourth {
 
 type userAge = Third & Fourth;
 declare const UserAge: userAge;
-UserAge.age;
+// UserAge.age;
 
 console.log("GENERIC OBJECT TYPES");
 
@@ -246,3 +246,16 @@ const appleBox: AppleBox = {
     maxAge: "4 days",
   },
 };
+
+type TypeOrNull<Type> = Type | null;
+type TypeOrArray<Type> = Type | Type[];
+
+type TypeMany<Type> = TypeOrNull<TypeOrArray<Type>>;
+
+const data1: TypeMany<number> = [1, 2, 3, 4, 5];
+const data2: TypeMany<string> = "Laxman Krishnamurti";
+const data3: TypeMany<null> = null;
+
+console.log("data1", data1);
+console.log("data2", data2);
+console.log("data3", data3);

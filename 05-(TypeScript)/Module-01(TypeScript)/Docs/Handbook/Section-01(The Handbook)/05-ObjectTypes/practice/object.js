@@ -73,3 +73,20 @@ var newBook = {
     year: 2020,
 };
 console.log("newBook", newBook);
+console.log("DIFFERENCE BETWEEN EXTEND AND INTERSECTION");
+var myUser = {
+    name: "Laxman Krishnamurti",
+};
+// UserAge.age;
+console.log("GENERIC OBJECT TYPES");
+var appleBox = {
+    name: {
+        maxAge: "4 days",
+    },
+};
+var data1 = [1, 2, 3, 4, 5];
+var data2 = "Laxman Krishnamurti";
+var data3 = null;
+console.log("data1", data1);
+console.log("data2", data2);
+console.log("data3", data3);
