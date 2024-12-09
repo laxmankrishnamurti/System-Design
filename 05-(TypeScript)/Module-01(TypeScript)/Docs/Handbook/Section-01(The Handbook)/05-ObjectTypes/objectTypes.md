@@ -516,3 +516,71 @@ console.log("myTuple3Example length", myTuple3Example.length);
 myTuple2Example lenght 2
 myTuple3Example length 3
 ```
+
+- Tuples can also have rest elements, which have to be an array/tuple type.
+
+```ts
+type RestTuple = [number, ...boolean[], string];
+
+const restTuples: RestTuple = [
+  22,
+  true,
+  false,
+  false,
+  false,
+  true,
+  true,
+  "Laxman Krishnamurti",
+];
+console.log("restTuples", restTuples);
+console.log("2nd element", restTuples[1]);
+console.log("restTuples length", restTuples.length);
+```
+
+```bash
+# Output
+
+restTuples [ 22, true, false, false, false, true, true, 'Laxman Krishnamurti' ]
+2nd element true
+restTuples length 8
+```
+
+**Why might Optional and Rest element be useful?**
+
+Yes, Because it allows TypeScript to correspond tuples with parameter list.
+
+Have a loo on this example:
+
+```ts
+function getParameterList(...args: [number, string, ...boolean[]]) {
+  const [totalConnections, type, ...isValid] = args;
+
+  console.log("totalConnections", totalConnections);
+  console.log("Type", type);
+  console.log("isValid", isValid);
+}
+
+getParameterList(10000, "object", false, true, true, false);
+```
+
+```bash
+# Output
+
+totalConnections 10000
+Type object
+isValid [ false, true, true, false ]
+```
+
+```ts
+//The above function is equivalent to:
+
+function getParameterList(
+  totalConnections: number,
+  type: string,
+  ...isValid: boolean[]
+) {
+  //body
+}
+```
+
+**`This is handy when we want to take a variable number of arguments with a rest parameter, and we need to minimum number of elements, but we don't want to introduce intermediate variable.`**

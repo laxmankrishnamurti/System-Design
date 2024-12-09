@@ -149,3 +149,27 @@ var myTuple3Example = [
     "laxmankrishnamurti@gmail.com",
 ];
 console.log("myTuple3Example length", myTuple3Example.length);
+var restTuples = [
+    22,
+    true,
+    false,
+    false,
+    false,
+    true,
+    true,
+    "Laxman Krishnamurti",
+];
+console.log("restTuples", restTuples);
+console.log("2nd element", restTuples[1]);
+console.log("restTuples length", restTuples.length);
+function getParameterList() {
+    var args = [];
+    for (var _i = 0; _i < arguments.length; _i++) {
+        args[_i] = arguments[_i];
+    }
+    var totalConnections = args[0], type = args[1], isValid = args.slice(2);
+    console.log("totalConnections", totalConnections);
+    console.log("Type", type);
+    console.log("isValid", isValid);
+}
+getParameterList(10000, "object", false, true, true, false);

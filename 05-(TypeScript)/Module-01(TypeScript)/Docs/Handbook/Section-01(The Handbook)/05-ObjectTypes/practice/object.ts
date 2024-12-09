@@ -343,3 +343,29 @@ const myTuple3Example = [
   "laxmankrishnamurti@gmail.com",
 ];
 console.log("myTuple3Example length", myTuple3Example.length);
+
+type RestTuple = [number, ...boolean[], string];
+
+const restTuples: RestTuple = [
+  22,
+  true,
+  false,
+  false,
+  false,
+  true,
+  true,
+  "Laxman Krishnamurti",
+];
+console.log("restTuples", restTuples);
+console.log("2nd element", restTuples[1]);
+console.log("restTuples length", restTuples.length);
+
+function getParameterList(...args: [number, string, ...boolean[]]) {
+  const [totalConnections, type, ...isValid] = args;
+
+  console.log("totalConnections", totalConnections);
+  console.log("Type", type);
+  console.log("isValid", isValid);
+}
+
+getParameterList(10000, "object", false, true, true, false);
