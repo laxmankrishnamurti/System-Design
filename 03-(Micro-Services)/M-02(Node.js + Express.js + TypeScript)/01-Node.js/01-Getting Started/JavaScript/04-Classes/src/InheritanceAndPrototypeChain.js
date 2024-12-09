@@ -78,3 +78,21 @@ All Prototypes
 [Object: null prototype]{} ===> This signifies the end of the prototype chain.
 
 */  
+
+/**
+ * Inhering methods :: When an inherited function is executed, the value of this points to the inheriting object, not to the prototype object where the function is an own property.
+ */
+
+const parent = {
+    bonusPoint: 10,
+    addBonusPoint(){
+        console.log("Bonus Point", this.bonusPoint + 5)
+    }
+}
+
+const child = {
+    bonusPoint: 1,
+    __proto__: parent
+}
+
+child.addBonusPoint() // Bonus Point 6

@@ -18,3 +18,5 @@ In short,
 - And, Prototype means the object which is interlink with other object or the _internal property of an object._
 - This chain will continue untill an object will not reach to _null_.
 - Because, _null_ doesn't have any kind of prototypes.
+
+[Checkout](./src/InheritanceAndPrototypeChain.js)
