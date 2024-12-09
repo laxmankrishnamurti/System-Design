@@ -96,3 +96,33 @@ const child = {
 }
 
 child.addBonusPoint() // Bonus Point 6
+
+const Box1 = [
+    {value: 1, getValue() { return this.value }},
+    {value: 2, getValue() { return this.value }},
+    {value: 3, getValue() { return this.value }},
+]
+
+const boxPrototype = {
+    getValue(){
+        return this.value
+    }
+}
+
+const Box2 = [
+    {value: 1, __proto__: boxPrototype},
+    {value: 2, __proto__: boxPrototype},
+    {value: 3, __proto__: boxPrototype},
+]
+
+function Box3(value){
+    return this.value
+}
+
+Box3.prototype.getValue = function(){
+    return this.value
+}
+
+const Box4 = [new Box3(1), new Box3(2), new Box3(3)]
+console.log("Box4", Box4)
+console.log("Box3", Box4[0].getValue())
