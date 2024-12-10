@@ -478,3 +478,17 @@ The following best practices should help, whether we're running build script in 
   - For small projects, it's overkill; modern Webpack optimizations like **code splitting** and **tree shaking** may suffice.
 
   ***
+
+- **_Worker Pool_**
+
+  ### Simple Explanation:
+
+  **Worker Pool**:  
+  Think of workers like helpers who assist in doing heavy tasks (like expensive loaders) in separate "threads" or parallel processes. This can make the overall build process faster.
+
+  **Warning**:
+
+  1. **Too Many Helpers Are Bad**: If we assign too many helpers (workers), our system might waste time getting them ready (boot overhead) instead of actually working.
+  2. **Avoid Sending Too Much Data**: Try not to pass too many tasks (modules) back and forth between the main process and helpers, because this communication (called IPC) is slow and can reduce the performance benefits.
+
+  In short, use workers wisely to keep your builds fast without adding unnecessary overhead.
