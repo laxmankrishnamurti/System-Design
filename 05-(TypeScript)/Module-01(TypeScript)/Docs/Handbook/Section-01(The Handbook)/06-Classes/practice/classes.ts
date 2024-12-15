@@ -1,3 +1,4 @@
-console.log("Classes");
-
-class User {}
+class Player {
+    wicket = 2;
+    six = 6
+}
