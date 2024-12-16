@@ -103,3 +103,12 @@ This statement means that **TypeScript does not trust methods called from the co
 - This is a modifier.
 - That prefixed fields.
 - Prevents assignments to the field outside of the constructor.
+
+3. **constructor**
+
+- Class constructors are very similar to functions.
+- That can take n numbers of arguments and assign all values to the respective fields.
+- Way to do this:
+  - type annotation without default values
+  - with default values
+  - With Constructor overloads that define all possible combination of the parameter list for the class.
