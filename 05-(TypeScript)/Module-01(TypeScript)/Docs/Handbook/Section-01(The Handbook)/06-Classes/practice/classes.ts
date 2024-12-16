@@ -67,3 +67,11 @@ class Parent3 {
     this.email = email;
   }
 }
+
+class Child3 extends Parent3 {
+  phone: number;
+  constructor(phone: number) {
+    super("123j3j2h1j2h3", "Laxman Krishnamurti", 22, "laxmankrishnamurti");
+    this.phone = phone;
+  }
+}
