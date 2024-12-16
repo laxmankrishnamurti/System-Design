@@ -97,3 +97,9 @@ This statement means that **TypeScript does not trust methods called from the co
 
 - TypeScript doesn’t trust methods we call from the constructor to initialize properties because those methods can be overridden in a subclass and fail to initialize the properties properly.
 - Always initialize properties directly in the constructor or at their declaration to avoid such risks.
+
+2. **readonly**
+
+- This is a modifier.
+- That prefixed fields.
+- Prevents assignments to the field outside of the constructor.

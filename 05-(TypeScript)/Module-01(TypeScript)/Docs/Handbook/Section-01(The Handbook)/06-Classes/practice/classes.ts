@@ -29,9 +29,15 @@ console.log("instance1 name", instance1.name);
 
 class Parent2 {
   name!: string;
+  readonly pan: string;
+  constructor(pan: string) {
+    this.pan = pan;
+  }
 }
 
-const instance2 = new Parent2();
+const instance2 = new Parent2("KYAS9816E");
 console.log("instance2 name", instance2.name);
 instance2.name = "Laxman Krishnamurti";
 console.log("instance2 name after initialization", instance2.name);
+
+// instance2.pan = "abcdxyz"; (readonly property)
