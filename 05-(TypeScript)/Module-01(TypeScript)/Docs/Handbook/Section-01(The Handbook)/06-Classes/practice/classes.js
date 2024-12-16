@@ -43,3 +43,12 @@ var instance12 = new Parent1();
 console.log("instance12 name", instance12.name);
 var instance1 = new Child1();
 console.log("instance1 name", instance1.name);
+var Parent2 = /** @class */ (function () {
+    function Parent2() {
+    }
+    return Parent2;
+}());
+var instance2 = new Parent2();
+console.log("instance2 name", instance2.name);
+instance2.name = "Laxman Krishnamurti";
+console.log("instance2 name after initialization", instance2.name);

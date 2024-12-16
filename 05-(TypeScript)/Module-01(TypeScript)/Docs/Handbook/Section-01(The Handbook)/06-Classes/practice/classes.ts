@@ -24,3 +24,14 @@ console.log("instance12 name", instance12.name);
 
 const instance1 = new Child1();
 console.log("instance1 name", instance1.name);
+
+// Definite assignment assertion operator "!"
+
+class Parent2 {
+  name!: string;
+}
+
+const instance2 = new Parent2();
+console.log("instance2 name", instance2.name);
+instance2.name = "Laxman Krishnamurti";
+console.log("instance2 name after initialization", instance2.name);
