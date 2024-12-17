@@ -68,3 +68,7 @@ console.log("user1 is an instance of the User class?", user1 instanceof User)
  */
 
 // Note :- If we link an instance of a class with other instance or with other object literals then the instance does not belongs to that class, by which it had formed. Because now the instance has more properties and methods which may doesn't belongs to its parent class. 
+
+const marks = [91,89,95,85, 87]
+console.log(marks.toString())
+console.log(typeof marks.toString())
