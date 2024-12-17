@@ -72,3 +72,71 @@ console.log("user1 is an instance of the User class?", user1 instanceof User)
 const marks = [91,89,95,85, 87]
 console.log(marks.toString())
 console.log(typeof marks.toString())
+
+const users = ["Laxman", "Sonu", "Harshad"];
+const firstChain = Object.getPrototypeOf(users)
+console.log("firstChain", firstChain)
+const secondChain = Object.getPrototypeOf(firstChain)
+console.log("secondChain", secondChain)
+
+const firstFunction = function(){
+    console.log("firstFunction called")
+}
+
+const firstChainOfFunction = Object.getPrototypeOf(firstFunction)
+console.log("firstChainOfFunction", firstChainOfFunction)
+
+const secondChainOfFunction = Object.getPrototypeOf(firstChainOfFunction)
+console.log("secondChainOfFunction", secondChainOfFunction)
+
+console.log("Parent Object Prototype", Object.prototype)
+console.log("All keys of array prototype", Object.getOwnPropertyNames(Array.prototype))
+console.log("Object.prototype", Object.prototype)
+console.log("Array.prototype", Array.prototype)
+console.log("Function.prototype", Function.prototype)
+console.log("String.prototype", String.prototype)
+console.log("Date.prototype", Date.prototype)
+console.log("Math.prototype", Math.prototype)
+
+const test1 = {
+    type: "test1"
+}
+
+const test2 = {
+    type: "test2"
+}
+console.log("BEFORE LINKING")
+console.log("test1.prototype", Object.getPrototypeOf(test1))
+console.log("test2.prototype", Object.getPrototypeOf(test2))
+
+test1.__proto__ = test2
+
+console.log("AFTER LINKING")
+console.log("test1.prototype", Object.getPrototypeOf(test1))
+console.log("test2.prototype", Object.getPrototypeOf(test2))
+
+console.log("GET ALL PROPERTIES AND METHODS OF AN OBJECT")
+
+console.log("Array", Object.getOwnPropertyNames(Array))
+// Array [ 'length', 'name', 'prototype', 'isArray', 'from', 'of' ]
+
+console.log("Array prototype", Object.getOwnPropertyNames(Array.prototype))
+
+/*
+Array prototype [
+    'length',        'constructor',    'at',
+    'concat',        'copyWithin',     'fill',
+    'find',          'findIndex',      'findLast',
+    'findLastIndex', 'lastIndexOf',    'pop',
+    'push',          'reverse',        'shift',
+    'unshift',       'slice',          'sort',
+    'splice',        'includes',       'indexOf',
+    'join',          'keys',           'entries',
+    'values',        'forEach',        'filter',
+    'flat',          'flatMap',        'map',
+    'every',         'some',           'reduce',
+    'reduceRight',   'toLocaleString', 'toString',
+    'toReversed',    'toSorted',       'toSpliced',
+    'with'
+  ]
+*/
